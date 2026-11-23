@@ -93,18 +93,8 @@
 .catalog-pages button { min-width: 38px; }
 .catalog-page .catalog-pages [aria-current] { background: var(--gold); color: #131000; }
 .catalog-ellipsis { align-self: center; padding-inline: .25rem; color: var(--muted); }
-.is-favorite { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold), 0 0 12px #ffc80036; }
-.favorite-mark {
-  position: absolute;
-  top: .4rem;
-  right: .55rem;
-  color: var(--gold);
-  background: var(--space);
-  border: 1px solid var(--edge);
-  border-radius: 50%;
-  width: 1.8rem;
-  text-align: center;
-}
+
+
 .catalog-modal .modal-dialog { max-width: min(650px, calc(100% - 2rem)); margin-left: auto; margin-right: max(1rem, calc((100% - 1240px) / 2)); }
 .catalog-modal .modal-content {
   color: var(--ink);
@@ -158,7 +148,6 @@
   .catalog-card h2 { font-size: 1rem; }
   .card-data { font-size: .76rem; }
   .catalog-card .gold-button { justify-self: end; min-height: 44px; }
-  .favorite-mark { right: auto; left: .4rem; }
   .catalog-modal .modal-dialog { max-width: none; margin: .5rem; align-items: flex-end; }
   .catalog-modal .modal-body { grid-template-columns: minmax(0,1fr); }
   .catalog-modal .modal-body > :nth-child(n+3) { grid-column: auto; }
