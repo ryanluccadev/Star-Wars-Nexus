@@ -1,18 +1,227 @@
+
 /*
-    STAR WARS NEXUS
+    STAR WARS EXPLORER
     Arquivo: home.css
 
     Responsabilidades:
     - Estilizar a página inicial.
-    - Personalizar a seção principal (hero).
-    - Estilizar os cards de navegação.
-    - Adicionar elementos visuais exclusivos da home.
+    - Apresentar as categorias do projeto.
+    - Organizar os cards de navegação.
+    - Adaptar a Home para diferentes telas.
 */
 
-/* ===== SEÇÃO PRINCIPAL ===== */
 
-/* ===== CARDS DE NAVEGAÇÃO ===== */
+/* ==================================================
+   APRESENTAÇÃO DA HOME
+================================================== */
 
-/* ===== ELEMENTOS DECORATIVOS ===== */
+.home-hero {
+    position: relative;
+    isolation: isolate;
 
-/* ===== RESPONSIVIDADE ===== */
+    display: grid;
+    align-items: center;
+
+    min-height: 440px;
+    padding-block: 4rem;
+
+    background:
+        linear-gradient(90deg, #030910 10%, #03091099 100%),
+        url('../assets/imagens/banner-espacial.webp')
+        center / cover no-repeat;
+}
+
+.home-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.home-hero h1 {
+    max-width: 750px;
+    margin-bottom: 1.5rem;
+
+    font-size: clamp(2.5rem, 6vw, 5rem);
+}
+
+.home-description {
+    max-width: 570px;
+    margin-bottom: 1.8rem;
+
+    color: var(--ink);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   SEÇÃO DE CATEGORIAS
+================================================== */
+
+.home-explore {
+    padding-block: 4rem;
+}
+
+.home-section-heading {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.home-section-heading h2,
+.home-about h2 {
+    color: var(--gold);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+}
+
+.home-section-heading > p:last-child {
+    color: var(--muted);
+}
+
+/* Organiza os cards em colunas menores e centralizadas. */
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 250px));
+    justify-content: center;
+
+    column-gap: 3rem;
+    row-gap: 1.5rem;
+
+    max-width: 1000px;
+    margin-inline: auto;
+}
+
+
+/* ==================================================
+   CARDS DE NAVEGAÇÃO
+================================================== */
+
+.home-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 1rem;
+    padding: 1.4rem;
+
+    background: var(--panel);
+
+    border: 1px solid var(--edge);
+    border-radius: .8rem;
+
+    transition: border-color .2s ease;
+}
+
+.home-card:hover {
+    border-color: var(--gold);
+}
+
+.home-card-icon {
+    display: grid;
+    place-items: center;
+
+    width: 65px;
+    height: 65px;
+
+    color: var(--gold);
+    background: #121e29;
+
+    border: 1px solid var(--line);
+    border-radius: .7rem;
+}
+
+.catalog-page .home-card-icon svg {
+    width: 35px;
+    height: 35px;
+}
+
+.home-card h3 {
+    margin: 0;
+
+    color: var(--ink);
+    font-size: 1.4rem;
+    font-weight: 750;
+}
+
+.home-card p {
+    flex: 1;
+
+    margin: 0;
+
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.home-card .gold-button {
+    max-width: 100%;
+}
+
+
+/* ==================================================
+   SOBRE O PROJETO
+================================================== */
+
+.home-about {
+    padding-block: 3rem;
+
+    background: #07111a;
+    border-top: 1px solid var(--line);
+}
+
+.home-about p {
+    max-width: 760px;
+    margin: 1rem 0 0;
+
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   RESPONSIVIDADE
+================================================== */
+
+/* Tablets */
+@media (max-width: 850px) {
+
+    .home-grid {
+        grid-template-columns: repeat(2, minmax(0, 250px));
+        column-gap: 1.5rem;
+    }
+
+    .home-hero {
+        min-height: 370px;
+    }
+}
+
+
+/* Celulares */
+@media (max-width: 575px) {
+
+    .home-hero {
+        min-height: 340px;
+        padding-block: 3rem;
+    }
+
+    .home-description {
+        font-size: .95rem;
+    }
+
+    .home-explore {
+        padding-block: 2.5rem;
+    }
+
+    .home-grid {
+        grid-template-columns: minmax(0, 320px);
+        justify-content: center;
+
+        gap: .8rem;
+    }
+
+    .home-card {
+        padding: 1.2rem;
+    }
+
+    .home-about {
+        padding-block: 2rem;
+    }
+}

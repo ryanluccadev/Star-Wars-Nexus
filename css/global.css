@@ -277,38 +277,109 @@
 }
 
 
+
+
 /* ==================================================
    RODAPÉ
 ================================================== */
 
 .catalog-footer {
-    padding-block: .8rem;
+    padding: 2rem 0 1rem;
+
+    background: #040910;
     border-top: 1px solid var(--edge);
 }
 
+/* Limita a largura do conteúdo e centraliza o rodapé. */
 .catalog-footer .catalog-wrap {
+    width: min(100% - 3rem, 900px);
+    margin-inline: auto;
+}
+
+/* Organização das informações principais. */
+.footer-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 2rem;
+    padding-bottom: 1.5rem;
+}
+
+/* Informações do projeto. */
+.footer-about {
+    max-width: 400px;
+}
+
+.footer-about h2,
+.footer-nav h2 {
+    margin: 0 0 .75rem;
+
+    color: var(--gold);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.footer-about p {
+    margin: 0;
+
+    color: var(--muted);
+    font-size: .9rem;
+    line-height: 1.6;
+}
+
+/* Links de navegação. */
+.footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    min-width: 190px;
+}
+
+.footer-links {
+    display: flex;
     flex-wrap: wrap;
 
-    gap: .55rem 1.2rem;
-
-    font-size: .81rem;
+    gap: .5rem 1rem;
 }
 
-.footer-brand {
-    padding-right: 1.2rem;
-    border-right: 1px solid var(--line);
-}
-
-.footer-brand img {
-    filter: grayscale(1) brightness(1.4);
-}
-
-.catalog-footer span {
-    margin-left: auto;
+.catalog-footer .footer-links a {
     color: var(--muted);
+
+    font-size: .9rem;
+    text-decoration: none;
 }
+
+.catalog-footer .footer-links a:hover {
+    color: var(--gold);
+}
+
+/* Créditos e fonte dos dados. */
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: .75rem;
+    padding-top: 1rem;
+
+    border-top: 1px solid var(--line);
+
+    color: var(--muted);
+    font-size: .8rem;
+}
+
+.catalog-footer .footer-bottom a {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.catalog-footer .footer-bottom a:hover {
+    color: var(--gold);
+}
+
 
 
 /* ==================================================
@@ -370,22 +441,24 @@
         height: 16px;
     }
 
-    /* Rodapé */
-    .catalog-footer span {
-        margin-left: 0;
+
+    /* Rodapé em celulares */
+    .catalog-footer .catalog-wrap {
+        width: calc(100% - 1.5rem);
     }
 
-    /* Tipografia */
-    .eyebrow {
-        letter-spacing: .2em;
-        font-size: .62rem;
+    .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
     }
 
-    .catalog-page h1 {
-        font-size: clamp(1.9rem, 7.5vw, 2.65rem);
+    .footer-nav {
+        min-width: 0;
     }
 
-    .intro {
-        font-size: .85rem;
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
     }
+
 }
