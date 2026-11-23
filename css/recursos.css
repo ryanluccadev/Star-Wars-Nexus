@@ -1,156 +1,648 @@
+
+/*
+    STAR WARS EXPLORER
+    Arquivo: recursos.css
+
+    Responsabilidades:
+    - Estilizar as páginas de Planetas e Naves.
+    - Organizar os campos de busca e ordenação.
+    - Definir a aparência dos cards e da paginação.
+    - Estilizar os modais de detalhes.
+    - Adaptar os catálogos para diferentes telas.
+*/
+
+
+/* ==================================================
+   APRESENTAÇÃO DA PÁGINA
+================================================== */
+
 .catalog-hero {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  align-content: center;
-  min-height: 205px;
-  padding-block: 2rem;
-  background: linear-gradient(0deg, var(--space), transparent),
-    url('../assets/imagens/orbita.webp') center bottom / 100% auto no-repeat, #030910;
+    position: relative;
+    isolation: isolate;
+
+    display: grid;
+    align-content: center;
+
+    min-height: 205px;
+    padding-block: 2rem;
+
+    background:
+        linear-gradient(0deg, var(--space), transparent),
+        url('../assets/imagens/orbita.webp') center bottom / 100% auto no-repeat,
+        #030910;
 }
+
+/* Imagem decorativa do banner. */
 .catalog-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 0 auto;
-  width: min(71%, 1050px);
-  z-index: -1;
-  background: url('../assets/imagens/banner-espacial.webp') right top / cover no-repeat;
-  mask-image: linear-gradient(90deg, transparent, #000 25%), linear-gradient(0deg, transparent, #000 32%);
-  mask-composite: intersect;
+    content: "";
+
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: -1;
+
+    width: min(71%, 1050px);
+
+    background:
+        url('../assets/imagens/banner-espacial.webp')
+        right top / cover no-repeat;
+
+    mask-image:
+        linear-gradient(90deg, transparent, #000 25%),
+        linear-gradient(0deg, transparent, #000 32%);
+
+    mask-composite: intersect;
 }
-.catalog-hero h1 { max-width: 24ch; }
-.catalog-hero h1 { font-size: clamp(2.1rem, 4.1vw, 3.65rem); }
-.catalog-hero .intro { text-shadow: 0 1px 6px #000; }
-.catalog-list { padding-bottom: 2.5rem; }
-.catalog-controls { display: flex; align-items: end; flex-wrap: wrap; gap: .75rem; }
+
+.catalog-hero h1 {
+    max-width: 24ch;
+    font-size: clamp(2.1rem, 4.1vw, 3.65rem);
+}
+
+.catalog-hero .intro {
+    text-shadow: 0 1px 6px #000;
+}
+
+
+/* ==================================================
+   CATÁLOGO E CONTROLES
+================================================== */
+
+.catalog-list {
+    padding-bottom: 2.5rem;
+}
+
+.catalog-controls {
+    display: flex;
+    align-items: end;
+    flex-wrap: wrap;
+
+    gap: .75rem;
+}
+
+/* Campo de pesquisa */
 .catalog-search {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  flex: 1 1 260px;
-  padding-inline: .85rem;
-  min-width: 0;
+    display: flex;
+    align-items: center;
+
+    gap: .6rem;
+    flex: 1 1 260px;
+
+    min-width: 0;
+    padding-inline: .85rem;
 }
-.catalog-search, .catalog-filter select {
-  color: var(--ink);
-  background: #060f17;
-  border: 1px solid var(--edge);
-  border-radius: .5rem;
-  min-height: 45px;
+
+/* Aparência compartilhada pela busca e pela ordenação. */
+.catalog-search,
+.catalog-filter select {
+    min-height: 45px;
+
+    color: var(--ink);
+    background: #060f17;
+
+    border: 1px solid var(--edge);
+    border-radius: .5rem;
 }
-.catalog-search svg { color: var(--gold); }
+
+.catalog-search svg {
+    color: var(--gold);
+}
+
 .catalog-search input {
-  min-width: 0;
-  width: 100%;
-  min-height: 44px;
-  color: inherit;
-  border: 0;
-  background: transparent;
-  font: inherit;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+
+    color: inherit;
+    background: transparent;
+
+    border: 0;
+    font: inherit;
 }
-.catalog-search input:focus-visible { outline-offset: 0; }
-.catalog-search input::placeholder { color: var(--muted); }
-.catalog-filter { display: grid; flex: 0 1 215px; min-width: 0; }
-.catalog-filter label { font-size: .8rem; color: var(--muted); }
-.catalog-filter select { min-width: 0; width: 100%; padding: .45rem .65rem; font: inherit; }
-.catalog-status { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-block: .75rem; }
-.catalog-status p, .catalog-feedback p { margin: 0; }
-.catalog-status p::before { content: '◉'; color: var(--gold); margin-right: .55rem; }
-.catalog-feedback { background: var(--panel); border: 1px dashed var(--edge); padding: 1rem; border-radius: .6rem; }
-.catalog-feedback button { margin-top: .75rem; }
-.catalog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .85rem; }
+
+.catalog-search input:focus-visible {
+    outline-offset: 0;
+}
+
+.catalog-search input::placeholder {
+    color: var(--muted);
+}
+
+/* Seletor de ordenação */
+.catalog-filter {
+    display: grid;
+    flex: 0 1 215px;
+
+    min-width: 0;
+}
+
+.catalog-filter label {
+    color: var(--muted);
+    font-size: .8rem;
+}
+
+.catalog-filter select {
+    width: 100%;
+    min-width: 0;
+
+    padding: .45rem .65rem;
+
+    font: inherit;
+}
+
+
+/* ==================================================
+   STATUS E MENSAGENS
+================================================== */
+
+.catalog-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: .75rem;
+    margin-block: .75rem;
+}
+
+.catalog-status p,
+.catalog-feedback p {
+    margin: 0;
+}
+
+.catalog-status p::before {
+    content: '◉';
+
+    color: var(--gold);
+    margin-right: .55rem;
+}
+
+/* Mensagens de erro e buscas sem resultados. */
+.catalog-feedback {
+    padding: 1rem;
+
+    background: var(--panel);
+
+    border: 1px dashed var(--edge);
+    border-radius: .6rem;
+}
+
+.catalog-feedback button {
+    margin-top: .75rem;
+}
+
+
+/* ==================================================
+   CARDS DO CATÁLOGO
+================================================== */
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: .85rem;
+}
+
 .catalog-card {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: grid;
-  border: 1px solid var(--edge);
-  border-radius: .7rem;
-  background: var(--panel);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: grid;
+
+    background: var(--panel);
+
+    border: 1px solid var(--edge);
+    border-radius: .7rem;
 }
-.catalog-card h2 { margin: 0; font-size: 1.14rem; font-weight: 750; overflow-wrap: anywhere; }
-.card-copy { display: grid; gap: .55rem; padding: 1rem; min-width: 0; }
-.card-image { display: block; width: 100%; height: 100%; object-fit: cover; }
-[data-recurso="planets"] .catalog-card { min-height: 175px; }
+
+.catalog-card h2 {
+    margin: 0;
+
+    font-size: 1.14rem;
+    font-weight: 750;
+
+    overflow-wrap: anywhere;
+}
+
+.card-copy {
+    display: grid;
+
+    gap: .55rem;
+    padding: 1rem;
+
+    min-width: 0;
+}
+
+.card-image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* Destaque visual ao interagir com os cards. */
+.catalog-card:hover {
+    border-color: var(--gold);
+}
+
+.catalog-card:focus-within {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+
+/* ==================================================
+   CARDS DE PLANETAS
+================================================== */
+
+[data-recurso="planets"] .catalog-card {
+    min-height: 175px;
+}
+
+/* A imagem aparece ao fundo do card. */
 [data-recurso="planets"] .card-image {
-  position: absolute;
-  inset: 0 0 0 auto;
-  width: 64%;
-  z-index: -1;
-  mask-image: linear-gradient(90deg, transparent, #000 52%);
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: -1;
+
+    width: 64%;
+
+    mask-image: linear-gradient(
+        90deg,
+        transparent,
+        #000 52%
+    );
 }
-[data-recurso="planets"] .card-copy { padding-right: 25%; background: linear-gradient(90deg,#071019 25%,#071019aa 52%,transparent); }
-[data-recurso="planets"] .catalog-card h2::before { content: '◉'; color: var(--gold); margin-right: .45em; }
-[data-recurso="starships"] .catalog-card { grid-template-rows: auto 1fr; border-radius: .3rem .9rem; }
-[data-recurso="starships"] .card-image { aspect-ratio: 3.15; border-bottom: 1px solid var(--line); }
-[data-recurso="starships"] .catalog-card h2 { font-style: italic; }
-.card-data { margin: 0; font-size: .81rem; }
-.card-data div { display: flex; gap: .45rem; align-items: baseline; }
-.card-data dt { flex: none; }
-.card-data dt::before { content: '✦'; color: var(--gold); margin-right: .35em; }
-.card-data dd { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
-.catalog-pages { display: flex; justify-content: center; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
-.catalog-pages button { min-width: 38px; }
-.catalog-page .catalog-pages [aria-current] { background: var(--gold); color: #131000; }
-.catalog-ellipsis { align-self: center; padding-inline: .25rem; color: var(--muted); }
+
+[data-recurso="planets"] .card-copy {
+    padding-right: 25%;
+
+    background: linear-gradient(
+        90deg,
+        #071019 25%,
+        #071019aa 52%,
+        transparent
+    );
+}
+
+[data-recurso="planets"] .catalog-card h2::before {
+    content: '◉';
+
+    color: var(--gold);
+    margin-right: .45em;
+}
 
 
-.catalog-modal .modal-dialog { max-width: min(650px, calc(100% - 2rem)); margin-left: auto; margin-right: max(1rem, calc((100% - 1240px) / 2)); }
+/* ==================================================
+   CARDS DE NAVES
+================================================== */
+
+[data-recurso="starships"] .catalog-card {
+    grid-template-rows: auto 1fr;
+    border-radius: .3rem .9rem;
+}
+
+[data-recurso="starships"] .card-image {
+    aspect-ratio: 3.15;
+    border-bottom: 1px solid var(--line);
+}
+
+[data-recurso="starships"] .catalog-card h2 {
+    font-style: italic;
+}
+
+
+/* ==================================================
+   INFORMAÇÕES DOS CARDS
+================================================== */
+
+.card-data {
+    margin: 0;
+    font-size: .81rem;
+}
+
+.card-data div {
+    display: flex;
+    align-items: baseline;
+
+    gap: .45rem;
+}
+
+.card-data dt {
+    flex: none;
+}
+
+.card-data dt::before {
+    content: '✦';
+
+    color: var(--gold);
+    margin-right: .35em;
+}
+
+.card-data dd {
+    margin: 0;
+
+    color: var(--muted);
+    overflow-wrap: anywhere;
+}
+
+
+/* ==================================================
+   PAGINAÇÃO
+================================================== */
+
+.catalog-pages {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: .4rem;
+    margin-top: 1rem;
+}
+
+.catalog-pages button {
+    min-width: 38px;
+}
+
+/* Destaca a página selecionada. */
+.catalog-page .catalog-pages [aria-current] {
+    color: #131000;
+    background: var(--gold);
+}
+
+.catalog-ellipsis {
+    align-self: center;
+
+    padding-inline: .25rem;
+    color: var(--muted);
+}
+
+
+/* ==================================================
+   MODAL DE DETALHES
+================================================== */
+
+.catalog-modal .modal-dialog {
+    max-width: min(650px, calc(100% - 2rem));
+
+    margin-left: auto;
+    margin-right: max(1rem, calc((100% - 1240px) / 2));
+}
+
 .catalog-modal .modal-content {
-  color: var(--ink);
-  background: linear-gradient(140deg, #0c1720, #060b12);
-  border: 1px solid var(--gold);
-  border-radius: .9rem;
-}
-.catalog-modal .modal-header, .catalog-modal .modal-footer { border-color: var(--line); }
-.catalog-modal h2 { font-weight: 800; font-size: 1.45rem; overflow-wrap: anywhere; }
-.catalog-modal .modal-header svg { color: var(--gold); margin-right: .65rem; }
-[data-recurso="starships"] .catalog-modal h2 { font-style: italic; }
-.catalog-modal .modal-body { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; gap: .8rem; }
-.detail-image { width: 100%; height: 175px; object-fit: cover; border-radius: .45rem; }
-.detail-panel { border: 1px solid var(--line); background: #09121b; padding: .75rem; border-radius: .45rem; }
-.detail-panel h3 { font-size: 1rem; border-left: 3px solid var(--gold); padding-left: .5rem; }
-.detail-panel dl { margin: 0; }
-.detail-panel dl div { display: flex; justify-content: space-between; gap: .55rem; border-top: 1px solid var(--line); padding: .35rem 0; font-size: .86rem; }
-.detail-panel dd { color: var(--muted); text-align: right; margin: 0; overflow-wrap: anywhere; }
-.catalog-modal .modal-body > :nth-child(n+3) { grid-column: 1 / -1; }
-[data-recurso="planets"] .detail-image { grid-column: 1 / -1; }
-[data-recurso="planets"] .catalog-modal .modal-body > :nth-child(n+3) { grid-column: auto; }
-.catalog-card:hover { border-color: var(--gold); }
-.catalog-card:focus-within { outline: 2px solid var(--gold); outline-offset: 2px; }
-@media (min-width: 992px) {
-  .catalog-modal .modal-dialog { margin-top: 200px; max-width: min(510px,42vw); }
-  .catalog-modal .modal-dialog-scrollable { height: calc(100% - 218px); }
-}
-@media (max-width: 850px) {
-  .catalog-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
-}
-#detalhes-status:empty { display: none; }
+    color: var(--ink);
 
+    background: linear-gradient(
+        140deg,
+        #0c1720,
+        #060b12
+    );
+
+    border: 1px solid var(--gold);
+    border-radius: .9rem;
+}
+
+.catalog-modal .modal-header,
+.catalog-modal .modal-footer {
+    border-color: var(--line);
+}
+
+.catalog-modal h2 {
+    font-weight: 800;
+    font-size: 1.45rem;
+
+    overflow-wrap: anywhere;
+}
+
+.catalog-modal .modal-header svg {
+    color: var(--gold);
+    margin-right: .65rem;
+}
+
+[data-recurso="starships"] .catalog-modal h2 {
+    font-style: italic;
+}
+
+
+/* ==================================================
+   CONTEÚDO DO MODAL
+================================================== */
+
+.catalog-modal .modal-body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+
+    gap: .8rem;
+}
+
+.detail-image {
+    width: 100%;
+    height: 175px;
+
+    object-fit: cover;
+    border-radius: .45rem;
+}
+
+/* Painéis que apresentam as informações detalhadas. */
+.detail-panel {
+    padding: .75rem;
+
+    background: #09121b;
+
+    border: 1px solid var(--line);
+    border-radius: .45rem;
+}
+
+.detail-panel h3 {
+    padding-left: .5rem;
+
+    font-size: 1rem;
+    border-left: 3px solid var(--gold);
+}
+
+.detail-panel dl {
+    margin: 0;
+}
+
+.detail-panel dl div {
+    display: flex;
+    justify-content: space-between;
+
+    gap: .55rem;
+    padding: .35rem 0;
+
+    border-top: 1px solid var(--line);
+    font-size: .86rem;
+}
+
+.detail-panel dd {
+    margin: 0;
+
+    color: var(--muted);
+    text-align: right;
+
+    overflow-wrap: anywhere;
+}
+
+/* Elementos adicionais ocupam toda a largura do modal. */
+.catalog-modal .modal-body > :nth-child(n+3) {
+    grid-column: 1 / -1;
+}
+
+/* Organização específica dos detalhes de planetas. */
+[data-recurso="planets"] .detail-image {
+    grid-column: 1 / -1;
+}
+
+[data-recurso="planets"] .catalog-modal .modal-body > :nth-child(n+3) {
+    grid-column: auto;
+}
+
+/* Oculta mensagens de status vazias. */
+#detalhes-status:empty {
+    display: none;
+}
+
+
+/* ==================================================
+   RESPONSIVIDADE
+================================================== */
+
+/* Ajustes do modal em telas grandes. */
+@media (min-width: 992px) {
+
+    .catalog-modal .modal-dialog {
+        margin-top: 200px;
+        max-width: min(510px, 42vw);
+    }
+
+    .catalog-modal .modal-dialog-scrollable {
+        height: calc(100% - 218px);
+    }
+}
+
+
+/* Tablets */
+@media (max-width: 850px) {
+
+    .catalog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* Celulares */
 @media (max-width: 575px) {
-  .catalog-hero {
-    min-height: 182px;
-    padding-block: 1.3rem;
-  }
-  .catalog-hero::before { width: 88%; opacity: .72; background-position: 72% center; }
-  .catalog-hero h1 { max-width: 17ch; font-size: clamp(1.7rem, 7vw, 2.15rem); }
-  .catalog-hero .intro { max-width: 36ch; font-size: .84rem; }
-  .catalog-grid { grid-template-columns: minmax(0,1fr); gap: .45rem; }
-  .catalog-filter { flex: 1 1 130px; }
-  .catalog-search input { font-size: .88rem; }
-  #atualizar { flex: none; font-size: .74rem; padding-inline: .6rem; }
-  [data-recurso="planets"] .catalog-card,
-  [data-recurso="starships"] .catalog-card { grid-template: auto / minmax(0,32%) minmax(0,1fr); min-height: 0; }
-  [data-recurso="starships"] .catalog-card { grid-template-rows: auto; }
-  [data-recurso="planets"] .card-image { position: static; width: 100%; mask-image: none; }
-  [data-recurso="starships"] .card-image { aspect-ratio: auto; border: 0; }
-  [data-recurso] .card-copy { padding: .55rem .65rem; gap: .3rem; background: transparent; }
-  .catalog-card h2 { font-size: 1rem; }
-  .card-data { font-size: .76rem; }
-  .catalog-card .gold-button { justify-self: end; min-height: 44px; }
-  .catalog-modal .modal-dialog { max-width: none; margin: .5rem; align-items: flex-end; }
-  .catalog-modal .modal-body { grid-template-columns: minmax(0,1fr); }
-  .catalog-modal .modal-body > :nth-child(n+3) { grid-column: auto; }
-  .detail-image { height: 135px; }
-  .catalog-modal .modal-footer { justify-content: flex-start; }
+
+    /* Apresentação */
+    .catalog-hero {
+        min-height: 182px;
+        padding-block: 1.3rem;
+    }
+
+    .catalog-hero::before {
+        width: 88%;
+        opacity: .72;
+        background-position: 72% center;
+    }
+
+    .catalog-hero h1 {
+        max-width: 17ch;
+        font-size: clamp(1.7rem, 7vw, 2.15rem);
+    }
+
+    .catalog-hero .intro {
+        max-width: 36ch;
+        font-size: .84rem;
+    }
+
+    /* Catálogo e controles */
+    .catalog-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: .45rem;
+    }
+
+    .catalog-filter {
+        flex: 1 1 130px;
+    }
+
+    .catalog-search input {
+        font-size: .88rem;
+    }
+
+    #atualizar {
+        flex: none;
+
+        padding-inline: .6rem;
+        font-size: .74rem;
+    }
+
+    /* Cards de planetas e naves */
+    [data-recurso="planets"] .catalog-card,
+    [data-recurso="starships"] .catalog-card {
+        grid-template: auto / minmax(0, 32%) minmax(0, 1fr);
+        min-height: 0;
+    }
+
+    [data-recurso="starships"] .catalog-card {
+        grid-template-rows: auto;
+    }
+
+    [data-recurso="planets"] .card-image {
+        position: static;
+
+        width: 100%;
+        mask-image: none;
+    }
+
+    [data-recurso="starships"] .card-image {
+        aspect-ratio: auto;
+        border: 0;
+    }
+
+    [data-recurso] .card-copy {
+        padding: .55rem .65rem;
+        gap: .3rem;
+
+        background: transparent;
+    }
+
+    .catalog-card h2 {
+        font-size: 1rem;
+    }
+
+    .card-data {
+        font-size: .76rem;
+    }
+
+    .catalog-card .gold-button {
+        justify-self: end;
+        min-height: 44px;
+    }
+
+    /* Modal de detalhes */
+    .catalog-modal .modal-dialog {
+        max-width: none;
+
+        margin: .5rem;
+        align-items: flex-end;
+    }
+
+    .catalog-modal .modal-body {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .catalog-modal .modal-body > :nth-child(n+3) {
+        grid-column: auto;
+    }
+
+    .detail-image {
+        height: 135px;
+    }
+
+    .catalog-modal .modal-footer {
+        justify-content: flex-start;
+    }
 }

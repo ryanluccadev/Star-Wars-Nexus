@@ -1,6 +1,18 @@
 
+/*
+    STAR WARS EXPLORER
+    Arquivo: main.js
+
+    Responsabilidades:
+    - Carregar os registros da API ou do cache.
+    - Criar e exibir os cards de planetas e naves.
+    - Exibir os detalhes dos registros em um modal.
+    - Controlar a busca e a ordenação dos resultados.
+    - Gerenciar a paginação e as mensagens da interface.
+*/
+
 import { carregarRecurso, urlRegistro } from './api.js';
-import { filtrarRegistros, listarClasses } from './busca.js';
+import { filtrarRegistros } from './busca.js';
 import { abrirModal, elemento, prepararModal, valorExibido } from './modal.js';
 
 // Configurações da página
@@ -15,7 +27,6 @@ const $ = id => document.getElementById(id);
 
 const lista = $('lista');
 const busca = $('busca');
-const classe = $('classe');
 const ordem = $('ordem');
 const status = $('status');
 const feedback = $('feedback');
@@ -53,14 +64,7 @@ let pagina = 1;
 let erro = false;
 
 
-/**
- * Cria a imagem de um planeta ou nave.
- * Utiliza uma imagem genérica caso não exista uma específica.
- *
- * @param {Object} item - Registro da API.
- * @param {boolean} card - Indica se a imagem será utilizada em um card.
- * @returns {HTMLImageElement} Elemento de imagem.
- */
+// Cria a imagem de um registro, utilizando uma imagem genérica quando necessário.
 function criarImagem(item, card = false) {
     const padrao = nave ? 'nave-generica' : 'planeta-generico';
     const nome = imagens.get(item.name);
@@ -103,12 +107,7 @@ function criarImagem(item, card = false) {
 }
 
 
-/**
- * Cria um card com as informações resumidas de um registro.
- *
- * @param {Object} item - Planeta ou nave recebido da API.
- * @returns {HTMLElement} Card criado.
- */
+// Cria um card com informações resumidas e um botão para visualizar os detalhes.
 function criarCard(item) {
     const card = elemento('article', '', 'catalog-card');
     const imagem = criarImagem(item, true);
@@ -138,7 +137,7 @@ function criarCard(item) {
         dados.append(linha);
     }
 
-    // Botão que exibe os detalhes do registro no modal
+    // Botão responsável por abrir o modal de detalhes.
     const detalhes = elemento('button', 'Ver detalhes →', 'gold-button');
 
     detalhes.type = 'button';
@@ -167,12 +166,7 @@ function criarCard(item) {
 }
 
 
-/**
- * Exibe uma mensagem de feedback ao usuário.
- *
- * @param {string} mensagem - Texto da mensagem.
- * @param {string} rotulo - Texto do botão de ação.
- */
+// Exibe uma mensagem de feedback e um botão de ação para o usuário.
 function mostrarFeedback(mensagem, rotulo) {
     $('mensagem').textContent = mensagem;
     acao.textContent = rotulo;
@@ -180,11 +174,7 @@ function mostrarFeedback(mensagem, rotulo) {
 }
 
 
-/**
- * Cria os botões de navegação entre páginas de resultados.
- *
- * @param {number} total - Quantidade total de páginas.
- */
+// Cria os botões para navegar entre as páginas de resultados.
 function montarPaginacao(total) {
     paginacao.replaceChildren();
     paginacao.hidden = total <= 1;
@@ -193,11 +183,13 @@ function montarPaginacao(total) {
         return;
     }
 
+    // Adiciona um botão de navegação à paginação.
     const incluir = (texto, destino, rotulo, indisponivel = false) => {
         const distante = Math.abs(destino - pagina) > 1;
         const intermediaria = destino > 1 && destino < total;
         const numerico = /^\d+$/.test(texto);
 
+        // Oculta páginas distantes quando existem muitas páginas.
         if (total > 8 && intermediaria && distante && numerico) {
             if (destino === 2 || destino === total - 1) {
                 paginacao.append(
@@ -238,14 +230,11 @@ function montarPaginacao(total) {
 }
 
 
-/**
- * Atualiza os cards, o total de resultados e a paginação.
- */
+// Atualiza os cards, a quantidade de resultados e a paginação.
 function renderizar() {
     const filtrados = filtrarRegistros(
         registros,
         busca.value,
-        classe?.value,
         ordem?.value
     );
 
@@ -265,6 +254,7 @@ function renderizar() {
         total + ' ' + rotulo + ' ' + encontrados +
         (paginas > 1 ? ' · Página ' + pagina + ' de ' + paginas : '');
 
+    // Seleciona apenas os registros da página atual.
     const itens = filtrados.slice(inicio, inicio + porPagina);
 
     lista.replaceChildren(...itens.map(criarCard));
@@ -275,20 +265,16 @@ function renderizar() {
 
     if (!total) {
         mostrarFeedback(
-            'Nenhum resultado corresponde à busca ou aos filtros.',
-            'Limpar busca e filtros'
+            'Nenhum resultado corresponde à busca.',
+            'Limpar busca'
         );
     }
 }
 
 
-/**
- * Habilita ou desabilita os controles durante o carregamento.
- *
- * @param {boolean} habilitado - Estado dos controles.
- */
+// Habilita ou desabilita os controles durante o carregamento.
 function habilitarControles(habilitado) {
-    for (const campo of [busca, classe, ordem]) {
+    for (const campo of [busca, ordem]) {
         if (campo) {
             campo.disabled = !habilitado;
         }
@@ -298,11 +284,7 @@ function habilitarControles(habilitado) {
 }
 
 
-/**
- * Carrega os registros da API ou do cache e atualiza a interface.
- *
- * @param {boolean} forcar - Indica se deve atualizar os dados da API.
- */
+// Carrega os registros da API ou do cache e atualiza a interface.
 async function carregar(forcar = false) {
     erro = false;
 
@@ -321,30 +303,12 @@ async function carregar(forcar = false) {
             atualizar: forcar
         });
 
-        // Mantém os planetas destacados no início da listagem
+        // Exibe os planetas destacados no início da listagem.
         if (recurso === 'planets') {
             registros = [...registros].sort((a, b) =>
                 (destaques.get(a.name) ?? Infinity) -
                 (destaques.get(b.name) ?? Infinity)
             );
-        }
-
-        // Preenche as opções do filtro de classes
-        if (classe) {
-            const anterior = classe.value;
-
-            const opcoes = listarClasses(registros).map(
-                nome => new Option(nome, nome)
-            );
-
-            classe.replaceChildren(
-                new Option('Todas as classes', ''),
-                ...opcoes
-            );
-
-            if (opcoes.some(opcao => opcao.value === anterior)) {
-                classe.value = anterior;
-            }
         }
 
         pagina = 1;
@@ -369,9 +333,7 @@ async function carregar(forcar = false) {
 }
 
 
-/**
- * Retorna à primeira página e atualiza os resultados.
- */
+// Retorna à primeira página quando a busca ou a ordenação muda.
 function redefinirPagina() {
     pagina = 1;
     renderizar();
@@ -380,8 +342,6 @@ function redefinirPagina() {
 
 // Eventos da interface
 busca.addEventListener('input', redefinirPagina);
-
-classe?.addEventListener('change', redefinirPagina);
 ordem?.addEventListener('change', redefinirPagina);
 
 atualizar.addEventListener('click', () => carregar(true));
@@ -393,10 +353,6 @@ acao.addEventListener('click', () => {
     }
 
     busca.value = '';
-
-    if (classe) {
-        classe.value = '';
-    }
 
     if (ordem) {
         ordem.value = 'asc';

@@ -1,132 +1,391 @@
+
+/*
+    STAR WARS EXPLORER
+    Arquivo: global.css
+
+    Responsabilidades:
+    - Definir a aparência geral das páginas.
+    - Estilizar o cabeçalho e o rodapé.
+    - Padronizar textos, botões e elementos compartilhados.
+    - Adaptar a interface para diferentes tamanhos de tela.
+*/
+
+
+/* ==================================================
+   FONTES
+================================================== */
+
 @font-face {
-  font-family: "Exo 2";
-  src: url("../assets/fontes/exo-2.woff2") format("woff2");
-  font-style: italic;
-  font-weight: 800;
-  font-display: swap;
+    font-family: "Exo 2";
+    src: url("../assets/fontes/exo-2.woff2") format("woff2");
+    font-style: italic;
+    font-weight: 800;
+    font-display: swap;
 }
+
+
+/* ==================================================
+   CONFIGURAÇÕES GERAIS
+================================================== */
 
 .catalog-page {
-  --space: #030910;
-  --panel: #09141e;
-  --gold: #ffd000;
-  --edge: #8c7012;
-  --ink: #f3f6fa;
-  --muted: #b9c5d1;
-  --line: #2c3b49;
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  color: var(--ink);
-  background: radial-gradient(ellipse at 53% 30%, #0c1b2b, var(--space) 70%);
-  font: 400 1rem/1.45 system-ui, sans-serif;
-  color-scheme: dark;
+    --space: #030910;
+    --panel: #09141e;
+    --gold: #ffd000;
+    --edge: #8c7012;
+    --ink: #f3f6fa;
+    --muted: #b9c5d1;
+    --line: #2c3b49;
+
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    color: var(--ink);
+    background: radial-gradient(
+        ellipse at 53% 30%,
+        #0c1b2b,
+        var(--space) 70%
+    );
+
+    font: 400 1rem/1.45 system-ui, sans-serif;
+    color-scheme: dark;
 }
 
-.catalog-page [hidden] { display: none !important; }
-.catalog-page :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
-.catalog-page a { color: inherit; }
-.catalog-wrap { width: min(100% - 3rem, 1280px); margin-inline: auto; }
-.catalog-page main { flex: 1; }
-.catalog-page svg { width: 1.2em; height: 1.2em; flex: none; }
+.catalog-page [hidden] {
+    display: none !important;
+}
+
+.catalog-page :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+
+.catalog-page a {
+    color: inherit;
+}
+
+.catalog-page main {
+    flex: 1;
+}
+
+.catalog-page svg {
+    width: 1.2em;
+    height: 1.2em;
+    flex: none;
+}
+
+.catalog-wrap {
+    width: min(100% - 3rem, 1280px);
+    margin-inline: auto;
+}
+
+
+/* ==================================================
+   ACESSIBILIDADE
+================================================== */
+
+/* Permite pular diretamente para o conteúdo principal. */
 .catalog-skip {
-  position: fixed;
-  z-index: 2000;
-  top: .5rem;
-  left: .5rem;
-  padding: .5rem 1rem;
-  background: var(--space);
-  transform: translateY(-200%);
-}
-.catalog-skip:focus { transform: none; }
+    position: fixed;
+    z-index: 2000;
 
-.catalog-header, .catalog-footer { background: #040910; }
-.catalog-header { border-bottom: 1px solid var(--edge); position: relative; z-index: 1; }
+    top: .5rem;
+    left: .5rem;
+
+    padding: .5rem 1rem;
+
+    background: var(--space);
+    transform: translateY(-200%);
+}
+
+.catalog-skip:focus {
+    transform: none;
+}
+
+
+/* ==================================================
+   CABEÇALHO E NAVEGAÇÃO
+================================================== */
+
+.catalog-header,
+.catalog-footer {
+    background: #040910;
+}
+
+.catalog-header {
+    position: relative;
+    z-index: 1;
+
+    border-bottom: 1px solid var(--edge);
+}
+
 .catalog-header .catalog-wrap {
-  min-height: 62px;
-  display: grid;
-  grid-template-columns: 145px 1fr 145px;
+    min-height: 62px;
+
+    display: grid;
+    grid-template-columns: 145px 1fr 145px;
 }
+
+/* Logo do projeto */
 .catalog-brand {
-  width: 126px;
-  min-height: 70px;
-  margin-bottom: -10px;
-  justify-self: start;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(var(--space), var(--space)) padding-box;
-  border: 1px solid var(--edge);
-  border-top: 0;
-  border-radius: 0 0 20px 20px;
+    width: 126px;
+    min-height: 70px;
+
+    margin-bottom: -10px;
+    justify-self: start;
+
+    display: grid;
+    place-items: center;
+
+    background: linear-gradient(
+        var(--space),
+        var(--space)
+    ) padding-box;
+
+    border: 1px solid var(--edge);
+    border-top: 0;
+    border-radius: 0 0 20px 20px;
 }
-.catalog-brand img, .footer-brand img { display: block; object-fit: contain; mix-blend-mode: screen; }
-.catalog-header nav { display: flex; justify-content: center; gap: clamp(.3rem, 2vw, 1.6rem); }
+
+.catalog-brand img,
+.footer-brand img {
+    display: block;
+    object-fit: contain;
+    mix-blend-mode: screen;
+}
+
+/* Menu de navegação */
+.catalog-header nav {
+    display: flex;
+    justify-content: center;
+
+    gap: clamp(.3rem, 2vw, 1.6rem);
+}
+
 .catalog-header nav a {
-  display: flex;
-  gap: .5em;
-  align-items: center;
-  justify-content: center;
-  padding: .45rem .75rem;
-  border-bottom: 3px solid transparent;
-  text-decoration: none;
-  font-size: .91rem;
-  font-weight: 650;
-}
-.catalog-header nav a[aria-current], .catalog-header nav a:hover {
-  color: var(--gold);
-  border-bottom-color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: .5em;
+    padding: .45rem .75rem;
+
+    border-bottom: 3px solid transparent;
+
+    text-decoration: none;
+    font-size: .91rem;
+    font-weight: 650;
 }
 
-.catalog-footer { border-top: 1px solid var(--edge); padding-block: .8rem; }
-.catalog-footer .catalog-wrap { display: flex; align-items: center; flex-wrap: wrap; gap: .55rem 1.2rem; font-size: .81rem; }
-.footer-brand { border-right: 1px solid var(--line); padding-right: 1.2rem; }
-.footer-brand img { filter: grayscale(1) brightness(1.4); }
-.catalog-footer span { margin-left: auto; color: var(--muted); }
+/* Destaca a página atual e os links ao passar o mouse. */
+.catalog-header nav a[aria-current],
+.catalog-header nav a:hover {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+}
 
-.eyebrow { margin: 0 0 .6rem; text-transform: uppercase; letter-spacing: .34em; font-size: .74rem; }
+
+/* ==================================================
+   TIPOGRAFIA
+================================================== */
+
+.eyebrow {
+    margin: 0 0 .6rem;
+
+    text-transform: uppercase;
+    letter-spacing: .34em;
+    font-size: .74rem;
+}
+
 .catalog-page h1 {
-  color: var(--gold);
-  text-transform: uppercase;
-  font: italic 800 clamp(2.25rem, 4.6vw, 4.15rem)/.98 "Exo 2", system-ui, sans-serif;
-  letter-spacing: -.025em;
-  margin: 0 0 .8rem;
-  text-shadow: 0 0 18px #e6a80038, 0 3px 12px #010408;
-}
-.intro { max-width: 51ch; margin: 0; font-size: .98rem; }
-.gold-button, .outline-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  width: fit-content;
-  padding: .45rem .8rem;
-  min-height: 38px;
-  border: 1px solid var(--edge);
-  border-radius: .34rem;
-  text-decoration: none;
-  font: 700 .86rem/1.2 system-ui, sans-serif;
-  cursor: pointer;
-}
-.catalog-page .gold-button { color: #131000; background: var(--gold); }
-.catalog-page .gold-button:hover { background: #ffe25a; }
-.catalog-page .outline-button { color: var(--ink); background: #09131d; }
-.catalog-page .outline-button:hover { border-color: var(--gold); }
-.outline-button:disabled { opacity: .45; cursor: default; }
+    margin: 0 0 .8rem;
 
-@media (max-width: 880px) {
-  .catalog-header .catalog-wrap { grid-template-columns: auto 1fr; }
+    color: var(--gold);
+
+    font: italic 800
+        clamp(2.25rem, 4.6vw, 4.15rem)/.98
+        "Exo 2", system-ui, sans-serif;
+
+    text-transform: uppercase;
+    letter-spacing: -.025em;
+
+    text-shadow:
+        0 0 18px #e6a80038,
+        0 3px 12px #010408;
 }
+
+.intro {
+    max-width: 51ch;
+    margin: 0;
+
+    font-size: .98rem;
+}
+
+
+/* ==================================================
+   BOTÕES
+================================================== */
+
+/* Propriedades compartilhadas pelos botões. */
+.gold-button,
+.outline-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: .5rem;
+
+    width: fit-content;
+    min-height: 38px;
+    padding: .45rem .8rem;
+
+    border: 1px solid var(--edge);
+    border-radius: .34rem;
+
+    text-decoration: none;
+    font: 700 .86rem/1.2 system-ui, sans-serif;
+
+    cursor: pointer;
+}
+
+/* Botão principal */
+.catalog-page .gold-button {
+    color: #131000;
+    background: var(--gold);
+}
+
+.catalog-page .gold-button:hover {
+    background: #ffe25a;
+}
+
+/* Botão secundário */
+.catalog-page .outline-button {
+    color: var(--ink);
+    background: #09131d;
+}
+
+.catalog-page .outline-button:hover {
+    border-color: var(--gold);
+}
+
+.outline-button:disabled {
+    opacity: .45;
+    cursor: default;
+}
+
+
+/* ==================================================
+   RODAPÉ
+================================================== */
+
+.catalog-footer {
+    padding-block: .8rem;
+    border-top: 1px solid var(--edge);
+}
+
+.catalog-footer .catalog-wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: .55rem 1.2rem;
+
+    font-size: .81rem;
+}
+
+.footer-brand {
+    padding-right: 1.2rem;
+    border-right: 1px solid var(--line);
+}
+
+.footer-brand img {
+    filter: grayscale(1) brightness(1.4);
+}
+
+.catalog-footer span {
+    margin-left: auto;
+    color: var(--muted);
+}
+
+
+/* ==================================================
+   RESPONSIVIDADE
+================================================== */
+
+/* Tablets e telas menores */
+@media (max-width: 880px) {
+    .catalog-header .catalog-wrap {
+        grid-template-columns: auto 1fr;
+    }
+}
+
+
+/* Celulares */
 @media (max-width: 575px) {
-  .catalog-wrap { width: calc(100% - 1.5rem); }
-  .catalog-header .catalog-wrap { width: 100%; min-height: 57px; }
-  .catalog-brand { width: 68px; min-height: 56px; margin-bottom: -4px; border-radius: 0 0 12px 0; }
-  .catalog-brand img { width: 53px; height: 36px; }
-  .catalog-header nav { gap: 0; justify-content: space-around; min-width: 0; }
-  .catalog-header nav a { flex-direction: column; gap: .15rem; padding: .3rem .18rem; font-size: .67rem; }
-  .catalog-header nav a svg { width: 16px; height: 16px; }
-  .catalog-footer span { margin-left: 0; }
-  .eyebrow { letter-spacing: .2em; font-size: .62rem; }
-  .catalog-page h1 { font-size: clamp(1.9rem, 7.5vw, 2.65rem); }
-  .intro { font-size: .85rem; }
+
+    .catalog-wrap {
+        width: calc(100% - 1.5rem);
+    }
+
+    /* Cabeçalho */
+    .catalog-header .catalog-wrap {
+        width: 100%;
+        min-height: 57px;
+    }
+
+    .catalog-brand {
+        width: 68px;
+        min-height: 56px;
+
+        margin-bottom: -4px;
+        border-radius: 0 0 12px 0;
+    }
+
+    .catalog-brand img {
+        width: 53px;
+        height: 36px;
+    }
+
+    /* Navegação */
+    .catalog-header nav {
+        gap: 0;
+        justify-content: space-around;
+        min-width: 0;
+    }
+
+    .catalog-header nav a {
+        flex-direction: column;
+
+        gap: .15rem;
+        padding: .3rem .18rem;
+
+        font-size: .67rem;
+    }
+
+    .catalog-header nav a svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Rodapé */
+    .catalog-footer span {
+        margin-left: 0;
+    }
+
+    /* Tipografia */
+    .eyebrow {
+        letter-spacing: .2em;
+        font-size: .62rem;
+    }
+
+    .catalog-page h1 {
+        font-size: clamp(1.9rem, 7.5vw, 2.65rem);
+    }
+
+    .intro {
+        font-size: .85rem;
+    }
 }

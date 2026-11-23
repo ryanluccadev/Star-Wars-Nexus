@@ -1,121 +1,343 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Descubra as naves mais icônicas da galáxia, de caças estelares a imensos destróieres.">
-  <title>Naves espaciais | Star Wars Nexus</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/global.css">
-  <link rel="stylesheet" href="../css/recursos.css">
-  <script defer src="../js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="../js/main.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta
+        name="description"
+        content="Descubra as naves mais icônicas da galáxia, de caças estelares a imensos destróieres."
+    >
+
+    <title>Naves espaciais | Star Wars Explorer</title>
+
+    <!-- Estilos da página -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/recursos.css">
+
+    <!-- Scripts -->
+    <script defer src="../js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/main.js"></script>
 </head>
+
 <body class="catalog-page" data-recurso="starships">
-  <a class="catalog-skip" href="#conteudo">Pular para o conteúdo</a>
-  <header class="catalog-header">
-    <div class="catalog-wrap">
-      <a class="catalog-brand" href="planetas.html" aria-label="Star Wars Nexus — Planetas">
-        <img src="../assets/imagens/marca.webp" width="84" height="53" alt="">
-      </a>
-    <nav aria-label="Menu principal">
-  <a href="../index.html">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
-    </svg>
-    <span>Início</span>
-  </a>
 
-  <a href="personagens.html">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="9" cy="7" r="3"/>
-      <path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2zM17 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5v2"/>
-    </svg>
-    <span>Personagens</span>
-  </a>
+    <!-- Link de acessibilidade -->
+    <a class="catalog-skip" href="#conteudo">
+        Pular para o conteúdo
+    </a>
 
-  <a href="planetas.html" aria-current="page">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="7"/>
-      <ellipse cx="12" cy="12" rx="11" ry="3" transform="rotate(-29 12 12)"/>
-    </svg>
-    <span>Planetas</span>
-  </a>
+    <!-- Cabeçalho e navegação -->
+    <header class="catalog-header">
+        <div class="catalog-wrap">
 
-  <a href="naves.html">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="m13 15-4-4c3-6 7-9 13-9 0 6-3 10-9 13Zm-4-4H5l-3 5 7-1m4 0v4l-5 3 1-7m-3 3-3 3"/>
-      <circle cx="16" cy="8" r="2"/>
-    </svg>
-    <span>Naves</span>
-  </a>
-</nav>
+            <a
+                class="catalog-brand"
+                href="planetas.html"
+                aria-label="Star Wars Explorer — Planetas"
+            >
+                <img
+                    src="../assets/imagens/marca.webp"
+                    width="84"
+                    height="53"
+                    alt=""
+                >
+            </a>
+
+            <nav aria-label="Menu principal">
+
+                <a href="../index.html">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    <span>Início</span>
+                </a>
+
+                <a href="personagens.html">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="9" cy="7" r="3"/>
+                        <path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2zM17 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5v2"/>
+                    </svg>
+                    <span>Personagens</span>
+                </a>
+
+                <a href="planetas.html">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="12" cy="12" r="7"/>
+                        <ellipse
+                            cx="12"
+                            cy="12"
+                            rx="11"
+                            ry="3"
+                            transform="rotate(-29 12 12)"
+                        />
+                    </svg>
+                    <span>Planetas</span>
+                </a>
+
+                <a href="naves.html" aria-current="page">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="m13 15-4-4c3-6 7-9 13-9 0 6-3 10-9 13Zm-4-4H5l-3 5 7-1m4 0v4l-5 3 1-7m-3 3-3 3"/>
+                        <circle cx="16" cy="8" r="2"/>
+                    </svg>
+                    <span>Naves</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main id="conteudo">
+
+        <!-- Apresentação da página -->
+        <section class="catalog-hero" aria-labelledby="titulo">
+            <div class="catalog-wrap">
+
+                <p class="eyebrow">
+                    Explore o universo de Star Wars
+                </p>
+
+                <h1 id="titulo">Naves espaciais</h1>
+
+                <p class="intro">
+                    Descubra as naves mais icônicas da galáxia,
+                    de caças estelares a imensos destróieres.
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Catálogo de naves -->
+        <section
+            class="catalog-list catalog-wrap"
+            aria-label="Catálogo de naves"
+        >
+
+            <!-- Campo de busca e ordenação -->
+            <div class="catalog-controls">
+
+                <div class="catalog-search">
+                    <label class="visually-hidden" for="busca">
+                        Pesquisar naves por nome
+                    </label>
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="10.5" cy="10.5" r="6.5"/>
+                        <path d="m16 16 5 5"/>
+                    </svg>
+
+                    <input
+                        id="busca"
+                        type="search"
+                        placeholder="Pesquisar naves (ex.: X-wing, Falcon)"
+                        disabled
+                    >
+                </div>
+
+                <div class="catalog-filter">
+                    <label for="ordem">Ordenar por</label>
+
+                    <select id="ordem" disabled>
+                        <option value="asc">Nome (A–Z)</option>
+                        <option value="desc">Nome (Z–A)</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Quantidade de resultados e atualização -->
+            <div class="catalog-status">
+                <p id="status" role="status">
+                    Carregando naves…
+                </p>
+
+                <button
+                    type="button"
+                    class="outline-button"
+                    id="atualizar"
+                    hidden
+                >
+                    Atualizar dados
+                </button>
+            </div>
+
+            <!-- Mensagens de erro ou busca sem resultados -->
+            <div class="catalog-feedback" id="feedback" hidden>
+                <p id="mensagem"></p>
+
+                <button
+                    type="button"
+                    class="outline-button"
+                    id="acao"
+                ></button>
+            </div>
+
+            <!-- Cards gerados pelo JavaScript -->
+            <div
+                class="catalog-grid"
+                id="lista"
+                aria-busy="true"
+            ></div>
+
+            <!-- Navegação entre páginas -->
+            <nav
+                class="catalog-pages"
+                id="paginacao"
+                aria-label="Paginação de naves"
+                hidden
+            ></nav>
+
+        </section>
+    </main>
+
+    <!-- Modal com os detalhes da nave selecionada -->
+    <div
+        class="modal catalog-modal"
+        id="detalhes"
+        tabindex="-1"
+        aria-labelledby="detalhes-titulo"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!-- Cabeçalho do modal -->
+                <div class="modal-header">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M13 15l-4-4c3-6 7-9 13-9 0 6-3 10-9 13zm-4-4H5l-3 5 7-1m4 0v4l-5 3 1-7m-3 3-3 3"/>
+                        <circle cx="16" cy="8" r="2"/>
+                    </svg>
+
+                    <h2
+                        class="modal-title"
+                        id="detalhes-titulo"
+                    ></h2>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"
+                    ></button>
+
+                </div>
+
+                <!-- Informações preenchidas pelo JavaScript -->
+                <div
+                    class="modal-body"
+                    id="detalhes-corpo"
+                ></div>
+
+                <!-- Rodapé do modal -->
+                <div class="modal-footer">
+
+                    <p
+                        class="w-100 m-0"
+                        id="detalhes-status"
+                        role="status"
+                    ></p>
+
+                    <button
+                        type="button"
+                        class="outline-button"
+                        data-bs-dismiss="modal"
+                    >
+                        Fechar
+                    </button>
+
+                    <a
+                        class="gold-button"
+                        id="registro"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Ver na SWAPI ↗
+                    </a>
+
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
-  <main id="conteudo">
-    <section class="catalog-hero" aria-labelledby="titulo">
-      <div class="catalog-wrap">
-        <p class="eyebrow">Explore o universo de Star Wars</p>
-        <h1 id="titulo">Naves espaciais</h1>
-        <p class="intro">Descubra as naves mais icônicas da galáxia, de caças estelares a imensos destróieres.</p>
-      </div>
-    </section>
-    <section class="catalog-list catalog-wrap" aria-label="Catálogo de naves">
-      <div class="catalog-controls">
-        <div class="catalog-search">
-          <label class="visually-hidden" for="busca">Pesquisar naves por nome</label>
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
-          <input id="busca" type="search" placeholder="Pesquisar naves (ex.: X-wing, Falcon)" disabled>
+
+    <!-- Rodapé -->
+    <footer class="catalog-footer">
+        <div class="catalog-wrap">
+
+            <a
+                class="footer-brand"
+                href="planetas.html"
+                aria-label="Star Wars Explorer — Planetas"
+            >
+                <img
+                    src="../assets/imagens/marca.webp"
+                    width="55"
+                    height="35"
+                    alt=""
+                >
+            </a>
+
+            <a href="https://swapi.dev/">
+                Projeto acadêmico utilizando a SWAPI ↗
+            </a>
+
+            <span>
+                Desenvolvido para fins educacionais · IFSP
+            </span>
+
         </div>
-        <div class="catalog-filter">
-          <label for="classe">Classe</label>
-          <select id="classe" disabled><option value="">Todas as classes</option></select>
-        </div>
-        <div class="catalog-filter">
-          <label for="ordem">Ordenar por</label>
-          <select id="ordem" disabled><option value="asc">Nome (A–Z)</option><option value="desc">Nome (Z–A)</option></select>
-        </div>
-      </div>
-      <div class="catalog-status">
-        <p id="status" role="status">Carregando naves…</p>
-        <button type="button" class="outline-button" id="atualizar" hidden>Atualizar dados</button>
-      </div>
-      <div class="catalog-feedback" id="feedback" hidden>
-        <p id="mensagem"></p>
-        <button type="button" class="outline-button" id="acao"></button>
-      </div>
-      <div class="catalog-grid" id="lista" aria-busy="true"></div>
-      <nav class="catalog-pages" id="paginacao" aria-label="Paginação de naves" hidden></nav>
-    </section>
-  </main>
-  <div class="modal catalog-modal" id="detalhes" tabindex="-1" aria-labelledby="detalhes-titulo" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 15l-4-4c3-6 7-9 13-9 0 6-3 10-9 13zm-4-4H5l-3 5 7-1m4 0v4l-5 3 1-7m-3 3-3 3"/><circle cx="16" cy="8" r="2"/></svg>
-          <h2 class="modal-title" id="detalhes-titulo"></h2>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
-        </div>
-        <div class="modal-body" id="detalhes-corpo"></div>
-        <div class="modal-footer">
-          <p class="w-100 m-0" id="detalhes-status" role="status"></p>
-          <button type="button" class="outline-button" data-bs-dismiss="modal">Fechar</button>
-          <a class="gold-button" id="registro" target="_blank" rel="noopener noreferrer">Ver na SWAPI ↗</a>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-  <footer class="catalog-footer">
-    <div class="catalog-wrap">
-      <a class="footer-brand" href="planetas.html" aria-label="Star Wars Nexus — Planetas"><img src="../assets/imagens/marca.webp" width="55" height="35" alt=""></a>
-      <a href="https://swapi.dev/">Projeto acadêmico utilizando a SWAPI ↗</a>
-      <span>Desenvolvido para fins educacionais · IFSP</span>
-    </div>
-  </footer>
+    </footer>
+
 </body>
 </html>
