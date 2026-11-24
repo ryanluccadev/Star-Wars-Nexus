@@ -1,6 +1,6 @@
 
 /* ===============================================================================
-    STAR WARS EXPLORER
+    STAR WARS NEXUS
     Arquivo: api.js
 
     Responsabilidades:
@@ -11,13 +11,14 @@
     - Disponibilizar os registros para outras partes do sistema.
    =============================================================================== */
 
-import { lerCache, salvarCache } from './cache.js';
+import { lerCache, salvarCache, lerContagem, salvarContagem } from './cache.js';
 
 // Endereço principal da API Star Wars.
 const ORIGEM = 'https://swapi.dev';
 
 // Recursos disponíveis no sistema.
 const RECURSOS_PERMITIDOS = ['people', 'planets', 'starships', 'films'];
+const RECURSOS_RELACIONADOS = [...RECURSOS_PERMITIDOS, 'species', 'vehicles'];
 
 
 /* ===============================================================================
@@ -32,7 +33,7 @@ const RECURSOS_PERMITIDOS = ['people', 'planets', 'starships', 'films'];
 export function urlRegistro(valor, recurso) {
     try {
         // Verifica se o recurso é permitido.
-        if (!RECURSOS_PERMITIDOS.includes(recurso)) {
+        if (!RECURSOS_RELACIONADOS.includes(recurso)) {
             return null;
         }
 
@@ -46,7 +47,7 @@ export function urlRegistro(valor, recurso) {
         const dominioValido = url.host === 'swapi.dev';
 
         // Rejeita a URL se alguma condição for inválida.
-        if (!protocoloValido || !dominioValido) {
+        if (!protocoloValido || !dominioValido || url.username || url.password) {
             return null;
         }
 
@@ -59,7 +60,7 @@ export function urlRegistro(valor, recurso) {
         }
 
         // Reconstrói a URL utilizando HTTPS.
-        const urlPadronizada = new URL(url.pathname, ORIGEM);
+        const urlPadronizada = new URL(url.pathname.replace(/\/?$/, '/'), ORIGEM);
 
         return urlPadronizada.href;
 
@@ -84,130 +85,194 @@ export function urlRegistro(valor, recurso) {
     Retorno:
     - Array contendo todos os registros encontrados.
    =============================================================================== */
-export async function carregarRecurso(recurso, { atualizar = false } = {}) {
+const pendentes = new Map();
+const contagensPendentes = new Map();
 
-    // 1. Verifica se o recurso solicitado é permitido.
-    if (!RECURSOS_PERMITIDOS.includes(recurso)) {
-        throw new Error('Recurso inválido');
+function validarRecurso(recurso) {
+    if (!RECURSOS_PERMITIDOS.includes(recurso)) throw new Error('Recurso inválido');
+}
+
+async function buscarPagina(url) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+
+    try {
+        const resposta = await fetch(url, { signal: controller.signal });
+        if (!resposta.ok) throw new Error('HTTP ' + resposta.status);
+        return await resposta.json();
+    } finally {
+        clearTimeout(timeout);
+    }
+}
+
+export async function carregarRecurso(recurso, { atualizar = false, aoUsarDadosLocais } = {}) {
+    validarRecurso(recurso);
+    const cache = registrosValidosNoCache(recurso);
+    if (cache && !atualizar) return cache;
+
+    if (!pendentes.has(recurso)) {
+        const promessa = buscarRecurso(recurso).finally(() => pendentes.delete(recurso));
+        pendentes.set(recurso, promessa);
     }
 
-    // 2. Verifica se existem dados armazenados no cache.
-    let cache = null;
-
-    if (!atualizar) {
-        cache = lerCache(recurso);
-    }
-
-    // Se encontrou cache válido, retorna os dados armazenados.
-    if (cache) {
-        return cache;
-    }
-
-    // 3. Prepara as variáveis utilizadas na paginação.
-    const caminho = '/api/' + recurso + '/';
-
-    // Endereço da primeira página que será consultada.
-    let proxima = new URL(caminho, ORIGEM);
-
-    // Guarda os endereços das páginas já visitadas.
-    const visitadas = new Set();
-
-    // Array que receberá os registros de todas as páginas.
-    const registros = [];
-
-    // 4. Continua buscando enquanto existir uma próxima página.
-    while (proxima) {
-
-        // Verifica se o endereço pertence à origem esperada.
-        const origemValida = proxima.origin === ORIGEM;
-
-        // Verifica se o caminho corresponde ao recurso solicitado.
-        const caminhoValido = proxima.pathname === caminho;
-
-        // Verifica se essa página já foi consultada.
-        const paginaRepetida = visitadas.has(proxima.href);
-
-        // Interrompe a busca caso a paginação seja inválida.
-        if (!origemValida || !caminhoValido || paginaRepetida) {
-            throw new Error('Paginação inválida');
+    try {
+        return await pendentes.get(recurso);
+    } catch (erro) {
+        const local = cache ?? registrosValidosNoCache(recurso, { aceitarExpirado: true });
+        if (local) {
+            aoUsarDadosLocais?.();
+            return local;
         }
+        throw erro;
+    }
+}
 
-        // Registra o endereço para evitar páginas repetidas.
-        visitadas.add(proxima.href);
-
-        // 5. Prepara um controlador para cancelar a requisição.
-        const controller = new AbortController();
-
-        // Agenda o cancelamento caso demore mais de 12 segundos.
-        const timeout = setTimeout(() => {
-            controller.abort();
-        }, 12000);
-
-        let pagina;
-
+export async function contarRecurso(recurso) {
+    validarRecurso(recurso);
+    const cache = registrosValidosNoCache(recurso);
+    if (cache) return cache.length;
+    const catalogoPendente = pendentes.get(recurso);
+    if (catalogoPendente) {
         try {
-            // Faz a requisição HTTP para a página atual.
-            const resposta = await fetch(proxima, {
-                signal: controller.signal
-            });
+            return (await catalogoPendente).length;
+        } catch (erro) {
+            return contagemExpirada(recurso, erro);
+        }
+    }
 
-            // Verifica se a requisição HTTP foi bem-sucedida.
-            if (!resposta.ok) {
-                throw new Error('HTTP ' + resposta.status);
+    const local = lerContagem(recurso);
+    if (local !== null) return local;
+
+    if (!contagensPendentes.has(recurso)) {
+        const url = new URL('/api/' + recurso + '/', ORIGEM);
+        const promessa = buscarPagina(url).then(pagina => {
+            if (!Number.isSafeInteger(pagina?.count) || pagina.count < 0) {
+                throw new Error('Contagem indisponível');
+            }
+            salvarContagem(recurso, pagina.count);
+            return pagina.count;
+        }).finally(() => contagensPendentes.delete(recurso));
+
+        contagensPendentes.set(recurso, promessa);
+    }
+
+    try {
+        return await contagensPendentes.get(recurso);
+    } catch (erro) {
+        return contagemExpirada(recurso, erro);
+    }
+}
+
+function contagemExpirada(recurso, erro) {
+    const registros = registrosValidosNoCache(recurso, { aceitarExpirado: true });
+    const contagem = registros?.length ?? lerContagem(recurso, { aceitarExpirado: true });
+    if (contagem !== null) return contagem;
+    throw erro;
+}
+
+function validarPagina(url, caminho) {
+    if (url.protocol === 'http:' && url.host === 'swapi.dev') url.protocol = 'https:';
+    if (url.origin !== ORIGEM || url.pathname !== caminho || url.username || url.password) {
+        throw new Error('Endereço de paginação inválido');
+    }
+
+    const parametros = [...url.searchParams];
+    if (parametros.length > 1 || parametros.some(([chave, valor]) =>
+        chave !== 'page' || !/^[1-9]\d*$/.test(valor) || !Number.isSafeInteger(Number(valor))
+    )) {
+        throw new Error('Parâmetros de paginação inválidos');
+    }
+
+    return url.searchParams.get('page') ?? '1';
+}
+
+async function buscarRecurso(recurso) {
+    const caminho = '/api/' + recurso + '/';
+    let proxima = new URL(caminho, ORIGEM);
+    const visitadas = new Set();
+    const registros = new Map();
+    let quantidade;
+
+    while (proxima) {
+        const numero = validarPagina(proxima, caminho);
+        if (visitadas.has(numero)) throw new Error('A SWAPI repetiu uma página.');
+        visitadas.add(numero);
+
+        const pagina = await buscarPagina(proxima);
+        if (!Array.isArray(pagina?.results)) throw new Error('Resposta inválida.');
+
+        if (pagina.count !== undefined) {
+            if (!Number.isSafeInteger(pagina.count) || pagina.count < 0 ||
+                (quantidade !== undefined && quantidade !== pagina.count)) {
+                throw new Error('Contagem inconsistente na SWAPI');
             }
 
-            // Lê o JSON recebido e converte em dados JavaScript.
-            pagina = await resposta.json();
-
-        } finally {
-            // Cancela o temporizador após a tentativa de requisição.
-            clearTimeout(timeout);
+            quantidade = pagina.count;
         }
 
-        // 6. Verifica se a API retornou um array de registros.
-        const resultadosValidos = Array.isArray(pagina?.results);
+        const totalAnterior = registros.size;
+        for (const item of pagina.results) {
+            const id = identidade(item, recurso);
 
-        if (!resultadosValidos) {
-            throw new Error('Resposta inválida');
+            if (!id) {
+                throw new Error('Registro inválido');
+            }
+
+            registros.set(id, item);
         }
 
-        // Filmes possuem "title"; os demais recursos possuem "name".
-        const propriedadeNome = recurso === 'films' ? 'title' : 'name';
-
-        // Verifica se todos os registros possuem o campo esperado.
-        const nomeInvalido = pagina.results.some(
-            item => typeof item?.[propriedadeNome] !== 'string'
-        );
-
-        if (nomeInvalido) {
-            throw new Error('Resposta inválida');
+        if (pagina.next === null) break;
+        if (typeof pagina.next !== 'string' || !pagina.next.trim() ||
+            registros.size === totalAnterior ||
+            (quantidade !== undefined && registros.size >= quantidade)) {
+            throw new Error('A SWAPI não forneceu uma próxima página válida.');
         }
 
-        // 7. Adiciona os registros recebidos ao array principal.
-        registros.push(...pagina.results);
+        proxima = new URL(pagina.next, proxima);
+    }
 
-        // Verifica se a informação da próxima página é válida.
-        if (pagina.next !== null && typeof pagina.next !== 'string') {
-            throw new Error('Paginação ausente');
-        }
+    if (quantidade !== undefined && registros.size !== quantidade) {
+        throw new Error('A SWAPI retornou uma listagem incompleta');
+    }
 
-        // 8. Define qual será a próxima página consultada.
-        if (pagina.next === null) {
-            proxima = null;
-        } else {
-            proxima = new URL(pagina.next, proxima);
-        }
+    const completos = [...registros.values()];
+    salvarCache(recurso, completos, quantidade);
+    salvarContagem(recurso, completos.length);
+    return completos;
+}
 
-        // Converte URLs HTTP da SWAPI para HTTPS.
-        if (proxima?.protocol === 'http:' &&
-            proxima.host === 'swapi.dev') {
-            proxima.protocol = 'https:';
+// Uma URL canônica identifica cada registro, inclusive após reordenar os cards.
+function identidade(item, recurso) {
+    const nome = recurso === 'films' ? item?.title : item?.name;
+    return typeof nome === 'string' && nome.trim() ? urlRegistro(item.url, recurso) : null;
+}
+
+function registrosValidosNoCache(recurso, opcoes) {
+    const cache = lerCache(recurso, opcoes);
+
+    if (!cache) {
+        return null;
+    }
+
+    const ids = cache.map(item => identidade(item, recurso));
+
+    return ids.includes(null) || new Set(ids).size !== ids.length ? null : cache;
+}
+
+// Aproveita os catálogos já existentes para traduzir URLs de relacionamentos.
+export function indexarNomes(recursoAtual, registrosAtuais) {
+    const nomes = new Map();
+
+    for (const recurso of RECURSOS_PERMITIDOS) {
+        const itens = recurso === recursoAtual
+            ? registrosAtuais
+            : registrosValidosNoCache(recurso) ?? [];
+
+        for (const item of itens) {
+            const id = identidade(item, recurso);
+            if (id) nomes.set(id, item.name ?? item.titulo_pt ?? item.title);
         }
     }
 
-    // 9. Armazena os registros após buscar todas as páginas.
-    salvarCache(recurso, registros);
-
-    // 10. Devolve o array completo para quem chamou a função.
-    return registros;
+    return nomes;
 }

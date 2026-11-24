@@ -10,3 +10,6 @@
 # Arquivos gerados pelo sistema operacional
 .DS_Store
 Thumbs.db
+
+# Artefatos dos scripts em Python
+__pycache__/

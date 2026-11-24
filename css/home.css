@@ -1,227 +1,363 @@
-
-/*
-    STAR WARS EXPLORER
-    Arquivo: home.css
-
-    Responsabilidades:
-    - Estilizar a página inicial.
-    - Apresentar as categorias do projeto.
-    - Organizar os cards de navegação.
-    - Adaptar a Home para diferentes telas.
-*/
-
-
-/* ==================================================
-   APRESENTAÇÃO DA HOME
-================================================== */
+.home-page {
+    --home-gold: #ffd96a;
+    --home-border: #d5def026;
+    --home-muted: #c2ccda;
+    --home-heading: "Exo 2", system-ui, sans-serif;
+}
 
 .home-hero {
     position: relative;
     isolation: isolate;
-
     display: grid;
+    min-height: clamp(28rem, 39vw, 36rem);
     align-items: center;
+    overflow: hidden;
+    background: #060b14;
+}
 
-    min-height: 440px;
-    padding-block: 4rem;
-
+.home-hero::after {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
     background:
-        linear-gradient(90deg, #030910 10%, #03091099 100%),
-        url('../assets/imagens/banner-espacial.webp')
-        center / cover no-repeat;
+        radial-gradient(ellipse at 74% 51%, #38549120, transparent 60%),
+        linear-gradient(0deg, #070d17 0%, #070d1738 21%, transparent 45%),
+        linear-gradient(90deg, #050a13 0%, #050a13f7 17%, #050a13a6 44%, transparent 78%);
+    content: "";
+    pointer-events: none;
+}
+
+.home-hero-media {
+    position: absolute;
+    z-index: -2;
+    inset: -1.5rem 0;
+    transform: translateY(var(--hero-shift, 0px));
+    background:
+        url("../assets/imagens/banners/hero-nexus.webp") center / cover no-repeat,
+        url("../assets/imagens/banners/banner-espacial.webp") center / cover no-repeat,
+        #071120;
+}
+
+.home-hero-orbit {
+    position: absolute;
+    z-index: -1;
+    inset: auto -10% 3%;
+    height: 23%;
+    border: 1px solid #b1c9ef20;
+    border-radius: 50%;
+    transform: rotate(-8deg);
+    pointer-events: none;
 }
 
 .home-hero-content {
     position: relative;
-    z-index: 1;
+    padding-block: clamp(2.4rem, 4.65vw, 4rem) clamp(3rem, 5.5vw, 4.8rem);
 }
 
-.home-hero h1 {
-    max-width: 750px;
-    margin-bottom: 1.5rem;
+.home-kicker {
+    display: flex;
+    align-items: center;
+    gap: .64rem;
+    margin: 0 0 1rem;
+    color: var(--home-gold);
+    font-size: .75rem;
+    font-weight: 750;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
 
-    font-size: clamp(2.5rem, 6vw, 5rem);
+.home-kicker span {
+    width: 1.8rem;
+    height: 1px;
+    background: currentColor;
+}
+
+.home-page .home-hero h1 {
+    max-width: 12ch;
+    margin: 0;
+    color: #f6f7fb;
+    font: italic 800 clamp(3.55rem, 7.3vw, 7.2rem)/.88 var(--home-heading);
+    letter-spacing: -.056em;
+    text-shadow: 0 4px 36px #03050ab5;
+}
+
+.home-hero h1 em {
+    color: var(--home-gold);
 }
 
 .home-description {
-    max-width: 570px;
-    margin-bottom: 1.8rem;
-
-    color: var(--ink);
-    font-size: 1.1rem;
-    line-height: 1.7;
+    max-width: 54ch;
+    margin: 1.45rem 0 0;
+    color: #d7dfea;
+    font-size: clamp(1rem, 1.45vw, 1.16rem);
+    line-height: 1.65;
+    text-wrap: pretty;
 }
 
+.home-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .72rem;
+    margin-top: 1.45rem;
+}
 
-/* ==================================================
-   SEÇÃO DE CATEGORIAS
-================================================== */
+.home-hero-actions .gold-button,
+.home-hero-actions .outline-button {
+    min-height: 2.8rem;
+    padding-inline: .92rem;
+}
 
-.home-explore {
-    padding-block: 4rem;
+.home-hero-actions .outline-button {
+    background: #0b131ccc;
+}
+
+.home-icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.65;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.home-stats {
+    position: relative;
+    padding-block: .2rem;
+    border-block: 1px solid var(--home-border);
+    background: linear-gradient(90deg, #0a1422b8, #0b14206b);
+}
+
+.home-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
+}
+
+.home-stat {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: .25rem;
+    min-height: 5.9rem;
+    padding: .65rem clamp(.6rem, 2.35vw, 1.7rem);
+    border-inline-end: 1px solid var(--home-border);
+}
+
+.home-stat:last-child {
+    border-inline-end: 0;
+}
+
+.home-stat dt {
+    display: flex;
+    align-items: center;
+    gap: .48rem;
+    color: var(--home-muted);
+    font-size: clamp(.69rem, 1.28vw, .86rem);
+    font-weight: 650;
+}
+
+.home-stat dt svg {
+    color: var(--home-gold);
+}
+
+.home-stat dd {
+    margin: 0;
+    color: var(--ink);
+    font: italic 800 clamp(1.65rem, 3vw, 2.8rem)/1 var(--home-heading);
+    font-variant-numeric: tabular-nums;
+}
+
+.home-load-error {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem .85rem;
+    margin-top: 1rem;
+    color: var(--home-muted);
+}
+
+.home-load-error p {
+    margin: 0;
+}
+
+.home-section {
+    padding-block: clamp(2.3rem, 5vw, 4.65rem);
+}
+
+.home-section h2 {
+    margin: 0;
+    color: #f5f7fb;
+    font: italic 800 clamp(2.1rem, 5vw, 3.55rem)/.97 var(--home-heading);
+    letter-spacing: -.032em;
 }
 
 .home-section-heading {
-    margin-bottom: 2rem;
-    text-align: center;
+    margin-bottom: clamp(1.25rem, 2.8vw, 2rem);
 }
 
-.home-section-heading h2,
-.home-about h2 {
-    color: var(--gold);
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 800;
-}
-
-.home-section-heading > p:last-child {
-    color: var(--muted);
-}
-
-/* Organiza os cards em colunas menores e centralizadas. */
 .home-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 250px));
-    justify-content: center;
-
-    column-gap: 3rem;
-    row-gap: 1.5rem;
-
-    max-width: 1000px;
-    margin-inline: auto;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(.75rem, 1.4vw, 1.2rem);
 }
 
+.home-grid > :nth-child(2) { --reveal-delay: 55ms; }
+.home-grid > :nth-child(3) { --reveal-delay: 105ms; }
+.home-grid > :nth-child(4) { --reveal-delay: 155ms; }
 
-/* ==================================================
-   CARDS DE NAVEGAÇÃO
-================================================== */
-
-.home-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    gap: 1rem;
-    padding: 1.4rem;
-
-    background: var(--panel);
-
-    border: 1px solid var(--edge);
-    border-radius: .8rem;
-
-    transition: border-color .2s ease;
-}
-
-.home-card:hover {
-    border-color: var(--gold);
-}
-
-.home-card-icon {
+.home-page .home-card {
+    position: relative;
+    isolation: isolate;
     display: grid;
-    place-items: center;
-
-    width: 65px;
-    height: 65px;
-
-    color: var(--gold);
-    background: #121e29;
-
-    border: 1px solid var(--line);
-    border-radius: .7rem;
+    align-items: end;
+    min-width: 0;
+    min-height: clamp(15.6rem, 26vw, 20.5rem);
+    overflow: hidden;
+    color: var(--ink);
+    border: 1px solid var(--home-border);
+    border-radius: .8rem;
+    background: #101a27;
+    text-decoration: none;
+    box-shadow: 0 .75rem 2rem #0002;
+    transition: translate .24s ease, border-color .24s ease, box-shadow .24s ease;
 }
 
-.catalog-page .home-card-icon svg {
-    width: 35px;
-    height: 35px;
+.home-card img,
+.home-card::after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+.home-card img {
+    object-fit: cover;
+    transition: transform .35s ease;
+}
+
+.home-card-people img { object-position: center 30%; }
+.home-card-planets img { object-position: 46% center; }
+
+.home-card::after {
+    background: linear-gradient(0deg, #050a12 6%, #050a12ee 27%, #050a1274 59%, #050a1207 90%);
+    content: "";
+}
+
+.home-page .home-card:hover,
+.home-page .home-card:focus-visible {
+    border-color: #ffd96aab;
+    box-shadow: 0 .8rem 1.8rem #0007;
+}
+
+.home-card:is(:hover, :focus-visible) img { transform: scale(1.06); }
+
+.home-card-copy {
+    display: grid;
+    justify-items: start;
+    gap: .42rem;
+    padding: clamp(.8rem, 2vw, 1.3rem);
+}
+
+.home-card .home-card-icon {
+    width: 1.45rem;
+    height: 1.45rem;
+    margin-bottom: .15rem;
+    color: var(--home-gold);
 }
 
 .home-card h3 {
     margin: 0;
-
-    color: var(--ink);
-    font-size: 1.4rem;
-    font-weight: 750;
+    color: #f9fafc;
+    font-size: clamp(1.21rem, 2vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: -.025em;
 }
 
 .home-card p {
-    flex: 1;
-
+    min-height: 4.5em;
     margin: 0;
-
-    color: var(--muted);
-    line-height: 1.6;
+    color: #d5deeb;
+    font-size: .89rem;
+    line-height: 1.5;
 }
 
-.home-card .gold-button {
-    max-width: 100%;
+.home-card-link {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    margin-top: .45rem;
+    color: var(--home-gold);
+    font-size: .82rem;
+    font-weight: 750;
 }
 
+.home-card-link svg { transition: transform .2s ease; }
+.home-card:hover .home-card-link svg { transform: translateX(.22rem); }
 
-/* ==================================================
-   SOBRE O PROJETO
-================================================== */
-
-.home-about {
-    padding-block: 3rem;
-
-    background: #07111a;
-    border-top: 1px solid var(--line);
+@media (hover: hover) and (pointer: fine) {
+    .home-page .home-card:hover { translate: 0 -.22rem; }
 }
 
-.home-about p {
-    max-width: 760px;
-    margin: 1rem 0 0;
-
-    color: var(--muted);
-    line-height: 1.8;
+@media (max-width: 1080px) {
+    .home-hero::after {
+        background:
+            linear-gradient(0deg, #070d17 0%, #070d1738 24%, transparent 48%),
+            linear-gradient(90deg, #050a13 0%, #050a13e6 29%, #050a138a 55%, transparent 91%);
+    }
 }
 
-
-/* ==================================================
-   RESPONSIVIDADE
-================================================== */
-
-/* Tablets */
 @media (max-width: 850px) {
+    .home-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .home-card p { min-height: 3em; }
+}
 
-    .home-grid {
-        grid-template-columns: repeat(2, minmax(0, 250px));
-        column-gap: 1.5rem;
+@media (max-width: 680px) {
+    .home-page .home-hero h1 {
+        max-width: 11ch;
+        font-size: clamp(2.55rem, 10vw, 4.3rem);
     }
 
-    .home-hero {
-        min-height: 370px;
+    .home-hero { min-height: 25rem; }
+    .home-hero-content { padding-block: 3.05rem 3.6rem; }
+    .home-hero-media { background-position: 63% center; }
+    .home-hero::after {
+        background: linear-gradient(0deg, #070d17, #070d1770 45%, transparent),
+                    linear-gradient(90deg, #050a13f2, #050a1363);
+    }
+
+    .home-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .home-stat { min-height: 4.4rem; padding-inline: .75rem; }
+    .home-stat:nth-child(2n) { border-inline-end: 0; }
+    .home-stat:nth-child(-n + 2) { border-bottom: 1px solid var(--home-border); }
+
+}
+
+@media (max-width: 465px) {
+    .home-page .home-card { min-height: 15rem; }
+    .home-card-copy { padding-inline: .64rem; }
+    .home-card p { min-height: 4.5em; font-size: .79rem; }
+    .home-card-link { font-size: .72rem; }
+
+    .home-hero-actions {
+        column-gap: .5rem;
+    }
+
+    .home-hero-actions .gold-button,
+    .home-hero-actions .outline-button {
+        padding-inline: .67rem;
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .home-hero-media,
+    .home-card:is(:hover, :focus-visible) img,
+    .home-card:hover .home-card-link svg { transform: none; }
 
-/* Celulares */
-@media (max-width: 575px) {
+    .home-page .home-card:hover { translate: none; }
 
-    .home-hero {
-        min-height: 340px;
-        padding-block: 3rem;
-    }
-
-    .home-description {
-        font-size: .95rem;
-    }
-
-    .home-explore {
-        padding-block: 2.5rem;
-    }
-
-    .home-grid {
-        grid-template-columns: minmax(0, 320px);
-        justify-content: center;
-
-        gap: .8rem;
-    }
-
-    .home-card {
-        padding: 1.2rem;
-    }
-
-    .home-about {
-        padding-block: 2rem;
-    }
+    .home-card,
+    .home-card img,
+    .home-card-link svg { transition: none; }
 }

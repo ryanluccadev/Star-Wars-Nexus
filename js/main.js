@@ -1,6 +1,6 @@
 
 /*
-    STAR WARS EXPLORER
+    STAR WARS NEXUS
     Arquivo: main.js
 
     Responsabilidades:
@@ -11,9 +11,11 @@
     - Gerenciar a paginação e as mensagens da interface.
 */
 
-import { carregarRecurso, urlRegistro } from './api.js';
+import { carregarRecurso, indexarNomes, urlRegistro } from './api.js';
+import { imagemDoRegistro, placeholders } from './imagens.js';
+import { carregarFilmes, nomeCategoriaFilme, rotuloEpisodio } from './filmes.js';
 import { filtrarRegistros } from './busca.js';
-import { abrirModal, elemento, prepararModal, valorExibido } from './modal.js';
+import { abrirModal, elemento, prepararModal, termosEmPortugues, valorExibido } from './modal.js';
 
 // Configurações da página
 const recurso = document.body.dataset.recurso;
@@ -35,25 +37,14 @@ const $ = id => document.getElementById(id);
 const lista = $('lista');
 const busca = $('busca');
 const ordem = $('ordem');
+const categoriaFilme = $('categoria-filme');
+const limparBusca = $('limpar-busca');
+const notaCache = $('nota-cache');
 const status = $('status');
 const feedback = $('feedback');
 const acao = $('acao');
 const atualizar = $('atualizar');
 const paginacao = $('paginacao');
-
-// Imagens específicas de planetas e naves.
-const imagens = new Map([
-    ['Tatooine', 'tatooine'],
-    ['Alderaan', 'alderaan'],
-    ['Naboo', 'naboo'],
-    ['Hoth', 'hoth'],
-    ['Endor', 'endor'],
-    ['Coruscant', 'coruscant'],
-    ['Millennium Falcon', 'millennium-falcon'],
-    ['X-wing', 'x-wing'],
-    ['Star Destroyer', 'star-destroyer'],
-    ['Slave 1', 'slave-1']
-]);
 
 // Ordem de destaque dos planetas.
 const destaques = new Map([
@@ -65,33 +56,6 @@ const destaques = new Map([
     ['Coruscant', 5]
 ]);
 
-// Ilustrações genéricas de personagens e filmes.
-const ilustracoes = {
-    people: `
-        <svg xmlns="http://www.w3.org/2000/svg"
-             viewBox="0 0 400 250">
-            <rect width="400" height="250" fill="#09141e"/>
-            <circle cx="200" cy="88" r="38"
-                    fill="none" stroke="#ffd000" stroke-width="5"/>
-            <path d="M115 205v-12a85 85 0 0 1 170 0v12"
-                  fill="none" stroke="#ffd000"
-                  stroke-width="5" stroke-linecap="round"/>
-        </svg>
-    `,
-    films: `
-        <svg xmlns="http://www.w3.org/2000/svg"
-             viewBox="0 0 400 250">
-            <rect width="400" height="250" fill="#09141e"/>
-            <rect x="105" y="65" width="190" height="120" rx="8"
-                  fill="none" stroke="#ffd000" stroke-width="5"/>
-            <path d="M145 65v120M255 65v120"
-                  stroke="#ffd000" stroke-width="4"/>
-            <path d="M105 95h40M105 155h40M255 95h40M255 155h40"
-                  stroke="#ffd000" stroke-width="4"/>
-            <path d="m180 103 48 22-48 22z" fill="#ffd000"/>
-        </svg>
-    `
-};
 
 // Estado da página
 let registros = [];
@@ -101,99 +65,53 @@ let erro = false;
 
 // Retorna o nome ou título de um registro.
 function nomeRegistro(item) {
-    return item.name ?? item.title ?? 'Sem título';
+    return item.name ?? item.titulo_pt ?? item.title ?? 'Sem título';
 }
 
 
-// Formata a data de lançamento dos filmes.
-function formatarData(data) {
-    if (!data || data === 'unknown') {
-        return 'Não informado';
-    }
-
-    const partes = data.split('-');
-
-    if (partes.length !== 3) {
-        return data;
-    }
-
-    return partes[2] + '/' + partes[1] + '/' + partes[0];
-}
-
-
-// Cria uma imagem para o registro.
+// Cria imagens a partir do ID da SWAPI, ou do número do episódio nos filmes.
 function criarImagem(item, card = false) {
-    const imagem = elemento(
-        'img',
-        '',
-        card ? 'card-image' : 'detail-image'
-    );
+    const imagem = elemento('img', '', card ? 'card-image' : 'detail-image');
+    const vertical = recurso === 'people' || recurso === 'films';
+    const padrao = placeholders[recurso];
+    const selecionada = imagemDoRegistro(recurso, item);
 
-    const nome = imagens.get(item.name);
-    const titulo = nomeRegistro(item);
+    const definir = ({ arquivo, descricao }) => {
+        imagem.classList.toggle('is-placeholder', arquivo === padrao.arquivo);
+        imagem.alt = descricao;
+        imagem.title = descricao;
+        imagem.src = new URL('../assets/imagens/' + arquivo, import.meta.url).href;
+    };
 
-    // Personagens e filmes utilizam ilustrações genéricas.
-    if (recurso === 'people' || recurso === 'films') {
-        const svg = ilustracoes[recurso];
-
-        imagem.src = 'data:image/svg+xml;charset=UTF-8,' +
-            encodeURIComponent(svg);
-
-        imagem.alt = recurso === 'people'
-            ? 'Ilustração genérica de personagem'
-            : 'Ilustração genérica de filme';
-
-    } else {
-        // Planetas e naves continuam utilizando as imagens existentes.
-        const nave = recurso === 'starships';
-        const padrao = nave ? 'nave-generica' : 'planeta-generico';
-
-        const descricaoPadrao = nave
-            ? 'Ilustração genérica de uma nave no espaço'
-            : 'Ilustração genérica de um planeta visto do espaço';
-
-        imagem.src = new URL(
-            '../assets/imagens/' + (nome ?? padrao) + '.webp',
-            import.meta.url
-        ).href;
-
-        imagem.alt = nome
-            ? 'Ilustração de ' + titulo
-            : descricaoPadrao;
-
-        imagem.addEventListener('error', () => {
-            if (nome) {
-                imagem.src = new URL(
-                    '../assets/imagens/' + padrao + '.webp',
-                    import.meta.url
-                ).href;
-
-                imagem.alt = descricaoPadrao;
-            }
-        }, { once: true });
-    }
+    imagem.width = vertical ? 480 : 600;
+    imagem.height = vertical ? 720 : 300;
+    imagem.decoding = 'async';
 
     if (card) {
         imagem.loading = 'lazy';
     }
 
+    if (selecionada !== padrao) {
+        imagem.addEventListener('error', () => definir(padrao), { once: true });
+    }
+
+    definir(selecionada);
     return imagem;
 }
-
 
 // Define as informações exibidas em cada tipo de card.
 function camposCard(item) {
     switch (recurso) {
         case 'people':
             return [
-                ['Gênero', item.gender],
+                ['Altura', /^\d+$/.test(item.height) ? item.height + ' cm' : item.height],
                 ['Nascimento', item.birth_year]
             ];
 
         case 'planets':
             return [
-                ['Clima', item.climate],
-                ['População', item.population]
+                ['Clima', termosEmPortugues(item.climate)],
+                ['Terreno', termosEmPortugues(item.terrain)]
             ];
 
         case 'starships':
@@ -204,8 +122,8 @@ function camposCard(item) {
 
         case 'films':
             return [
-                ['Diretor', item.director],
-                ['Lançamento', formatarData(item.release_date)]
+                ['Lançamento', typeof item.release_date === 'string' && /^\d{4}-/.test(item.release_date)
+                    ? item.release_date.slice(0, 4) : null]
             ];
 
         default:
@@ -218,10 +136,34 @@ function camposCard(item) {
 function criarCard(item) {
     const card = elemento('article', '', 'catalog-card');
     const imagem = criarImagem(item, true);
+    const visual = elemento('div', '', 'card-media');
+    visual.append(imagem);
+    if (recurso === 'films') {
+        const numero = rotuloEpisodio(item.episode_id).replace('Episódio ', '') || '◇';
+        const arte = elemento('span', numero, 'film-poster-fallback');
+        arte.setAttribute('aria-hidden', 'true');
+        visual.append(arte);
+    }
     const conteudo = elemento('div', '', 'card-copy');
 
     const tituloTexto = nomeRegistro(item);
     const titulo = elemento('h2', tituloTexto);
+
+    if (recurso === 'films') {
+        const episodio = rotuloEpisodio(item.episode_id);
+        const grupo = nomeCategoriaFilme(item.categoria);
+        const fonte = item.origem === 'swapi' ? 'SWAPI' : 'Complementar';
+        const etiqueta = [episodio, grupo, fonte].filter(Boolean).join(' · ');
+        conteudo.append(elemento('p', etiqueta, 'card-episode'));
+    }
+
+    conteudo.append(titulo);
+
+    if (recurso === 'films') {
+        const original = elemento('p', item.title, 'card-original');
+        original.lang = 'en';
+        conteudo.append(original);
+    }
 
     const dados = elemento('dl', '', 'card-data');
 
@@ -231,7 +173,7 @@ function criarCard(item) {
 
         linha.append(
             elemento('dt', rotulo),
-            elemento('dd', valorExibido(valor))
+            elemento('dd', recurso === 'films' && valor ? valor : valorExibido(valor))
         );
 
         dados.append(linha);
@@ -251,10 +193,10 @@ function criarCard(item) {
     detalhes.addEventListener('click', () => {
         const modal = prepararModal({
             recurso,
-            nave: recurso === 'starships',
             item,
             imagem: criarImagem(item),
-            registro
+            registro,
+            nomes: indexarNomes(recurso, registros)
         });
 
         if (!abrirModal(modal, detalhes)) {
@@ -263,8 +205,8 @@ function criarCard(item) {
         }
     });
 
-    conteudo.append(titulo, dados, detalhes);
-    card.append(imagem, conteudo);
+    conteudo.append(dados, detalhes);
+    card.append(visual, conteudo);
 
     return card;
 }
@@ -310,7 +252,7 @@ function montarPaginacao(total) {
         botao.disabled = indisponivel;
         botao.setAttribute('aria-label', rotulo);
 
-        if (destino === pagina && !indisponivel) {
+        if (numerico && destino === pagina && !indisponivel) {
             botao.setAttribute('aria-current', 'page');
         }
 
@@ -336,8 +278,13 @@ function montarPaginacao(total) {
 
 // Atualiza os cards, a quantidade de resultados e a paginação.
 function renderizar() {
+    const categoria = categoriaFilme?.value;
+    const disponiveis = categoria
+        ? registros.filter(item => item.categoria === categoria)
+        : registros;
+    limparBusca.hidden = busca.value.length === 0;
     const filtrados = filtrarRegistros(
-        registros,
+        disponiveis,
         busca.value,
         ordem?.value
     );
@@ -372,17 +319,14 @@ function renderizar() {
     feedback.hidden = true;
 
     if (!total) {
-        mostrarFeedback(
-            'Nenhum resultado corresponde à busca.',
-            'Limpar busca'
-        );
+        mostrarFeedback('Nenhum resultado corresponde à busca.', 'Limpar filtros');
     }
 }
 
 
 // Habilita ou desabilita os controles durante o carregamento.
 function habilitarControles(habilitado) {
-    for (const campo of [busca, ordem]) {
+    for (const campo of [busca, ordem, categoriaFilme, limparBusca]) {
         if (campo) {
             campo.disabled = !habilitado;
         }
@@ -393,13 +337,25 @@ function habilitarControles(habilitado) {
 
 
 // Carrega os registros da API ou do cache.
-async function carregar(forcar = false) {
+async function carregar(forcar = false, origem) {
     erro = false;
 
     habilitarControles(false);
 
     lista.setAttribute('aria-busy', 'true');
-    lista.replaceChildren();
+    notaCache.hidden = true;
+    lista.replaceChildren(...Array.from({ length: porPagina }, () => {
+        const card = elemento('article', '', 'catalog-card catalog-skeleton');
+        card.setAttribute('aria-hidden', 'true');
+        const corpo = elemento('div', '', 'card-copy');
+        corpo.append(
+            elemento('span', '', 'skeleton-line'),
+            elemento('span', '', 'skeleton-line'),
+            elemento('span', '', 'skeleton-button')
+        );
+        card.append(elemento('div', '', 'skeleton-image'), corpo);
+        return card;
+    }));
 
     paginacao.hidden = true;
     feedback.hidden = true;
@@ -407,15 +363,20 @@ async function carregar(forcar = false) {
     status.textContent = 'Carregando ' + substantivo[1] + '…';
 
     try {
-        registros = await carregarRecurso(recurso, {
-            atualizar: forcar
-        });
+        const opcoes = {
+            atualizar: forcar,
+            aoUsarDadosLocais: () => { notaCache.hidden = false; }
+        };
+        registros = recurso === 'films'
+            ? await carregarFilmes(opcoes)
+            : await carregarRecurso(recurso, opcoes);
 
-        // Exibe os planetas destacados no início da listagem.
-        if (recurso === 'planets') {
+        // A opção Imagens em destaque mantém os registros ilustrados no início.
+        if (recurso === 'people' || recurso === 'planets') {
+            const semImagem = item => Number(imagemDoRegistro(recurso, item) === placeholders[recurso]);
             registros = [...registros].sort((a, b) =>
-                (destaques.get(a.name) ?? Infinity) -
-                (destaques.get(b.name) ?? Infinity)
+                semImagem(a) - semImagem(b) ||
+                (destaques.get(a.name) ?? Infinity) - (destaques.get(b.name) ?? Infinity)
             );
         }
 
@@ -426,6 +387,7 @@ async function carregar(forcar = false) {
 
     } catch {
         erro = true;
+        lista.replaceChildren();
 
         status.textContent =
             'Não foi possível carregar ' + substantivo[1] + '.';
@@ -437,6 +399,10 @@ async function carregar(forcar = false) {
 
     } finally {
         lista.setAttribute('aria-busy', 'false');
+        // Os controles de atualização ficam ocultos durante a consulta.
+        if (origem && document.activeElement === document.body) {
+            (erro ? acao : atualizar).focus();
+        }
     }
 }
 
@@ -449,21 +415,29 @@ function redefinirPagina() {
 
 
 // Eventos da interface
+busca.value = new URLSearchParams(location.search).get('busca') ?? '';
 busca.addEventListener('input', redefinirPagina);
+categoriaFilme?.addEventListener('change', redefinirPagina);
+limparBusca.addEventListener('click', () => {
+    busca.value = '';
+    redefinirPagina();
+    busca.focus();
+});
 ordem?.addEventListener('change', redefinirPagina);
 
-atualizar.addEventListener('click', () => carregar(true));
+atualizar.addEventListener('click', () => carregar(true, atualizar));
 
 acao.addEventListener('click', () => {
     if (erro) {
-        carregar(true);
+        carregar(true, acao);
         return;
     }
 
     busca.value = '';
+    if (categoriaFilme) categoriaFilme.value = '';
 
     if (ordem) {
-        ordem.value = 'asc';
+        ordem.selectedIndex = 0;
     }
 
     redefinirPagina();

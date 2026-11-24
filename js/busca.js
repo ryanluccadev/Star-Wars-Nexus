@@ -1,6 +1,6 @@
 
 /*
-    STAR WARS EXPLORER
+    STAR WARS NEXUS
     Arquivo: busca.js
 
     Responsabilidades:
@@ -12,6 +12,8 @@
 // Remove acentos e transforma o texto em letras minúsculas.
 function normalizar(texto) {
     return texto
+        .trim()
+        .replace(/\s+/g, ' ')
         .normalize('NFD')
         .replace(/\p{Diacritic}/gu, '')
         .toLocaleLowerCase('pt-BR');
@@ -28,23 +30,28 @@ const comparar = new Intl.Collator('pt-BR', {
 export function filtrarRegistros(registros, termo, ordem = '') {
 
     // Remove espaços extras e normaliza o texto pesquisado.
-    const consulta = normalizar(termo.trim());
+    const consulta = normalizar(termo);
 
     // Mantém apenas os registros que correspondem à pesquisa.
-    const filtrados = registros.filter(item => {
-        const nome = item.name ?? item.title ?? '';
-
-        return normalizar(nome).includes(consulta);
-    });
+    const filtrados = consulta
+        ? registros.filter(item => [item.name, item.title, item.titulo_pt].some(nome =>
+            typeof nome === 'string' && normalizar(nome).includes(consulta)
+        ))
+        : [...registros];
 
     // Ordena os registros de A–Z ou Z–A, conforme a opção escolhida.
     if (ordem === 'asc' || ordem === 'desc') {
         filtrados.sort((a, b) => {
-            const nomeA = a.name ?? a.title ?? '';
-            const nomeB = b.name ?? b.title ?? '';
+            const nomeA = a.name ?? a.titulo_pt ?? a.title ?? '';
+            const nomeB = b.name ?? b.titulo_pt ?? b.title ?? '';
 
             return comparar(nomeA, nomeB) * (ordem === 'desc' ? -1 : 1);
         });
+    } else if (ordem === 'historia') {
+        filtrados.sort((a, b) => a.ordem_historia - b.ordem_historia);
+    } else if (ordem === 'lancamento') {
+        const data = item => typeof item.release_date === 'string' ? item.release_date : '\uffff';
+        filtrados.sort((a, b) => data(a).localeCompare(data(b)));
     }
 
     return filtrados;

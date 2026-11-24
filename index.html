@@ -8,15 +8,20 @@
 
     <meta
         name="description"
-        content="Explore os personagens, planetas e naves do universo Star Wars."
+        content="Explore personagens, planetas, naves e filmes do universo Star Wars."
     >
 
-    <title>Início | Star Wars Explorer</title>
+    <title>Início | Star Wars Nexus</title>
 
     <!-- Estilos da página -->
+    <link rel="icon" href="assets/imagens/banners/logo.png" type="image/png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/home.css">
+    <script defer src="js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/experiencia.css">
+    <script type="module" src="js/experiencia.js"></script>
+    <script type="module" src="js/home.js"></script>
 </head>
 
 <body class="catalog-page home-page">
@@ -29,328 +34,219 @@
     <!-- Cabeçalho e navegação -->
     <header class="catalog-header">
         <div class="catalog-wrap">
-
-            <a
-                class="catalog-brand"
-                href="index.html"
-                aria-label="Star Wars Explorer — Início"
-            >
-                <img
-                    src="assets/imagens/marca.webp"
-                    width="84"
-                    height="53"
-                    alt=""
-                >
+            <a class="catalog-brand" href="index.html" aria-label="Star Wars Nexus, início">
+                <img src="assets/imagens/banners/logo.png" width="1536" height="1024" alt="Star Wars Nexus">
             </a>
-
-            <nav aria-label="Menu principal">
-
+            <button class="outline-button catalog-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false">
+                <span aria-hidden="true">☰</span> Menu
+            </button>
+            <nav id="menu-principal" class="collapse" aria-label="Menu principal">
                 <a href="index.html" aria-current="page">
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                         <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
                     </svg>
                     <span>Início</span>
                 </a>
-
                 <a href="pages/personagens.html">
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                         <circle cx="9" cy="7" r="3"/>
                         <path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2zM17 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5v2"/>
                     </svg>
                     <span>Personagens</span>
                 </a>
-
                 <a href="pages/planetas.html">
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                         <circle cx="12" cy="12" r="7"/>
-                        <ellipse
-                            cx="12"
-                            cy="12"
-                            rx="11"
-                            ry="3"
-                            transform="rotate(-29 12 12)"
-                        />
+                        <ellipse cx="12" cy="12" rx="11" ry="3" transform="rotate(-29 12 12)"/>
                     </svg>
                     <span>Planetas</span>
                 </a>
-
                 <a href="pages/naves.html">
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                         <path d="m13 15-4-4c3-6 7-9 13-9 0 6-3 10-9 13Zm-4-4H5l-3 5 7-1m4 0v4l-5 3 1-7m-3 3-3 3"/>
                     </svg>
                     <span>Naves</span>
                 </a>
-
-
-                <!-- Filmes -->
-                <a href="filmes.html">
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
+                <a href="pages/filmes.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                         <rect x="3" y="4" width="18" height="16" rx="2"/>
                         <path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/>
                         <path d="m10 9 5 3-5 3z"/>
                     </svg>
                     <span>Filmes</span>
                 </a>
-
-
             </nav>
         </div>
     </header>
 
     <!-- Conteúdo principal -->
-    <main id="conteudo">
-
-        <!-- Apresentação do projeto -->
+    <main id="conteudo" tabindex="-1">
+        <svg class="visually-hidden" aria-hidden="true" width="0" height="0" focusable="false">
+            <symbol id="home-people-icon" viewBox="0 0 24 24">
+                <circle cx="9" cy="7" r="3"/>
+                <path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2M17 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5v2"/>
+            </symbol>
+            <symbol id="home-planets-icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="7"/>
+                <ellipse cx="12" cy="12" rx="11" ry="3" transform="rotate(-29 12 12)"/>
+            </symbol>
+            <symbol id="home-starships-icon" viewBox="0 0 24 24">
+                <path d="m13 15-4-4c3-6 7-9 13-9 0 6-3 10-9 13Zm-4-4H5l-3 5 7-1m4 0v4l-5 3 1-7m-3 3-3 3"/>
+            </symbol>
+            <symbol id="home-films-icon" viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                <path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4m-7-6 5 3-5 3z"/>
+            </symbol>
+            <symbol id="home-arrow-icon" viewBox="0 0 24 24">
+                <path d="M4 12h15m-6-6 6 6-6 6"/>
+            </symbol>
+        </svg>
         <section class="home-hero" aria-labelledby="titulo">
+            <div class="home-hero-media" aria-hidden="true"></div>
+            <div class="home-hero-orbit" aria-hidden="true"></div>
             <div class="catalog-wrap home-hero-content">
-
-                <p class="eyebrow">
-                    Uma galáxia de descobertas
-                </p>
-
-                <h1 id="titulo">
-                    Star Wars Explorer
-                </h1>
-
+                <p class="home-kicker home-hero-eyebrow"><span aria-hidden="true"></span> Star Wars Nexus</p>
+                <h1 id="titulo">Uma galáxia <em>muito, muito</em> distante.</h1>
                 <p class="home-description">
-                    Explore uma galáxia muito, muito distante.
-                    Conheça os personagens, descubra os planetas
-                    e investigue as naves do universo Star Wars.
+                    O Star Wars Nexus é um portal interativo dedicado ao universo Star Wars. Explore personagens icônicos, descubra diferentes planetas, conheça naves lendárias e reviva os acontecimentos dos filmes que marcaram gerações.
                 </p>
-
-                <a class="gold-button" href="#explorar">
-                    Começar a explorar
-                </a>
-
+                <div class="home-hero-actions">
+                    <a class="gold-button" href="#explorar">
+                        Explorar a galáxia
+                        <svg class="home-icon" aria-hidden="true"><use href="#home-arrow-icon"/></svg>
+                    </a>
+                    <a class="outline-button" href="pages/filmes.html">
+                        <svg class="home-icon" aria-hidden="true"><use href="#home-films-icon"/></svg>
+                        Conhecer os filmes
+                    </a>
+                </div>
             </div>
         </section>
 
-        <!-- Acesso aos catálogos -->
-        <section
-            class="home-explore catalog-wrap"
-            id="explorar"
-            aria-labelledby="explorar-titulo"
-        >
-
-            <div class="home-section-heading">
-
-                <p class="eyebrow">Explore a galáxia</p>
-
-                <h2 id="explorar-titulo">
-                    Escolha seu destino
-                </h2>
-
-                <p>
-                    Selecione uma categoria para descobrir
-                    informações sobre o universo Star Wars.
-                </p>
-
+        <div class="catalog-wrap">
+            <section class="home-stats" id="indicadores" aria-labelledby="indicadores-titulo" data-reveal>
+                <h2 class="visually-hidden" id="indicadores-titulo">A galáxia em números</h2>
+                <dl class="home-stat-grid">
+                    <div class="home-stat">
+                        <dt>
+                            <svg class="home-icon" aria-hidden="true"><use href="#home-people-icon"/></svg>
+                            Personagens
+                        </dt>
+                        <dd data-contador data-total="people"><span aria-label="Carregando">—</span></dd>
+                    </div>
+                    <div class="home-stat">
+                        <dt>
+                            <svg class="home-icon" aria-hidden="true"><use href="#home-planets-icon"/></svg>
+                            Planetas
+                        </dt>
+                        <dd data-contador data-total="planets"><span aria-label="Carregando">—</span></dd>
+                    </div>
+                    <div class="home-stat">
+                        <dt>
+                            <svg class="home-icon" aria-hidden="true"><use href="#home-starships-icon"/></svg>
+                            Naves
+                        </dt>
+                        <dd data-contador data-total="starships"><span aria-label="Carregando">—</span></dd>
+                    </div>
+                    <div class="home-stat">
+                        <dt>
+                            <svg class="home-icon" aria-hidden="true"><use href="#home-films-icon"/></svg>
+                            Filmes no catálogo
+                        </dt>
+                        <dd data-contador data-total="films"><span aria-label="Carregando">—</span></dd>
+                    </div>
+                </dl>
+            </section>
+            <div class="home-load-error" id="home-carregamento-erro" hidden>
+                <p role="status">Alguns dados da galáxia estão indisponíveis.</p>
+                <button class="outline-button" type="button" id="home-tentar-novamente">Tentar novamente</button>
             </div>
+        </div>
 
+        <section class="home-section home-explore catalog-wrap" id="explorar" aria-labelledby="explorar-titulo">
+            <div class="home-section-heading" data-reveal>
+                <h2 id="explorar-titulo">Explore a galáxia</h2>
+            </div>
             <div class="home-grid">
-
-                <!-- Card de personagens -->
-                <article class="home-card">
-
-                    <div class="home-card-icon" aria-hidden="true">
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <circle cx="12" cy="7" r="4"/>
-                            <path d="M4 21v-2a8 8 0 0 1 16 0v2"/>
-                        </svg>
+                <a class="home-card home-card-people" href="pages/personagens.html" data-reveal>
+                    <img src="assets/imagens/personagens/1-luke-skywalker.webp" alt="" width="254" height="323" loading="lazy">
+                    <div class="home-card-copy">
+                        <svg class="home-icon home-card-icon" aria-hidden="true"><use href="#home-people-icon"/></svg>
+                        <h3>Personagens</h3>
+                        <p>Heróis, vilões e as alianças que transformaram a galáxia.</p>
+                        <span class="home-card-link">Explorar personagens <svg class="home-icon" aria-hidden="true"><use href="#home-arrow-icon"/></svg></span>
                     </div>
-
-                    <h3>Personagens</h3>
-
-                    <p>
-                        Conheça os heróis, vilões e outros
-                        personagens que marcaram a saga.
-                    </p>
-
-                    <a
-                        class="gold-button"
-                        href="pages/personagens.html"
-                    >
-                        Explorar personagens →
-                    </a>
-
-                </article>
-
-                <!-- Card de planetas -->
-                <article class="home-card">
-
-                    <div class="home-card-icon" aria-hidden="true">
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <circle cx="12" cy="12" r="7"/>
-                            <ellipse
-                                cx="12"
-                                cy="12"
-                                rx="11"
-                                ry="3"
-                                transform="rotate(-29 12 12)"
-                            />
-                        </svg>
+                </a>
+                <a class="home-card home-card-planets" href="pages/planetas.html" data-reveal>
+                    <img src="assets/imagens/planetas/1-tatooine.webp" alt="" width="1333" height="1000" loading="lazy">
+                    <div class="home-card-copy">
+                        <svg class="home-icon home-card-icon" aria-hidden="true"><use href="#home-planets-icon"/></svg>
+                        <h3>Planetas</h3>
+                        <p>Desertos, florestas e cidades que se estendem por mundos inteiros.</p>
+                        <span class="home-card-link">Explorar planetas <svg class="home-icon" aria-hidden="true"><use href="#home-arrow-icon"/></svg></span>
                     </div>
-
-                    <h3>Planetas</h3>
-
-                    <p>
-                        Descubra mundos da galáxia, seus
-                        climas, terrenos e populações.
-                    </p>
-
-                    <a
-                        class="gold-button"
-                        href="pages/planetas.html"
-                    >
-                        Explorar planetas →
-                    </a>
-
-                </article>
-
-                <!-- Card de naves -->
-                <article class="home-card">
-
-                    <div class="home-card-icon" aria-hidden="true">
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path d="m13 15-4-4c3-6 7-9 13-9 0 6-3 10-9 13Zm-4-4H5l-3 5 7-1m4 0v4l-5 3 1-7m-3 3-3 3"/>
-                            <circle cx="16" cy="8" r="2"/>
-                        </svg>
+                </a>
+                <a class="home-card home-card-starships" href="pages/naves.html" data-reveal>
+                    <img src="assets/imagens/banners/categoria-naves.webp" alt="" width="660" height="350" loading="lazy">
+                    <div class="home-card-copy">
+                        <svg class="home-icon home-card-icon" aria-hidden="true"><use href="#home-starships-icon"/></svg>
+                        <h3>Naves</h3>
+                        <p>Caças e cruzadores, dos seus modelos aos fabricantes.</p>
+                        <span class="home-card-link">Explorar naves <svg class="home-icon" aria-hidden="true"><use href="#home-arrow-icon"/></svg></span>
                     </div>
-
-                    <h3>Naves espaciais</h3>
-
-                    <p>
-                        Explore as naves da saga, seus modelos,
-                        fabricantes e características.
-                    </p>
-
-                    <a
-                        class="gold-button"
-                        href="pages/naves.html"
-                    >
-                        Explorar naves →
-                    </a>
-
-                </article>
-
+                </a>
+                <a class="home-card home-card-films" href="pages/filmes.html" data-reveal>
+                    <img src="assets/imagens/banners/categoria-filmes.webp" alt="" width="660" height="350" loading="lazy">
+                    <div class="home-card-copy">
+                        <svg class="home-icon home-card-icon" aria-hidden="true"><use href="#home-films-icon"/></svg>
+                        <h3>Filmes</h3>
+                        <p>Os episódios e histórias que levaram esse universo às telas.</p>
+                        <span class="home-card-link">Explorar filmes <svg class="home-icon" aria-hidden="true"><use href="#home-arrow-icon"/></svg></span>
+                    </div>
+                </a>
             </div>
         </section>
-
     </main>
 
     <!-- Rodapé compacto -->
     <footer class="catalog-footer">
         <div class="catalog-wrap">
-
             <div class="footer-content">
-
-                <!-- Identidade e informações do projeto -->
                 <div class="footer-about">
-
-                    <h2>Star Wars Explorer</h2>
-
-                    <p>
-                        Projeto acadêmico desenvolvido com
-                        HTML, CSS, JavaScript e Bootstrap.
-                        Explore personagens, planetas e naves
-                        com dados da SWAPI.
-                    </p>
-
+                    <a class="footer-brand" href="index.html" aria-label="Star Wars Nexus, início">
+                        <img src="assets/imagens/banners/logo.png" width="1536" height="1024" alt="">
+                    </a>
+                    <p>Catálogo acadêmico não oficial do universo Star Wars.</p>
                 </div>
-
-                <!-- Links de navegação -->
                 <nav class="footer-nav" aria-label="Navegação do rodapé">
-
                     <h2>Explorar</h2>
-
                     <div class="footer-links">
+                        <a href="index.html">Início</a>
                         <a href="pages/personagens.html">Personagens</a>
                         <a href="pages/planetas.html">Planetas</a>
                         <a href="pages/naves.html">Naves</a>
+                        <a href="pages/filmes.html">Filmes</a>
                     </div>
-
                 </nav>
-
+                <div class="footer-academic">
+                    <h2>IFSP · Campus Araraquara</h2>
+                    <p>Tecnologia em Sistemas para Internet · Segundo semestre<br>Construção de Interfaces Web</p>
+                    <p>Ryan Lucca Marques Pereira e Pedro Aragoni</p>
+                </div>
             </div>
-
-            <!-- Créditos -->
             <div class="footer-bottom">
-
-                <span>
-                    © 2026 Star Wars Explorer · Projeto educacional IFSP
-                </span>
-
-                <a
-                    href="https://swapi.dev/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Dados fornecidos pela SWAPI ↗
-                </a>
-
+                <span>Star Wars Nexus · 2026</span>
+                <div class="footer-links">
+                    <a href="https://swapi.dev/" target="_blank" rel="noopener noreferrer">Dados da SWAPI ↗</a>
+                    <a href="CREDITOS-IMAGENS.md">Créditos das imagens</a>
+                </div>
             </div>
-
         </div>
     </footer>
 

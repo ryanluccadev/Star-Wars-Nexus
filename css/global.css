@@ -1,20 +1,3 @@
-
-/*
-    STAR WARS EXPLORER
-    Arquivo: global.css
-
-    Responsabilidades:
-    - Definir a aparência geral das páginas.
-    - Estilizar o cabeçalho e o rodapé.
-    - Padronizar textos, botões e elementos compartilhados.
-    - Adaptar a interface para diferentes tamanhos de tela.
-*/
-
-
-/* ==================================================
-   FONTES
-================================================== */
-
 @font-face {
     font-family: "Exo 2";
     src: url("../assets/fontes/exo-2.woff2") format("woff2");
@@ -23,442 +6,314 @@
     font-display: swap;
 }
 
-
-/* ==================================================
-   CONFIGURAÇÕES GERAIS
-================================================== */
-
 .catalog-page {
-    --space: #030910;
-    --panel: #09141e;
-    --gold: #ffd000;
-    --edge: #8c7012;
-    --ink: #f3f6fa;
-    --muted: #b9c5d1;
-    --line: #2c3b49;
+    --space: #05080e;
+    --panel: #0e1622;
+    --panel-raised: #152131;
+    --gold: #ffd96a;
+    --edge: #515553;
+    --ink: #f6f7fa;
+    --muted: #b8c2d0;
+    --line: #283748;
+    --focus: #ffe489;
+    --heading: "Exo 2", system-ui, sans-serif;
+    --radius: .85rem;
+    --section-space: clamp(3rem, 7vw, 6.25rem);
+    --shadow: 0 20px 48px #01040a65;
 
-    margin: 0;
     min-height: 100vh;
-
     display: flex;
     flex-direction: column;
-
+    margin: 0;
     color: var(--ink);
-    background: radial-gradient(
-        ellipse at 53% 30%,
-        #0c1b2b,
-        var(--space) 70%
-    );
-
-    font: 400 1rem/1.45 system-ui, sans-serif;
+    background: var(--space);
+    font: 400 1rem/1.55 system-ui, sans-serif;
     color-scheme: dark;
 }
 
-.catalog-page [hidden] {
-    display: none !important;
-}
+.catalog-page [hidden] { display: none !important; }
+.catalog-page :focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+.catalog-page a { color: inherit; }
+.catalog-page main { flex: 1; }
+.catalog-page svg { inline-size: 1.2em; block-size: 1.2em; flex: none; }
+.catalog-wrap { width: min(calc(100% - 2.25rem), 1240px); margin-inline: auto; }
 
-.catalog-page :focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 4px;
-}
-
-.catalog-page a {
-    color: inherit;
-}
-
-.catalog-page main {
-    flex: 1;
-}
-
-.catalog-page svg {
-    width: 1.2em;
-    height: 1.2em;
-    flex: none;
-}
-
-.catalog-wrap {
-    width: min(100% - 3rem, 1280px);
-    margin-inline: auto;
-}
-
-
-/* ==================================================
-   ACESSIBILIDADE
-================================================== */
-
-/* Permite pular diretamente para o conteúdo principal. */
 .catalog-skip {
     position: fixed;
+    top: .75rem;
+    left: .75rem;
     z-index: 2000;
-
-    top: .5rem;
-    left: .5rem;
-
-    padding: .5rem 1rem;
-
+    padding: .65rem 1rem;
+    border: 1px solid var(--gold);
     background: var(--space);
     transform: translateY(-200%);
 }
 
-.catalog-skip:focus {
-    transform: none;
-}
-
-
-/* ==================================================
-   CABEÇALHO E NAVEGAÇÃO
-================================================== */
-
-.catalog-header,
-.catalog-footer {
-    background: #040910;
-}
+.catalog-skip:focus { transform: none; }
 
 .catalog-header {
     position: relative;
-    z-index: 1;
-
-    border-bottom: 1px solid var(--edge);
+    z-index: 100;
+    isolation: isolate;
+    --nav-panel: #040910;
+    --nav-line: #967319;
+    --nav-accent: #ffdb00;
 }
 
 .catalog-header .catalog-wrap {
-    min-height: 62px;
-
+    min-height: 4.35rem;
     display: grid;
-    grid-template-columns: 145px 1fr 145px;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: .75rem 2rem;
 }
 
-/* Logo do projeto */
-.catalog-brand {
-    width: 126px;
-    min-height: 70px;
-
-    margin-bottom: -10px;
-    justify-self: start;
-
-    display: grid;
-    place-items: center;
-
-    background: linear-gradient(
-        var(--space),
-        var(--space)
-    ) padding-box;
-
-    border: 1px solid var(--edge);
-    border-top: 0;
-    border-radius: 0 0 20px 20px;
+.catalog-brand, .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+    width: fit-content;
+    text-decoration: none;
+    flex: none;
 }
 
-.catalog-brand img,
-.footer-brand img {
+.catalog-brand img, .footer-brand img {
     display: block;
-    object-fit: contain;
-    mix-blend-mode: screen;
+    block-size: auto;
 }
 
-/* Menu de navegação */
-.catalog-header nav {
-    display: flex;
-    justify-content: center;
+.catalog-brand img { inline-size: 5rem; }
+.footer-brand img { inline-size: 7rem; max-inline-size: 100%; }
 
-    gap: clamp(.3rem, 2vw, 1.6rem);
+.catalog-header nav {
+    align-items: stretch;
+    gap: clamp(.2rem, 1.4vw, 1.35rem);
 }
 
 .catalog-header nav a {
-    display: flex;
+    position: relative;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-
-    gap: .5em;
-    padding: .45rem .75rem;
-
-    border-bottom: 3px solid transparent;
-
+    gap: .55em;
+    min-height: 44px;
+    padding: .35rem clamp(.3rem, .75vw, .75rem);
+    color: var(--ink);
+    font-size: clamp(.81rem, 1.08vw, .94rem);
+    font-weight: 600;
     text-decoration: none;
-    font-size: .91rem;
-    font-weight: 650;
+    white-space: nowrap;
 }
 
-/* Destaca a página atual e os links ao passar o mouse. */
-.catalog-header nav a[aria-current],
-.catalog-header nav a:hover {
-    color: var(--gold);
-    border-bottom-color: var(--gold);
+.catalog-header nav a::after {
+    position: absolute;
+    inset: auto 0 0;
+    block-size: 2px;
+    background: var(--nav-accent);
+    border-radius: 2px 2px 0 0;
+    content: "";
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .2s ease;
 }
 
-
-/* ==================================================
-   TIPOGRAFIA
-================================================== */
+.catalog-header nav a:is(:hover, [aria-current]) svg { color: var(--nav-accent); }
+.catalog-header nav a:is(:hover, [aria-current])::after { transform: scaleX(1); }
+.catalog-header nav a:focus-visible { outline-offset: -3px; }
+.catalog-header .catalog-toggle { display: none; }
 
 .eyebrow {
-    margin: 0 0 .6rem;
-
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    margin: 0 0 .75rem;
+    color: var(--gold);
+    font-size: .72rem;
+    font-weight: 740;
+    letter-spacing: .17em;
     text-transform: uppercase;
-    letter-spacing: .34em;
-    font-size: .74rem;
+}
+
+.eyebrow::before {
+    content: "";
+    inline-size: 1.5rem;
+    block-size: 1px;
+    background: currentColor;
 }
 
 .catalog-page h1 {
-    margin: 0 0 .8rem;
-
-    color: var(--gold);
-
-    font: italic 800
-        clamp(2.25rem, 4.6vw, 4.15rem)/.98
-        "Exo 2", system-ui, sans-serif;
-
+    color: var(--ink);
+    margin: 0 0 1rem;
+    font: italic 800 clamp(2.5rem, 6vw, 5rem)/.96 var(--heading);
     text-transform: uppercase;
-    letter-spacing: -.025em;
-
-    text-shadow:
-        0 0 18px #e6a80038,
-        0 3px 12px #010408;
+    letter-spacing: -.035em;
+    text-wrap: balance;
 }
 
-.intro {
-    max-width: 51ch;
-    margin: 0;
+.intro { max-width: 52ch; margin: 0; color: var(--muted); font-size: clamp(.95rem, 1.4vw, 1.1rem); }
 
-    font-size: .98rem;
-}
-
-
-/* ==================================================
-   BOTÕES
-================================================== */
-
-/* Propriedades compartilhadas pelos botões. */
-.gold-button,
-.outline-button {
+.gold-button, .outline-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    gap: .5rem;
-
+    gap: .55rem;
     width: fit-content;
-    min-height: 38px;
-    padding: .45rem .8rem;
-
-    border: 1px solid var(--edge);
-    border-radius: .34rem;
-
+    min-height: 44px;
+    max-width: 100%;
+    padding: .59rem .95rem;
+    border: 1px solid transparent;
+    border-radius: .45rem;
     text-decoration: none;
-    font: 700 .86rem/1.2 system-ui, sans-serif;
-
+    font: 690 .875rem/1.25 system-ui, sans-serif;
     cursor: pointer;
+    transition: color .18s ease, background-color .18s ease, border-color .18s ease, transform .18s ease;
 }
 
-/* Botão principal */
-.catalog-page .gold-button {
-    color: #131000;
-    background: var(--gold);
-}
-
-.catalog-page .gold-button:hover {
-    background: #ffe25a;
-}
-
-/* Botão secundário */
-.catalog-page .outline-button {
-    color: var(--ink);
-    background: #09131d;
-}
-
-.catalog-page .outline-button:hover {
-    border-color: var(--gold);
-}
-
-.outline-button:disabled {
-    opacity: .45;
-    cursor: default;
-}
-
-
-
-
-/* ==================================================
-   RODAPÉ
-================================================== */
+.catalog-page .gold-button { color: #201600; background: var(--gold); box-shadow: 0 5px 18px #ffd96a26; }
+.catalog-page .gold-button:hover { background: #fff0a3; }
+.catalog-page .outline-button { color: var(--ink); background: #17212e; border-color: #64758b69; }
+.catalog-page .outline-button:hover { color: var(--gold); border-color: var(--gold); }
+:is(.gold-button, .outline-button):active:not(:disabled) { transform: translateY(1px); }
+:is(.gold-button, .outline-button):disabled { opacity: .55; cursor: default; }
 
 .catalog-footer {
-    padding: 2rem 0 1rem;
-
-    background: #040910;
-    border-top: 1px solid var(--edge);
+    position: relative;
+    padding: clamp(2.6rem, 5vw, 4.2rem) 0 1.2rem;
+    border-top: 1px solid var(--line);
+    background: radial-gradient(ellipse at 20% 0%, #111d2b, transparent 64%), #070b13;
 }
 
-/* Limita a largura do conteúdo e centraliza o rodapé. */
-.catalog-footer .catalog-wrap {
-    width: min(100% - 3rem, 900px);
-    margin-inline: auto;
+.catalog-footer::before {
+    position: absolute;
+    inset: -1px auto auto 50%;
+    width: min(20rem, 80%);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ffd96a80, transparent);
+    transform: translateX(-50%);
+    content: "";
 }
 
-/* Organização das informações principais. */
 .footer-content {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, .85fr) minmax(0, 1.2fr);
     gap: 2rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.85rem;
 }
 
-/* Informações do projeto. */
-.footer-about {
-    max-width: 400px;
-}
-
-.footer-about h2,
-.footer-nav h2 {
-    margin: 0 0 .75rem;
-
-    color: var(--gold);
-    font-size: 1rem;
-    font-weight: 800;
-}
-
-.footer-about p {
-    margin: 0;
-
+.footer-about p, .footer-academic p {
     color: var(--muted);
+    margin: .8rem 0 0;
+    max-width: 42ch;
+    font-size: .88rem;
+}
+
+.footer-nav h2, .footer-academic h2 {
+    color: var(--ink);
     font-size: .9rem;
-    line-height: 1.6;
+    margin: 0 0 .65rem;
 }
 
-/* Links de navegação. */
-.footer-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.footer-links { display: flex; flex-wrap: wrap; gap: .35rem .95rem; }
 
-    min-width: 190px;
-}
-
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-
-    gap: .5rem 1rem;
-}
-
-.catalog-footer .footer-links a {
+.catalog-footer a:not(.footer-brand) {
+    text-decoration-thickness: 1px;
+    text-underline-offset: .2em;
     color: var(--muted);
-
-    font-size: .9rem;
-    text-decoration: none;
+    transition: color .18s ease;
 }
 
-.catalog-footer .footer-links a:hover {
-    color: var(--gold);
-}
-
-/* Créditos e fonte dos dados. */
+.catalog-footer a:not(.footer-brand):hover { color: var(--gold); }
+.footer-links a { font-size: .87rem; }
 .footer-bottom {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: flex-start;
     flex-wrap: wrap;
-
-    gap: .75rem;
-    padding-top: 1rem;
-
+    gap: .6rem 1.2rem;
+    padding-top: 1.15rem;
     border-top: 1px solid var(--line);
-
     color: var(--muted);
     font-size: .8rem;
 }
 
-.catalog-footer .footer-bottom a {
-    color: var(--muted);
-    text-decoration: none;
-}
+section[id], main[id] { scroll-margin-top: 1rem; }
 
-.catalog-footer .footer-bottom a:hover {
-    color: var(--gold);
-}
-
-
-
-/* ==================================================
-   RESPONSIVIDADE
-================================================== */
-
-/* Tablets e telas menores */
-@media (max-width: 880px) {
-    .catalog-header .catalog-wrap {
-        grid-template-columns: auto 1fr;
-    }
-}
-
-
-/* Celulares */
-@media (max-width: 575px) {
-
-    .catalog-wrap {
-        width: calc(100% - 1.5rem);
+@media (min-width: 768px) {
+    .catalog-header {
+        --bar-height: clamp(2.75rem, 5.05vw, 4.5rem);
+        --badge-depth: clamp(.95rem, 2.1vw, 1.875rem);
+        --badge-cut: 2.8%;
+        --right-step: calc(var(--bar-height) - clamp(.95rem, 2vw, 1.8rem));
+        --nav-frame: polygon(
+            0 0, 100% 0, 100% var(--right-step), 93% var(--right-step),
+            90% var(--bar-height), 23% var(--bar-height),
+            calc(23% - var(--badge-cut)) 100%, calc(5.2% + var(--badge-cut)) 100%,
+            5.2% var(--bar-height), 0 var(--bar-height)
+        );
     }
 
-    /* Cabeçalho */
+    /* As duas camadas do mesmo recorte formam a borda dourada. */
+    .catalog-header::before,
+    .catalog-header::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        inset: 0 0 auto;
+        block-size: calc(var(--bar-height) + var(--badge-depth));
+        clip-path: var(--nav-frame);
+        pointer-events: none;
+    }
+
+    .catalog-header::before { background: var(--nav-line); }
+    .catalog-header::after { background: var(--nav-panel); transform: translateY(-1px); }
+
     .catalog-header .catalog-wrap {
         width: 100%;
-        min-height: 57px;
+        min-height: 0;
+        grid-template-columns: 26.5% 1fr;
+        grid-template-rows: var(--bar-height);
+        column-gap: 7%;
     }
 
     .catalog-brand {
-        width: 68px;
-        min-height: 56px;
-
-        margin-bottom: -4px;
-        border-radius: 0 0 12px 0;
+        justify-self: center;
+        align-self: start;
+        min-height: calc(var(--bar-height) + var(--badge-depth));
     }
 
-    .catalog-brand img {
-        width: 53px;
-        height: 36px;
-    }
+    .catalog-brand img { inline-size: clamp(4.75rem, 8.95vw, 8.0625rem); }
 
-    /* Navegação */
-    .catalog-header nav {
-        gap: 0;
-        justify-content: space-around;
-        min-width: 0;
-    }
+    .catalog-header #menu-principal { display: flex; }
+    .catalog-header nav { align-self: stretch; }
+}
 
-    .catalog-header nav a {
-        flex-direction: column;
+@media (768px <= width < 900px) {
+    .catalog-header .catalog-wrap { column-gap: clamp(3%, calc(51vw - 23.15rem), 7%); }
+    .catalog-header nav { gap: .45rem; }
+    .catalog-header nav a { padding-inline: .35rem; }
+}
 
-        gap: .15rem;
-        padding: .3rem .18rem;
+@media (max-width: 767.98px) {
+    .catalog-header { background: var(--nav-panel); border-bottom: 1px solid var(--nav-line); }
+    .catalog-header .catalog-wrap { min-height: 3.85rem; gap: 0; grid-template-columns: 1fr auto; }
+    .catalog-brand { padding-block: .3rem; }
+    .catalog-brand img { inline-size: clamp(9.5rem, 34vw, 11rem); }
+    .catalog-header .catalog-toggle { display: inline-flex; }
+    .catalog-header #menu-principal { grid-column: 1 / -1; }
+    .catalog-header #menu-principal.show { display: grid; }
+    .catalog-header nav a { min-height: 44px; width: 100%; padding-inline: .4rem; }
+    .catalog-header nav a:last-child { margin-bottom: .6rem; }
+    .catalog-header nav a::after { inset-inline-end: auto; width: 2rem; }
+    .footer-content { grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+    .footer-about { grid-column: 1 / -1; }
+    .footer-brand img { inline-size: 10rem; }
+}
 
-        font-size: .67rem;
-    }
+@media (max-width: 479px) {
+    .catalog-wrap { width: calc(100% - 1.5rem); }
+    .footer-content { grid-template-columns: 1fr; }
+}
 
-    .catalog-header nav a svg {
-        width: 16px;
-        height: 16px;
-    }
-
-
-    /* Rodapé em celulares */
-    .catalog-footer .catalog-wrap {
-        width: calc(100% - 1.5rem);
-    }
-
-    .footer-content {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .footer-nav {
-        min-width: 0;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
+@media (prefers-reduced-motion: reduce) {
+    .catalog-header nav a::after,
+    .gold-button, .outline-button { transition: none; }
 }

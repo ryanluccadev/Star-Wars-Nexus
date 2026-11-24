@@ -1,13 +1,12 @@
 
 /*
-    STAR WARS EXPLORER
+    STAR WARS NEXUS
     Arquivo: cache.js
 
     Responsabilidades:
     - Salvar e recuperar dados do localStorage.
     - Verificar a validade dos dados armazenados.
     - Evitar requisições desnecessárias à API.
-    - Gerenciar os identificadores das naves favoritas.
 */
 
 // Tempo de validade do cache: 24 horas em milissegundos.
@@ -78,7 +77,7 @@ function salvar(chave, valor) {
 
     Retorna os registros ou null caso o cache seja inválido.
 */
-export function lerCache(recurso) {
+export function lerCache(recurso, { aceitarExpirado = false } = {}) {
 
     // Cria a chave correspondente ao recurso.
     const chave = chaveCache(recurso);
@@ -90,7 +89,8 @@ export function lerCache(recurso) {
     const dadosValidos = Array.isArray(cache?.dados);
     const dataValida = Number.isFinite(cache?.data);
 
-    if (!dadosValidos || !dataValida) {
+    if (!dadosValidos || !dataValida ||
+        (cache.quantidade !== undefined && cache.quantidade !== cache.dados.length)) {
         return null;
     }
 
@@ -98,7 +98,7 @@ export function lerCache(recurso) {
     const idade = Date.now() - cache.data;
 
     // Rejeita dados salvos no futuro ou com 24 horas ou mais.
-    if (idade < 0 || idade >= VALIDADE) {
+    if (idade < 0 || (!aceitarExpirado && idade >= VALIDADE)) {
         return null;
     }
 
@@ -113,14 +113,30 @@ export function lerCache(recurso) {
     Armazena os registros junto com a data atual,
     permitindo verificar sua validade posteriormente.
 */
-export function salvarCache(recurso, dados) {
+export function salvarCache(recurso, dados, quantidade) {
 
     // Objeto contendo a data e os registros.
     const cache = {
         data: Date.now(),
-        dados: dados
+        dados,
+        quantidade
     };
 
     // Salva o objeto na chave correspondente ao recurso.
     return salvar(chaveCache(recurso), cache);
+}
+
+// A Home pode consultar só a contagem sem baixar todas as páginas do recurso.
+export function lerContagem(recurso, { aceitarExpirado = false } = {}) {
+    const registro = ler('swn:contagem:v1:' + recurso);
+
+    if (!Number.isSafeInteger(registro?.valor) || registro.valor < 0 ||
+        !Number.isFinite(registro.data)) return null;
+
+    const idade = Date.now() - registro.data;
+    return idade >= 0 && (aceitarExpirado || idade < VALIDADE) ? registro.valor : null;
+}
+
+export function salvarContagem(recurso, valor) {
+    return salvar('swn:contagem:v1:' + recurso, { data: Date.now(), valor });
 }
