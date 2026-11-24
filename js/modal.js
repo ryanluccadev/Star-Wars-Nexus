@@ -6,7 +6,7 @@
     Responsabilidades:
     - Criar elementos HTML utilizados nas páginas.
     - Tratar informações vazias ou desconhecidas.
-    - Montar os painéis com detalhes dos registros.
+    - Montar os painéis com detalhes dos quatro recursos.
     - Exibir os detalhes utilizando o modal do Bootstrap.
 */
 
@@ -89,6 +89,47 @@ function painel(titulo, linhas) {
 const contar = itens => Array.isArray(itens) ? itens.length : null;
 
 
+// Formata a data de lançamento dos filmes.
+function formatarData(data) {
+    if (!data) {
+        return 'Não informado';
+    }
+
+    const partes = data.split('-');
+
+    if (partes.length !== 3) {
+        return valorExibido(data);
+    }
+
+    return partes[2] + '/' + partes[1] + '/' + partes[0];
+}
+
+
+// Monta os painéis com as informações completas de um personagem.
+function paineisPersonagem(item) {
+    return [
+        painel('Informações gerais', [
+            ['Nascimento', valorExibido(item.birth_year)],
+            ['Gênero', valorExibido(item.gender)],
+            ['Altura', valorExibido(item.height, ' cm')],
+            ['Massa', valorExibido(item.mass, ' kg')]
+        ]),
+
+        painel('Características físicas', [
+            ['Cor do cabelo', valorExibido(item.hair_color)],
+            ['Cor da pele', valorExibido(item.skin_color)],
+            ['Cor dos olhos', valorExibido(item.eye_color)]
+        ]),
+
+        painel('Relações na SWAPI', [
+            ['Filmes associados', valorExibido(contar(item.films))],
+            ['Naves associadas', valorExibido(contar(item.starships))],
+            ['Veículos associados', valorExibido(contar(item.vehicles))]
+        ])
+    ];
+}
+
+
 // Monta os painéis com as informações completas de um planeta.
 function paineisPlaneta(item) {
     return [
@@ -140,12 +181,53 @@ function paineisNave(item) {
 }
 
 
-// Preenche o modal com os dados do planeta ou nave selecionado.
-export function prepararModal({ nave, item, imagem, registro }) {
+// Monta os painéis com as informações completas de um filme.
+function paineisFilme(item) {
+    return [
+        painel('Informações gerais', [
+            ['Episódio', valorExibido(item.episode_id)],
+            ['Diretor', valorExibido(item.director)],
+            ['Produtores', valorExibido(item.producer)],
+            ['Lançamento', formatarData(item.release_date)]
+        ]),
+
+        painel('Relações na SWAPI', [
+            ['Personagens cadastrados', valorExibido(contar(item.characters))],
+            ['Planetas associados', valorExibido(contar(item.planets))],
+            ['Naves associadas', valorExibido(contar(item.starships))],
+            ['Veículos associados', valorExibido(contar(item.vehicles))],
+            ['Espécies associadas', valorExibido(contar(item.species))]
+        ]),
+
+        painel('Texto de abertura', [
+            ['Abertura', valorExibido(item.opening_crawl)]
+        ])
+    ];
+}
+
+
+// Preenche o modal com os detalhes do registro selecionado.
+export function prepararModal({ recurso, item, imagem, registro }) {
     const modal = document.querySelector('#detalhes');
 
+    // Seleciona os painéis correspondentes ao recurso.
+    const paineis = {
+        people: paineisPersonagem,
+        planets: paineisPlaneta,
+        starships: paineisNave,
+        films: paineisFilme
+    };
+
+    const montarPaineis = paineis[recurso];
+
+    if (!montarPaineis) {
+        throw new Error('Recurso inválido');
+    }
+
     // Atualiza o título e limpa mensagens anteriores.
-    modal.querySelector('#detalhes-titulo').textContent = item.name;
+    modal.querySelector('#detalhes-titulo').textContent =
+        item.name ?? item.title ?? 'Sem título';
+
     modal.querySelector('#detalhes-status').textContent = '';
 
     // Substitui o conteúdo pelos detalhes do item selecionado.
@@ -153,7 +235,7 @@ export function prepararModal({ nave, item, imagem, registro }) {
 
     corpo.replaceChildren(
         imagem,
-        ...(nave ? paineisNave(item) : paineisPlaneta(item))
+        ...montarPaineis(item)
     );
 
     // Exibe o link original do registro na SWAPI, quando disponível.

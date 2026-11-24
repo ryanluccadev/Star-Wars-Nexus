@@ -16,15 +16,14 @@ import { lerCache, salvarCache } from './cache.js';
 // Endereço principal da API Star Wars.
 const ORIGEM = 'https://swapi.dev';
 
+// Recursos disponíveis no sistema.
+const RECURSOS_PERMITIDOS = ['people', 'planets', 'starships', 'films'];
+
 
 /* ===============================================================================
     FUNÇÃO: urlRegistro()
 
     Verifica se uma URL pertence à SWAPI e possui o formato esperado.
-
-    Parâmetros:
-    - valor: endereço que será verificado.
-    - recurso: tipo de registro (planets ou starships).
 
     Retorno:
     - URL padronizada em HTTPS, se for válida.
@@ -32,6 +31,11 @@ const ORIGEM = 'https://swapi.dev';
    =============================================================================== */
 export function urlRegistro(valor, recurso) {
     try {
+        // Verifica se o recurso é permitido.
+        if (!RECURSOS_PERMITIDOS.includes(recurso)) {
+            return null;
+        }
+
         // Transforma o endereço recebido em um objeto URL.
         const url = new URL(valor);
 
@@ -71,9 +75,11 @@ export function urlRegistro(valor, recurso) {
 
     Busca todos os registros de um recurso na SWAPI.
 
-    Parâmetros:
-    - recurso: tipo de conteúdo (planets ou starships).
-    - atualizar: quando true, ignora o cache existente.
+    Recursos disponíveis:
+    - people: personagens.
+    - planets: planetas.
+    - starships: naves espaciais.
+    - films: filmes.
 
     Retorno:
     - Array contendo todos os registros encontrados.
@@ -81,9 +87,7 @@ export function urlRegistro(valor, recurso) {
 export async function carregarRecurso(recurso, { atualizar = false } = {}) {
 
     // 1. Verifica se o recurso solicitado é permitido.
-    const recursosPermitidos = ['planets', 'starships'];
-
-    if (!recursosPermitidos.includes(recurso)) {
+    if (!RECURSOS_PERMITIDOS.includes(recurso)) {
         throw new Error('Recurso inválido');
     }
 
@@ -167,9 +171,12 @@ export async function carregarRecurso(recurso, { atualizar = false } = {}) {
             throw new Error('Resposta inválida');
         }
 
-        // Verifica se todos os registros possuem um nome em texto.
+        // Filmes possuem "title"; os demais recursos possuem "name".
+        const propriedadeNome = recurso === 'films' ? 'title' : 'name';
+
+        // Verifica se todos os registros possuem o campo esperado.
         const nomeInvalido = pagina.results.some(
-            item => typeof item?.name !== 'string'
+            item => typeof item?.[propriedadeNome] !== 'string'
         );
 
         if (nomeInvalido) {

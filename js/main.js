@@ -5,7 +5,7 @@
 
     Responsabilidades:
     - Carregar os registros da API ou do cache.
-    - Criar e exibir os cards de planetas e naves.
+    - Criar e exibir os cards das quatro categorias.
     - Exibir os detalhes dos registros em um modal.
     - Controlar a busca e a ordenação dos resultados.
     - Gerenciar a paginação e as mensagens da interface.
@@ -17,10 +17,17 @@ import { abrirModal, elemento, prepararModal, valorExibido } from './modal.js';
 
 // Configurações da página
 const recurso = document.body.dataset.recurso;
-const nave = recurso === 'starships';
 const porPagina = 6;
 
-const substantivo = nave ? ['nave', 'naves'] : ['planeta', 'planetas'];
+// Nomes utilizados nas mensagens da interface.
+const categorias = {
+    people: ['personagem', 'personagens', 'encontrado', 'encontrados'],
+    planets: ['planeta', 'planetas', 'encontrado', 'encontrados'],
+    starships: ['nave', 'naves', 'encontrada', 'encontradas'],
+    films: ['filme', 'filmes', 'encontrado', 'encontrados']
+};
+
+const substantivo = categorias[recurso];
 
 // Elementos da interface
 const $ = id => document.getElementById(id);
@@ -34,7 +41,7 @@ const acao = $('acao');
 const atualizar = $('atualizar');
 const paginacao = $('paginacao');
 
-// Imagens específicas de planetas e naves
+// Imagens específicas de planetas e naves.
 const imagens = new Map([
     ['Tatooine', 'tatooine'],
     ['Alderaan', 'alderaan'],
@@ -48,7 +55,7 @@ const imagens = new Map([
     ['Slave 1', 'slave-1']
 ]);
 
-// Ordem de destaque dos planetas
+// Ordem de destaque dos planetas.
 const destaques = new Map([
     ['Tatooine', 0],
     ['Alderaan', 1],
@@ -58,75 +65,168 @@ const destaques = new Map([
     ['Coruscant', 5]
 ]);
 
+// Ilustrações genéricas de personagens e filmes.
+const ilustracoes = {
+    people: `
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 400 250">
+            <rect width="400" height="250" fill="#09141e"/>
+            <circle cx="200" cy="88" r="38"
+                    fill="none" stroke="#ffd000" stroke-width="5"/>
+            <path d="M115 205v-12a85 85 0 0 1 170 0v12"
+                  fill="none" stroke="#ffd000"
+                  stroke-width="5" stroke-linecap="round"/>
+        </svg>
+    `,
+    films: `
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 400 250">
+            <rect width="400" height="250" fill="#09141e"/>
+            <rect x="105" y="65" width="190" height="120" rx="8"
+                  fill="none" stroke="#ffd000" stroke-width="5"/>
+            <path d="M145 65v120M255 65v120"
+                  stroke="#ffd000" stroke-width="4"/>
+            <path d="M105 95h40M105 155h40M255 95h40M255 155h40"
+                  stroke="#ffd000" stroke-width="4"/>
+            <path d="m180 103 48 22-48 22z" fill="#ffd000"/>
+        </svg>
+    `
+};
+
 // Estado da página
 let registros = [];
 let pagina = 1;
 let erro = false;
 
 
-// Cria a imagem de um registro, utilizando uma imagem genérica quando necessário.
-function criarImagem(item, card = false) {
-    const padrao = nave ? 'nave-generica' : 'planeta-generico';
-    const nome = imagens.get(item.name);
+// Retorna o nome ou título de um registro.
+function nomeRegistro(item) {
+    return item.name ?? item.title ?? 'Sem título';
+}
 
+
+// Formata a data de lançamento dos filmes.
+function formatarData(data) {
+    if (!data || data === 'unknown') {
+        return 'Não informado';
+    }
+
+    const partes = data.split('-');
+
+    if (partes.length !== 3) {
+        return data;
+    }
+
+    return partes[2] + '/' + partes[1] + '/' + partes[0];
+}
+
+
+// Cria uma imagem para o registro.
+function criarImagem(item, card = false) {
     const imagem = elemento(
         'img',
         '',
         card ? 'card-image' : 'detail-image'
     );
 
-    const descricaoPadrao = nave
-        ? 'Ilustração genérica de uma nave no espaço'
-        : 'Ilustração genérica de um planeta visto do espaço';
+    const nome = imagens.get(item.name);
+    const titulo = nomeRegistro(item);
 
-    imagem.src = new URL(
-        '../assets/imagens/' + (nome ?? padrao) + '.webp',
-        import.meta.url
-    ).href;
+    // Personagens e filmes utilizam ilustrações genéricas.
+    if (recurso === 'people' || recurso === 'films') {
+        const svg = ilustracoes[recurso];
 
-    imagem.alt = nome
-        ? 'Ilustração de ' + item.name
-        : descricaoPadrao;
+        imagem.src = 'data:image/svg+xml;charset=UTF-8,' +
+            encodeURIComponent(svg);
+
+        imagem.alt = recurso === 'people'
+            ? 'Ilustração genérica de personagem'
+            : 'Ilustração genérica de filme';
+
+    } else {
+        // Planetas e naves continuam utilizando as imagens existentes.
+        const nave = recurso === 'starships';
+        const padrao = nave ? 'nave-generica' : 'planeta-generico';
+
+        const descricaoPadrao = nave
+            ? 'Ilustração genérica de uma nave no espaço'
+            : 'Ilustração genérica de um planeta visto do espaço';
+
+        imagem.src = new URL(
+            '../assets/imagens/' + (nome ?? padrao) + '.webp',
+            import.meta.url
+        ).href;
+
+        imagem.alt = nome
+            ? 'Ilustração de ' + titulo
+            : descricaoPadrao;
+
+        imagem.addEventListener('error', () => {
+            if (nome) {
+                imagem.src = new URL(
+                    '../assets/imagens/' + padrao + '.webp',
+                    import.meta.url
+                ).href;
+
+                imagem.alt = descricaoPadrao;
+            }
+        }, { once: true });
+    }
 
     if (card) {
         imagem.loading = 'lazy';
     }
 
-    imagem.addEventListener('error', () => {
-        if (nome) {
-            imagem.src = new URL(
-                '../assets/imagens/' + padrao + '.webp',
-                import.meta.url
-            ).href;
-
-            imagem.alt = descricaoPadrao;
-        }
-    }, { once: true });
-
     return imagem;
 }
 
 
-// Cria um card com informações resumidas e um botão para visualizar os detalhes.
+// Define as informações exibidas em cada tipo de card.
+function camposCard(item) {
+    switch (recurso) {
+        case 'people':
+            return [
+                ['Gênero', item.gender],
+                ['Nascimento', item.birth_year]
+            ];
+
+        case 'planets':
+            return [
+                ['Clima', item.climate],
+                ['População', item.population]
+            ];
+
+        case 'starships':
+            return [
+                ['Modelo', item.model],
+                ['Fabricante', item.manufacturer]
+            ];
+
+        case 'films':
+            return [
+                ['Diretor', item.director],
+                ['Lançamento', formatarData(item.release_date)]
+            ];
+
+        default:
+            return [];
+    }
+}
+
+
+// Cria um card com informações resumidas e um botão de detalhes.
 function criarCard(item) {
     const card = elemento('article', '', 'catalog-card');
     const imagem = criarImagem(item, true);
     const conteudo = elemento('div', '', 'card-copy');
-    const titulo = elemento('h2', item.name);
 
-    const campos = nave
-        ? [
-            ['Modelo', item.model],
-            ['Fabricante', item.manufacturer]
-        ]
-        : [
-            ['Clima', item.climate],
-            ['População', item.population]
-        ];
+    const tituloTexto = nomeRegistro(item);
+    const titulo = elemento('h2', tituloTexto);
 
     const dados = elemento('dl', '', 'card-data');
 
-    for (const [rotulo, valor] of campos) {
+    // Adiciona as informações específicas da categoria.
+    for (const [rotulo, valor] of camposCard(item)) {
         const linha = elemento('div');
 
         linha.append(
@@ -141,13 +241,17 @@ function criarCard(item) {
     const detalhes = elemento('button', 'Ver detalhes →', 'gold-button');
 
     detalhes.type = 'button';
-    detalhes.setAttribute('aria-label', 'Ver detalhes de ' + item.name);
+    detalhes.setAttribute(
+        'aria-label',
+        'Ver detalhes de ' + tituloTexto
+    );
 
     const registro = urlRegistro(item.url, recurso);
 
     detalhes.addEventListener('click', () => {
         const modal = prepararModal({
-            nave,
+            recurso,
+            nave: recurso === 'starships',
             item,
             imagem: criarImagem(item),
             registro
@@ -166,7 +270,7 @@ function criarCard(item) {
 }
 
 
-// Exibe uma mensagem de feedback e um botão de ação para o usuário.
+// Exibe uma mensagem de feedback e um botão de ação.
 function mostrarFeedback(mensagem, rotulo) {
     $('mensagem').textContent = mensagem;
     acao.textContent = rotulo;
@@ -183,7 +287,7 @@ function montarPaginacao(total) {
         return;
     }
 
-    // Adiciona um botão de navegação à paginação.
+    // Adiciona um botão à paginação.
     const incluir = (texto, destino, rotulo, indisponivel = false) => {
         const distante = Math.abs(destino - pagina) > 1;
         const intermediaria = destino > 1 && destino < total;
@@ -240,15 +344,19 @@ function renderizar() {
 
     const total = filtrados.length;
     const paginas = Math.ceil(total / porPagina);
+
+    // Garante que a página atual esteja dentro do limite.
+    pagina = Math.max(1, Math.min(pagina, paginas || 1));
+
     const inicio = (pagina - 1) * porPagina;
 
     const rotulo = total === 1
         ? substantivo[0]
         : substantivo[1];
 
-    const encontrados = nave
-        ? (total === 1 ? 'encontrada' : 'encontradas')
-        : (total === 1 ? 'encontrado' : 'encontrados');
+    const encontrados = total === 1
+        ? substantivo[2]
+        : substantivo[3];
 
     status.textContent =
         total + ' ' + rotulo + ' ' + encontrados +
@@ -284,7 +392,7 @@ function habilitarControles(habilitado) {
 }
 
 
-// Carrega os registros da API ou do cache e atualiza a interface.
+// Carrega os registros da API ou do cache.
 async function carregar(forcar = false) {
     erro = false;
 

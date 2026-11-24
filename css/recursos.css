@@ -314,6 +314,56 @@
 
 
 /* ==================================================
+   CARDS DE PERSONAGENS E FILMES
+================================================== */
+
+[data-recurso="people"] .catalog-card,
+[data-recurso="films"] .catalog-card {
+    grid-template-rows: 160px 1fr;
+}
+
+[data-recurso="people"] .card-image,
+[data-recurso="films"] .card-image {
+    width: 100%;
+    height: 160px;
+
+    object-fit: contain;
+
+    background: #09141e;
+    border-bottom: 1px solid var(--line);
+}
+
+[data-recurso="people"] .card-copy,
+[data-recurso="films"] .card-copy {
+    align-content: start;
+}
+
+[data-recurso="people"] .catalog-card h2,
+[data-recurso="films"] .catalog-card h2 {
+    color: var(--ink);
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 575px) {
+
+    [data-recurso="people"] .catalog-card,
+    [data-recurso="films"] .catalog-card {
+        grid-template: auto / minmax(0, 32%) minmax(0, 1fr);
+    }
+
+    [data-recurso="people"] .card-image,
+    [data-recurso="films"] .card-image {
+        height: 100%;
+        min-height: 125px;
+
+        border-bottom: 0;
+        border-right: 1px solid var(--line);
+    }
+
+}
+
+
+/* ==================================================
    INFORMAÇÕES DOS CARDS
 ================================================== */
 

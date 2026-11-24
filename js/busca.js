@@ -5,7 +5,7 @@
 
     Responsabilidades:
     - Normalizar os textos utilizados nas pesquisas.
-    - Filtrar os registros pelo nome.
+    - Filtrar os registros pelo nome ou título.
     - Ordenar os resultados alfabeticamente.
 */
 
@@ -17,29 +17,34 @@ function normalizar(texto) {
         .toLocaleLowerCase('pt-BR');
 }
 
-// Compara os nomes considerando as regras do português.
+// Compara os textos considerando as regras do português.
 const comparar = new Intl.Collator('pt-BR', {
     sensitivity: 'base',
     numeric: true
 }).compare;
 
 
-// Filtra os registros pelo nome e aplica a ordenação selecionada.
+// Filtra os registros pelo nome ou título e aplica a ordenação selecionada.
 export function filtrarRegistros(registros, termo, ordem = '') {
 
     // Remove espaços extras e normaliza o texto pesquisado.
     const consulta = normalizar(termo.trim());
 
     // Mantém apenas os registros que correspondem à pesquisa.
-    const filtrados = registros.filter(item =>
-        normalizar(item.name).includes(consulta)
-    );
+    const filtrados = registros.filter(item => {
+        const nome = item.name ?? item.title ?? '';
+
+        return normalizar(nome).includes(consulta);
+    });
 
     // Ordena os registros de A–Z ou Z–A, conforme a opção escolhida.
-    if (ordem) {
-        filtrados.sort((a, b) =>
-            comparar(a.name, b.name) * (ordem === 'desc' ? -1 : 1)
-        );
+    if (ordem === 'asc' || ordem === 'desc') {
+        filtrados.sort((a, b) => {
+            const nomeA = a.name ?? a.title ?? '';
+            const nomeB = b.name ?? b.title ?? '';
+
+            return comparar(nomeA, nomeB) * (ordem === 'desc' ? -1 : 1);
+        });
     }
 
     return filtrados;

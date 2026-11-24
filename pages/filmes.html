@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta
+        name="description"
+        content="Conheça os filmes de Star Wars, seus episódios, diretores e datas de lançamento."
+    >
+
+    <title>Filmes do universo Star Wars | Star Wars Explorer</title>
+
+    <!-- Estilos da página -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/recursos.css">
+
+    <!-- Scripts -->
+    <script defer src="../js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/main.js"></script>
+</head>
+
+<body class="catalog-page" data-recurso="films">
+
+    <!-- Link de acessibilidade -->
+    <a class="catalog-skip" href="#conteudo">
+        Pular para o conteúdo
+    </a>
+
+    <!-- Cabeçalho e navegação -->
+    <header class="catalog-header">
+        <div class="catalog-wrap">
+
+            <a
+                class="catalog-brand"
+                href="../index.html"
+                aria-label="Star Wars Explorer — Início"
+            >
+                <img
+                    src="../assets/imagens/marca.webp"
+                    width="84"
+                    height="53"
+                    alt=""
+                >
+            </a>
+
+            <nav aria-label="Menu principal">
+
+                <!-- Início -->
+                <a href="../index.html">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    <span>Início</span>
+                </a>
+
+                <!-- Personagens -->
+                <a href="personagens.html">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="9" cy="7" r="3"/>
+                        <path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2zM17 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5v2"/>
+                    </svg>
+                    <span>Personagens</span>
+                </a>
+
+                <!-- Planetas -->
+                <a href="planetas.html">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="12" cy="12" r="7"/>
+                        <ellipse
+                            cx="12"
+                            cy="12"
+                            rx="11"
+                            ry="3"
+                            transform="rotate(-29 12 12)"
+                        />
+                    </svg>
+                    <span>Planetas</span>
+                </a>
+
+                <!-- Naves -->
+                <a href="naves.html">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="m13 15-4-4c3-6 7-9 13-9 0 6-3 10-9 13Zm-4-4H5l-3 5 7-1m4 0v4l-5 3 1-7m-3 3-3 3"/>
+                        <circle cx="16" cy="8" r="2"/>
+                    </svg>
+                    <span>Naves</span>
+                </a>
+
+                <!-- Filmes -->
+                <a href="filmes.html" aria-current="page">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <rect x="3" y="4" width="18" height="16" rx="2"/>
+                        <path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/>
+                        <path d="m10 9 5 3-5 3z"/>
+                    </svg>
+                    <span>Filmes</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main id="conteudo">
+
+        <!-- Apresentação da página -->
+        <section class="catalog-hero" aria-labelledby="titulo">
+            <div class="catalog-wrap">
+
+                <p class="eyebrow">
+                    Explore a saga Star Wars
+                </p>
+
+                <h1 id="titulo">
+                    Filmes do universo Star Wars
+                </h1>
+
+                <p class="intro">
+                    Conheça os filmes da saga, seus episódios,
+                    diretores e datas de lançamento.
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Catálogo de filmes -->
+        <section
+            class="catalog-list catalog-wrap"
+            aria-label="Catálogo de filmes"
+        >
+
+            <!-- Campo de busca e ordenação -->
+            <div class="catalog-controls">
+
+                <div class="catalog-search">
+
+                    <label class="visually-hidden" for="busca">
+                        Pesquisar filmes por título
+                    </label>
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="10.5" cy="10.5" r="6.5"/>
+                        <path d="m16 16 5 5"/>
+                    </svg>
+
+                    <input
+                        id="busca"
+                        type="search"
+                        placeholder="Pesquisar filmes (ex.: A New Hope)"
+                        disabled
+                    >
+
+                </div>
+
+                <div class="catalog-filter">
+
+                    <label for="ordem">
+                        Ordenar por
+                    </label>
+
+                    <select id="ordem" disabled>
+                        <option value="asc">Título (A–Z)</option>
+                        <option value="desc">Título (Z–A)</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- Quantidade de resultados e atualização -->
+            <div class="catalog-status">
+
+                <p id="status" role="status">
+                    Carregando filmes…
+                </p>
+
+                <button
+                    type="button"
+                    class="outline-button"
+                    id="atualizar"
+                    hidden
+                >
+                    Atualizar dados
+                </button>
+
+            </div>
+
+            <!-- Mensagens de erro ou busca sem resultados -->
+            <div class="catalog-feedback" id="feedback" hidden>
+
+                <p id="mensagem"></p>
+
+                <button
+                    type="button"
+                    class="outline-button"
+                    id="acao"
+                ></button>
+
+            </div>
+
+            <!-- Cards gerados pelo JavaScript -->
+            <div
+                class="catalog-grid"
+                id="lista"
+                aria-busy="true"
+            ></div>
+
+            <!-- Navegação entre páginas -->
+            <nav
+                class="catalog-pages"
+                id="paginacao"
+                aria-label="Paginação de filmes"
+                hidden
+            ></nav>
+
+        </section>
+
+    </main>
+
+    <!-- Modal com os detalhes do filme selecionado -->
+    <div
+        class="modal catalog-modal"
+        id="detalhes"
+        tabindex="-1"
+        aria-labelledby="detalhes-titulo"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!-- Cabeçalho do modal -->
+                <div class="modal-header">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <rect x="3" y="4" width="18" height="16" rx="2"/>
+                        <path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/>
+                        <path d="m10 9 5 3-5 3z"/>
+                    </svg>
+
+                    <h2
+                        class="modal-title"
+                        id="detalhes-titulo"
+                    ></h2>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"
+                    ></button>
+
+                </div>
+
+                <!-- Informações preenchidas pelo JavaScript -->
+                <div
+                    class="modal-body"
+                    id="detalhes-corpo"
+                ></div>
+
+                <!-- Rodapé do modal -->
+                <div class="modal-footer">
+
+                    <p
+                        class="w-100 m-0"
+                        id="detalhes-status"
+                        role="status"
+                    ></p>
+
+                    <button
+                        type="button"
+                        class="outline-button"
+                        data-bs-dismiss="modal"
+                    >
+                        Fechar
+                    </button>
+
+                    <a
+                        class="gold-button"
+                        id="registro"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Ver na SWAPI ↗
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé compacto -->
+    <footer class="catalog-footer">
+        <div class="catalog-wrap">
+
+            <div class="footer-content">
+
+                <!-- Informações do projeto -->
+                <div class="footer-about">
+
+                    <h2>Star Wars Explorer</h2>
+
+                    <p>
+                        Projeto acadêmico desenvolvido com
+                        HTML, CSS, JavaScript e Bootstrap.
+                        Explore personagens, planetas, naves
+                        e filmes com dados da SWAPI.
+                    </p>
+
+                </div>
+
+                <!-- Links de navegação -->
+                <nav
+                    class="footer-nav"
+                    aria-label="Navegação do rodapé"
+                >
+                    <h2>Explorar</h2>
+
+                    <div class="footer-links">
+                        <a href="personagens.html">Personagens</a>
+                        <a href="planetas.html">Planetas</a>
+                        <a href="naves.html">Naves</a>
+                        <a href="filmes.html">Filmes</a>
+                    </div>
+
+                </nav>
+
+            </div>
+
+            <!-- Créditos -->
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 Star Wars Explorer · Projeto educacional IFSP
+                </span>
+
+                <a
+                    href="https://swapi.dev/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Dados fornecidos pela SWAPI ↗
+                </a>
+
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
