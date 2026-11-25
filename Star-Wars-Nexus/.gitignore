@@ -1,0 +1,15 @@
+# STAR WARS NEXUS
+#
+# Este arquivo informa ao Git quais arquivos
+# temporários ou locais não devem ser versionados.
+
+# Arquivos temporários
+*.tmp
+*.log
+
+# Arquivos gerados pelo sistema operacional
+.DS_Store
+Thumbs.db
+
+# Artefatos dos scripts em Python
+__pycache__/

@@ -1,0 +1,534 @@
+/* O mesmo catálogo recebe uma cor de destaque distinta por recurso. */
+[data-recurso="people"] {
+    --accent: #ffd18a;
+    --accent-glow: #a9485b56;
+    --hero-art: url('../assets/imagens/fundos/personagens.webp');
+    --hero-focus: 72%;
+    --formato-imagem: 4 / 3;
+    --imagem-fit-padrao: cover;
+    --imagem-y-padrao: 27%;
+}
+
+[data-recurso="planets"] {
+    --accent: #a7d9e9;
+    --accent-glow: #35798d55;
+    --hero-art: url('../assets/imagens/fundos/planetas.webp');
+    --hero-fallback: url('../assets/imagens/banners/orbita.webp');
+    --hero-focus: 64%;
+    --imagem-fit-padrao: cover;
+}
+
+[data-recurso="starships"] {
+    --accent: #9fbffb;
+    --accent-glow: #3557926c;
+    --hero-art: url('../assets/imagens/fundos/naves.webp');
+    --hero-focus: 62%;
+}
+
+[data-recurso="films"] {
+    --accent: #efd58a;
+    --accent-glow: #8a57296b;
+    --hero-art: url('../assets/imagens/fundos/filmes.webp');
+    --hero-focus: 76%;
+    --formato-imagem: 2 / 3;
+}
+
+.catalog-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: clamp(18rem, 32vw, 27.5rem);
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+    padding-block: clamp(3.5rem, 8vw, 6.25rem);
+    border-bottom: 1px solid #4c5d693b;
+    background: radial-gradient(ellipse at 80% 34%, var(--accent-glow), transparent 52%), #0a101b80;
+}
+
+.catalog-hero::before {
+    position: absolute;
+    inset: -1.5rem 0;
+    z-index: -2;
+    background:
+        var(--hero-art) var(--hero-focus) center / cover no-repeat,
+        var(--hero-fallback, url('../assets/imagens/banners/banner-espacial.webp')) center / cover no-repeat;
+    transform: translateY(var(--hero-shift, 0px));
+    content: "";
+}
+
+.catalog-hero::after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(0deg, #05080e, #05080e2b 21%, transparent 47%),
+        linear-gradient(90deg, #060a12eb 0%, #060a12ba 32%, #060a1254 61%, transparent 86%);
+    content: "";
+}
+
+.catalog-hero .eyebrow { color: var(--accent); }
+.catalog-hero h1 { font-size: clamp(2.4rem, 7vw, 5.5rem); max-width: 17ch; text-shadow: 0 3px 20px #000c; }
+.catalog-hero .intro { color: #d2dbe6; text-shadow: 0 3px 12px #0009; }
+
+/* Os ornamentos ficam atrás da leitura e herdam a cor de cada catálogo. */
+.catalog-hero .catalog-wrap::after {
+    position: absolute;
+    inset: 34% clamp(2rem, 12vw, 11rem) auto auto;
+    z-index: -1;
+    inline-size: min(36vw, 26rem);
+    pointer-events: none;
+    content: "";
+}
+
+[data-recurso="people"] .catalog-hero .catalog-wrap::after {
+    inset-block-start: 62%;
+    block-size: 2px;
+    background: linear-gradient(90deg, transparent, #ffe0aa 68%, #fff5d2);
+    box-shadow: 0 0 13px #ffab59a0;
+    transform: rotate(-19deg);
+    opacity: .68;
+}
+
+[data-recurso="planets"] .catalog-hero .catalog-wrap::after {
+    aspect-ratio: 2.7;
+    border: 1px solid #a7d9e95c;
+    border-radius: 50%;
+    box-shadow: 0 0 0 13px #91b9ce13, 0 0 0 25px #c4e9f20c;
+    transform: rotate(-23deg);
+}
+
+[data-recurso="starships"] .catalog-hero .catalog-wrap::after {
+    aspect-ratio: 2;
+    border: 1px solid #9fbffb47;
+    background: linear-gradient(0deg, #9fbffb26 1px, transparent 1px) 0 0 / 100% 21%;
+    clip-path: polygon(0 0, 88% 0, 100% 28%, 100% 100%, 10% 100%, 0 76%);
+}
+
+.catalog-list { padding-block: clamp(1.45rem, 4vw, 2.75rem) var(--section-space); }
+.catalog-controls { display: flex; align-items: end; flex-wrap: wrap; gap: .75rem; }
+.catalog-search { display: flex; align-items: center; gap: .65rem; flex: 1 1 260px; padding-inline: .82rem .35rem; min-width: 0; }
+.catalog-search, .catalog-filter select {
+    min-height: 46px;
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid #46566b;
+    border-radius: .55rem;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.catalog-search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.catalog-search input {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    font: inherit;
+}
+
+.catalog-search input:focus-visible { outline-offset: -3px; }
+.catalog-search input::placeholder { color: var(--muted); }
+.catalog-search svg { color: var(--accent); }
+.catalog-search-clear { min-height: 38px; min-width: 38px; padding: .3rem .6rem; }
+.catalog-filter { display: grid; flex: 0 1 13rem; min-width: 0; gap: .3rem; }
+.catalog-filter label { color: var(--muted); font-size: .83rem; font-weight: 650; }
+.catalog-filter select { width: 100%; min-width: 0; padding: .45rem .65rem; font: inherit; }
+.catalog-status { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .6rem 1rem; margin-block: 1.05rem; color: var(--muted); }
+.catalog-status p, .catalog-feedback p { margin: 0; }
+#status::before { content: "●"; margin-inline-end: .55rem; color: var(--accent); font-size: .63rem; }
+.catalog-cache-note { color: #ffe18f; }
+.catalog-feedback {
+    padding: 1.35rem;
+    border: 1px solid #41546a;
+    border-left: 3px solid var(--accent);
+    border-radius: .65rem;
+    background: linear-gradient(115deg, var(--accent-glow), transparent 78%), var(--panel);
+}
+.catalog-feedback button { margin-top: .75rem; }
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(.75rem, 2vw, 1.25rem);
+    align-items: stretch;
+}
+
+.catalog-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-width: 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background:
+        radial-gradient(ellipse at 75% 0%, var(--accent-glow), transparent 65%),
+        var(--panel);
+    box-shadow: var(--shadow);
+    transition: transform .25s ease, border-color .25s ease, background-color .25s ease;
+    animation: catalog-enter .38s backwards;
+}
+
+.catalog-card:nth-child(3n+2) { animation-delay: 50ms; }
+.catalog-card:nth-child(3n) { animation-delay: 100ms; }
+.catalog-card:focus-within { border-color: var(--accent); }
+
+@keyframes catalog-enter {
+    from { opacity: .4; transform: translateY(.55rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card-media, .detail-media {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: var(--formato-imagem, 16 / 9);
+    background: radial-gradient(ellipse at 50% 42%, #23374d, #08101a 80%);
+}
+
+.card-image, .detail-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: var(--imagem-fit, var(--imagem-fit-padrao, contain));
+    object-position: var(--imagem-x, 50%) var(--imagem-y, var(--imagem-y-padrao, 50%));
+}
+
+.card-image {
+    transform: scale(var(--imagem-escala, 1));
+    transition: transform .35s ease;
+}
+
+[data-recurso="starships"] :is(.card-image, .detail-image),
+[data-recurso="films"] .card-image { padding: .4rem; }
+
+:is(.card-image, .detail-image).is-placeholder {
+    object-fit: contain;
+    object-position: center;
+    padding: .6rem;
+    transform: none;
+}
+
+.card-copy {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .62rem;
+    min-width: 0;
+    padding: clamp(.9rem, 1.5vw, 1.25rem);
+    border-top: 1px solid #8aabc023;
+    background: linear-gradient(#111b28, #0e1622);
+}
+
+[data-recurso="people"] .card-copy {
+    border-top-color: #bd864d59;
+    background: linear-gradient(155deg, #261d266e, transparent 66%), #111a28;
+}
+
+[data-recurso="planets"] .card-copy {
+    border-top-color: #7eb7ca50;
+    background: linear-gradient(142deg, #19374483, transparent 79%), #0e1925;
+}
+
+[data-recurso="starships"] .card-copy {
+    border-top-color: #8caffb55;
+    background: linear-gradient(140deg, #1d2941, #101a28);
+}
+
+[data-recurso="films"] .card-copy {
+    background: linear-gradient(140deg, #302924ac, #121a28 75%), #111a28;
+}
+
+.card-copy h2 {
+    max-width: 100%;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(1.15rem, 2.2vw, 1.43rem);
+    font-weight: 760;
+    line-height: 1.17;
+    overflow-wrap: anywhere;
+}
+
+.card-copy :is(.card-subtitle, .card-original, .film-original) { color: var(--muted); font-size: .85rem; margin: 0; }
+.card-copy :is(.card-episode, .film-episode, .card-kicker, .card-tag, .film-category) {
+    color: var(--accent);
+    font-size: .73rem;
+    letter-spacing: .065em;
+    font-weight: 740;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.card-data {
+    display: grid;
+    gap: .25rem;
+    font-size: .85rem;
+    margin: 0 0 .35rem;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.card-data div { display: flex; align-items: baseline; flex-wrap: wrap; gap: .1rem .55rem; min-width: 0; }
+.card-data dt { font-weight: 670; }
+.card-data dd { color: var(--muted); margin: 0; min-width: 0; overflow-wrap: anywhere; }
+
+.card-copy > .gold-button { margin-top: auto; }
+
+@media (hover: hover) and (pointer: fine) {
+    .catalog-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .catalog-card:hover .card-image:not(.is-placeholder) {
+        transform: scale(calc(var(--imagem-escala, 1) * 1.025));
+    }
+}
+
+.catalog-pages { display: flex; justify-content: center; flex-wrap: wrap; gap: .4rem; margin-top: 1.35rem; }
+.catalog-pages button { min-width: 44px; }
+.catalog-page .catalog-pages [aria-current] { color: #201600; border-color: var(--gold); background: var(--gold); }
+.catalog-ellipsis { align-self: center; color: var(--muted); padding-inline: .25rem; }
+
+.catalog-card.catalog-skeleton { pointer-events: none; animation: none; }
+.skeleton-image { min-height: 155px; aspect-ratio: 16 / 9; }
+.skeleton-line, .skeleton-button { display: block; border-radius: .35rem; min-height: .8rem; width: 64%; }
+.skeleton-line:nth-child(2) { width: 44%; }
+.skeleton-button { min-height: 2rem; width: 42%; margin-block: .55rem; }
+.skeleton-image, .skeleton-line, .skeleton-button {
+    background: linear-gradient(110deg, #1b2a3e 28%, #2c4156 48%, #1b2a3e 70%) 100% 0 / 200% 100%;
+    animation: catalog-skeleton 1.5s linear infinite;
+}
+@keyframes catalog-skeleton { to { background-position-x: -100%; } }
+
+@media (max-width: 920px) {
+    .catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 575px) {
+    .catalog-hero { min-height: 17rem; padding-block: 2.7rem; }
+    .catalog-hero::after {
+        background: linear-gradient(0deg, #05080e, #05080e24 41%, transparent),
+                    linear-gradient(90deg, #060a12e8, #060a126b);
+    }
+    .catalog-hero h1 { font-size: clamp(2rem, 10vw, 3rem); }
+    .catalog-controls { display: grid; grid-template-columns: minmax(0, 1fr); }
+    .catalog-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .catalog-hero::before { transform: none; }
+    .catalog-card, .card-image, .catalog-search, .catalog-filter select { transition: none; }
+    .catalog-card, .skeleton-image, .skeleton-line, .skeleton-button { animation: none; }
+    .catalog-card:hover { transform: none; }
+    .catalog-card:hover .card-image:not(.is-placeholder) { transform: scale(var(--imagem-escala, 1)); }
+}
+.catalog-modal .modal-content {
+    color: var(--ink);
+
+    background: linear-gradient(
+        140deg,
+        #0c1720,
+        #060b12
+    );
+
+    border: 1px solid var(--gold);
+    border-radius: .9rem;
+}
+
+.catalog-modal .modal-header,
+.catalog-modal .modal-footer {
+    border-color: var(--line);
+}
+
+.catalog-modal h2 {
+    font-weight: 800;
+    font-size: 1.45rem;
+
+    overflow-wrap: anywhere;
+}
+
+.catalog-modal .modal-header svg {
+    color: var(--gold);
+    margin-right: .65rem;
+}
+
+[data-recurso="starships"] .catalog-modal h2 {
+    font-style: italic;
+}
+
+
+/* ==================================================
+   CONTEÚDO DO MODAL
+================================================== */
+
+.catalog-modal .modal-body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+
+    gap: .8rem;
+}
+
+.detail-media {
+    border-radius: .45rem;
+    border: 1px solid var(--line);
+}
+
+.detail-image:not(.is-placeholder) { transform: scale(var(--imagem-escala, 1)); }
+
+/* Painéis que apresentam as informações detalhadas. */
+.detail-panel {
+    padding: .75rem;
+
+    background: #09121b;
+
+    border: 1px solid var(--line);
+    border-radius: .45rem;
+}
+
+.detail-panel h3 {
+    padding-left: .5rem;
+
+    font-size: 1rem;
+    border-left: 3px solid var(--gold);
+}
+
+.detail-panel dl {
+    margin: 0;
+}
+
+.detail-panel dl div {
+    display: flex;
+    justify-content: space-between;
+
+    gap: .55rem;
+    padding: .35rem 0;
+
+    border-top: 1px solid var(--line);
+    font-size: .86rem;
+}
+
+.detail-panel dd {
+    margin: 0;
+
+    color: var(--muted);
+    text-align: right;
+
+    overflow-wrap: anywhere;
+}
+
+/* Elementos adicionais ocupam toda a largura do modal. */
+.catalog-modal .modal-body > :nth-child(n+3) {
+    grid-column: 1 / -1;
+}
+
+/* Organização específica dos detalhes de planetas. */
+[data-recurso="planets"] .detail-media {
+    grid-column: 1 / -1;
+}
+
+[data-recurso="planets"] .catalog-modal .modal-body > :nth-child(n+3) {
+    grid-column: auto;
+}
+
+/* Oculta mensagens de status vazias. */
+#detalhes-status:empty {
+    display: none;
+}
+
+
+.catalog-modal .modal-dialog {
+    margin: var(--bs-modal-margin) auto;
+    max-width: min(720px, calc(100% - 2rem));
+}
+
+.catalog-modal .modal-dialog-scrollable {
+    height: calc(100% - var(--bs-modal-margin) * 2);
+}
+
+.detail-crawl {
+    color: #ffe275;
+    background: #050911;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.detail-relations {
+    margin: 0;
+    padding-left: 1.15rem;
+    text-align: left;
+}
+
+.detail-relations a {
+    color: #ffe275;
+}
+
+
+@media (max-width: 575px) {
+    .catalog-modal .modal-dialog { max-width: none; height: 100%; margin: 0; }
+    .catalog-modal .modal-content { border: 0; border-radius: 0; }
+    .catalog-modal .modal-body { grid-template-columns: minmax(0, 1fr); }
+    .catalog-modal .modal-body > :nth-child(n+3) { grid-column: auto; }
+}
+
+[data-recurso="starships"] :is(.card-media, .detail-media) {
+    background:
+        linear-gradient(90deg, #829db617 1px, transparent 1px) 50% / 28px 28px,
+        linear-gradient(0deg, #829db617 1px, transparent 1px) 50% / 28px 28px,
+        radial-gradient(ellipse at 50% 46%, #284461, #0b1423 78%);
+}
+
+[data-recurso="starships"] :is(.card-image, .detail-image) { mix-blend-mode: lighten; }
+
+[data-recurso="starships"] .card-media img.is-placeholder {
+    opacity: .75;
+    mix-blend-mode: screen;
+}
+
+.film-poster-fallback { display: none; }
+
+.is-placeholder + .film-poster-fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    color: var(--accent);
+    background:
+        repeating-linear-gradient(0deg, transparent 0 20px, #8ba1c913 20px 21px),
+        radial-gradient(ellipse at 50% 38%, #223750, #0b1321 72%);
+    font: italic 800 clamp(3.3rem, 8vw, 5.4rem)/1 var(--heading);
+    letter-spacing: -.035em;
+}
+
+.film-poster-fallback::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(65%, 8rem);
+    aspect-ratio: 1;
+    border: 1px solid #d8b46b4d;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    content: "";
+}
+
+@media (min-width: 1024px) {
+    [data-recurso="films"] .catalog-controls {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(11rem, 15rem) minmax(10.5rem, 13rem);
+    }
+}
+
+@media (max-width: 575px) {
+    .catalog-hero .catalog-wrap::after { opacity: .22; }
+    [data-recurso="people"] .catalog-hero .catalog-wrap::after { opacity: .27; }
+}
+
+@media (min-width: 500px) and (max-width: 575px) {
+    [data-recurso="films"] .catalog-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    [data-recurso="films"] .catalog-search { grid-column: 1 / -1; }
+    [data-recurso="films"] .catalog-filter select { font-size: .9rem; }
+}
