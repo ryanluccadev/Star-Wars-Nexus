@@ -4,7 +4,7 @@
 
 | Caminho | Responsabilidade |
 |---|---|
-| `index.html`, `js/home.js`, `css/home.css` | Hero, apresentação, indicadores e quatro links de exploração |
+| `index.html`, `js/home.js`, `css/home.css` | Hero, apresentação, indicadores, destaques, galeria e cronologia |
 | `pages/*.html`, `js/main.js`, `css/recursos.css` | Catálogos independentes, filtros, buscas e paginação |
 | `js/api.js`, `js/cache.js`, `js/busca.js` | SWAPI, persistência e pesquisa |
 | `js/filmes.js`, `data/filmes-complementares.json`, `data/filmes-metadados-swapi.json` | Integração da SWAPI, cinco filmes adicionais e dados oficiais de apoio |
@@ -25,7 +25,7 @@ A pesquisa compara todos os registros carregados e ignora caixa, acentos e espa�
 
 O localStorage guarda JSON por categoria sob `swe:cache:v1:<categoria>` durante 24 horas. Cache válido vem antes da rede. O botão de atualização solicita novamente os dados. Se a rede falhar, o último catálogo válido pode ser exibido, com aviso. Respostas inválidas e armazenamento bloqueado são tratados. O estado vazio sem cache oferece nova tentativa.
 
-A Home obtém personagens, planetas e naves do total já guardado ou da primeira resposta de cada endpoint. O indicador de filmes reflete a coleção dos seis registros da SWAPI e dos cinco complementares. A Home dispensa a leitura dos metadados de apoio usados somente nas fichas. A chave `swn:contagem:v1:<categoria>` guarda contagens válidas por 24 horas. Sem rede, o indicador pode aproveitar uma contagem anterior.
+A Home obtém personagens, planetas e naves do total já guardado ou da primeira resposta de cada endpoint. Os destaques são uma seleção editorial e abrem a pesquisa dos catálogos. A galeria, a cronologia e o contador de filmes compartilham o mesmo carregamento dos seis registros da SWAPI e dos cinco complementares. A Home dispensa a leitura dos metadados de apoio usados somente nas fichas. A chave `swn:contagem:v1:<categoria>` guarda contagens válidas por 24 horas. Sem rede, o indicador pode aproveitar uma contagem anterior.
 
 ## Filmes e modais
 
@@ -37,7 +37,9 @@ Os modais usam Bootstrap e são preenchidos a cada abertura com os dados do item
 
 ## Imagens e efeitos
 
-Os arquivos de imagens, placeholders, diretórios e mapeamentos foram preservados. A cobertura será ampliada manualmente em outra etapa. O [inventário](CREDITOS-IMAGENS.md) mantém as atribuições e as condições de uso. Elementos decorativos do CSS ficam atrás do conteúdo. A animação contínua é pausada quando a aba fica oculta, e a versão móvel usa menos partículas e atualizações. Conteúdo estático e navegação permanecem disponíveis sem as animações.
+Os arquivos anteriores permanecem em suas pastas. Os novos arquivos ficam em `assets/imagens/naves/`, `assets/imagens/filmes/` e `assets/imagens/fundos/`. O [inventário](CREDITOS-IMAGENS.md) registra os arquivos e os ZIPs de origem. Os cards e os modais de naves e filmes usam o mesmo mapeamento e preservam a proporção das imagens com `object-fit: contain`. O mapa associa as naves pelo número da SWAPI, os filmes pelo número do episódio ou pelo identificador complementar e usa placeholders quando falta uma imagem adequada. Uma descrição `null` indica um arquivo preservado sem associação visual.
+
+Cada hero antecipa o carregamento do próprio fundo WebP. As imagens dos catálogos e da galeria são carregadas sob demanda. O parallax usa a posição de rolagem em telas maiores, e os efeitos respeitam a preferência por movimento reduzido. O campo de estrelas pausa em abas ocultas. Navegadores compatíveis aplicam a transição entre páginas da mesma origem.
 
 ## Verificar
 

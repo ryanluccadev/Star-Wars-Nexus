@@ -3,7 +3,7 @@ const movimentoReduzido = matchMedia('(prefers-reduced-motion: reduce)');
 const telaCompacta = matchMedia('(max-width: 767px)');
 const corpo = document.body;
 const cabecalho = document.querySelector('.catalog-header');
-const hero = document.querySelector('.home-hero');
+const hero = document.querySelector('.home-hero, .catalog-hero');
 const formato = new Intl.NumberFormat('pt-BR');
 
 function elemento(tag, classe) {
@@ -179,7 +179,7 @@ function navegacaoDeRolagem() {
 }
 
 function entradaDaHome() {
-    if (!hero || movimentoReduzido.matches) {
+    if (!hero?.matches('.home-hero') || movimentoReduzido.matches) {
         return;
     }
 

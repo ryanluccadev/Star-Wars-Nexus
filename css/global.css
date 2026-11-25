@@ -317,3 +317,8 @@ section[id], main[id] { scroll-margin-top: 1rem; }
     .catalog-header nav a::after,
     .gold-button, .outline-button { transition: none; }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .22s; }
+}

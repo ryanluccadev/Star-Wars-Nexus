@@ -1,6 +1,6 @@
 # Star Wars Nexus
 
-Portal acadêmico não oficial para explorar personagens, planetas, naves e filmes de Star Wars. A Home apresenta o projeto, os quatro totais dinâmicos e os links para os catálogos.
+Portal acadêmico não oficial para explorar personagens, planetas, naves e filmes de Star Wars. A Home reúne os quatro totais dinâmicos, links para os catálogos, destaques, galeria de pôsteres e cronologia.
 
 ## Executar
 
@@ -10,7 +10,7 @@ Portal acadêmico não oficial para explorar personagens, planetas, naves e film
 
 O site usa HTML5, CSS3, JavaScript, Bootstrap local e Fetch API. Os catálogos oferecem busca, paginação e modais. Filmes inclui os seis episódios da SWAPI e cinco registros complementares de um JSON local. Essa extensão é uma funcionalidade adicional do projeto.
 
-Os arquivos de imagem dos catálogos foram preservados. A Home usa a arte espacial do projeto. A cobertura dos catálogos será complementada manualmente em uma etapa posterior.
+Cada página usa o fundo do seu pacote. O catálogo de naves exibe 35 imagens específicas e mantém o placeholder para o Republic Cruiser classe Consular. Os onze pôsteres aparecem na galeria, no catálogo de filmes e nas fichas. Consulte o relatório para conferir a duplicata encontrada.
 
 - [Documentação técnica](DOCUMENTACAO.md)
 - [Relatório de verificação](RELATORIO.md)

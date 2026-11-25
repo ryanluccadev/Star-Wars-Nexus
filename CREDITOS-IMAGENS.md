@@ -86,3 +86,62 @@ Os pôsteres dos seis episódios da SWAPI e dos cinco filmes complementares cont
 - O Smithsonian indica que os pôsteres dos episódios II, V e VI exigem permissão para uso. A indicação CC0 aplicável a certos metadados do catálogo não libera as respectivas imagens. [Coleção](https://collections.si.edu/search/results.htm?fq=name%3A%2220th+Century+Fox+Film+Corporation%22&q=set_name%3A%22Memorabilia+and+Ephemera+-+Advertisements%22) · [FAQ de acesso aberto](https://www.si.edu/openaccess/faq)
 - O USPTO reúne desenhos técnicos autênticos de X-wing, Slave I e Imperial Shuttle em patentes de modelos ornamentais. A permissão de reprodução em fac-símile do documento não confirma o uso separado dos desenhos como imagens de catálogo. [Guia do USPTO](https://www.uspto.gov/web/offices/pac/mpep/s1512.html)
 - A cobertura considera os resultados paginados da SWAPI e os cinco filmes complementares do catálogo local. [SWAPI](https://swapi.dev/)
+
+## Imagens dos ZIPs recebidos
+
+Arquivos enviados pelo responsável pelo projeto. Os ZIPs não identificam a autoria original nem a licença individual.
+
+| Recurso | Arquivo | Pacote de origem | Uso ou observação |
+|---|---|---|---|
+| CR90 corvette | `naves/2-cr90-corvette.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 2 |
+| Star Destroyer | `naves/3-star-destroyer.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 3 |
+| Sentinel-class landing craft | `naves/5-sentinel-class-landing-craft.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 5 |
+| Death Star | `naves/9-death-star.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 9 |
+| Millennium Falcon | `naves/10-millennium-falcon.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 10 |
+| Y-wing | `naves/11-y-wing.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 11 |
+| X-wing | `naves/12-x-wing.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 12 |
+| TIE Advanced x1 | `naves/13-tie-advanced-x1.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 13 |
+| Executor | `naves/15-executor.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 15 |
+| Rebel transport | `naves/17-rebel-transport.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 17 |
+| Slave 1 | `naves/21-slave-1.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 21 |
+| Imperial shuttle | `naves/22-imperial-shuttle.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 22 |
+| EF76 Nebulon-B escort frigate | `naves/23-ef76-nebulon-b-escort-frigate.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 23 |
+| Calamari Cruiser | `naves/27-calamari-cruiser.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 27 |
+| A-wing | `naves/28-a-wing.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 28 |
+| B-wing | `naves/29-b-wing.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 29 |
+| Republic Cruiser | `naves/31-republic-cruiser.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Consular (SWAPI 31) usa placeholder. A imagem recebida é idêntica à do cruzador 63 e mostra um Venator. |
+| Droid control ship | `naves/32-droid-control-ship.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 32 |
+| Naboo fighter | `naves/39-naboo-fighter.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 39 |
+| Naboo Royal Starship | `naves/40-naboo-royal-starship.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 40 |
+| Scimitar | `naves/41-scimitar.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 41 |
+| J-type diplomatic barge | `naves/43-j-type-diplomatic-barge.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 43 |
+| AA-9 Coruscant freighter | `naves/47-aa-9-coruscant-freighter.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 47 |
+| Jedi starfighter | `naves/48-jedi-starfighter.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 48 |
+| H-type Nubian yacht | `naves/49-h-type-nubian-yacht.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 49 |
+| Republic Assault ship | `naves/52-republic-assault-ship.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 52 |
+| Solar Sailer | `naves/58-solar-sailer.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 58 |
+| Trade Federation cruiser | `naves/59-trade-federation-cruiser.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 59 |
+| Theta-class T-2c shuttle | `naves/61-theta-class-t-2c-shuttle.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 61 |
+| Republic attack cruiser | `naves/63-republic-attack-cruiser.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 63 |
+| Naboo star skiff | `naves/64-naboo-star-skiff.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 64 |
+| Jedi Interceptor | `naves/65-jedi-interceptor.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 65 |
+| arc-170 | `naves/66-arc-170.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 66 |
+| Banking clan frigte | `naves/68-banking-clan-frigte.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 68 |
+| Belbullab-22 starfighter | `naves/74-belbullab-22-starfighter.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 74 |
+| V-wing | `naves/75-v-wing.webp` | `Star-Wars-Nexus-Naves-Completo.zip` | Nave · SWAPI 75 |
+| A Ameaça Fantasma | `filmes/episodio-1.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| Ataque dos Clones | `filmes/episodio-2.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| A Vingança dos Sith | `filmes/episodio-3.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| Uma Nova Esperança | `filmes/episodio-4.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| O Império Contra-Ataca | `filmes/episodio-5.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| O Retorno de Jedi | `filmes/episodio-6.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| O Despertar da Força | `filmes/episodio-7.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| Os Últimos Jedi | `filmes/episodio-8.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| A Ascensão Skywalker | `filmes/episodio-9.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| Rogue One: Uma História Star Wars | `filmes/rogue-one.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| Han Solo: Uma História Star Wars | `filmes/solo.webp` | `Star-Wars-Nexus-Posteres.zip` | Pôster vertical |
+| Home | `fundos/home.webp` | `Star-Wars-Nexus-Fundos.zip` | Fundo · WebP, 1672 × 941 |
+| Personagens | `fundos/personagens.webp` | `Star-Wars-Nexus-Fundos.zip` | Fundo · WebP, 1672 × 941 |
+| Planetas | `fundos/planetas.webp` | `Star-Wars-Nexus-Fundos.zip` | Fundo · WebP, 1672 × 941 |
+| Naves | `fundos/naves.webp` | `Star-Wars-Nexus-Fundos.zip` | Fundo · WebP, 1672 × 941 |
+| Filmes | `fundos/filmes.webp` | `Star-Wars-Nexus-Fundos.zip` | Fundo · WebP, 1671 × 941 |

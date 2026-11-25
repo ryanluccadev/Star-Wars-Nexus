@@ -32,6 +32,8 @@
     object-fit: contain;
     background: #080d16;
 }
+[data-recurso="films"] .catalog-modal .detail-image { max-height: min(44vh, 24rem); }
+[data-recurso="starships"] .catalog-modal .detail-image { padding: .4rem; }
 .catalog-modal .detail-panel { background: #0c1421; padding: 1rem; min-width: 0; }
 .catalog-modal .detail-panel h3 { color: var(--ink); margin: 0 0 .8rem; }
 .catalog-modal .detail-panel dt { min-width: 0; overflow-wrap: anywhere; }

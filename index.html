@@ -14,7 +14,8 @@
     <title>Início | Star Wars Nexus</title>
 
     <!-- Estilos da página -->
-    <link rel="icon" href="assets/imagens/banners/logo.png" type="image/png">
+    <link rel="icon" href="assets/imagens/banners/logo2.png" type="image/png">
+    <link rel="preload" as="image" href="assets/imagens/fundos/home.webp">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/home.css">
@@ -193,7 +194,7 @@
                     </div>
                 </a>
                 <a class="home-card home-card-starships" href="pages/naves.html" data-reveal>
-                    <img src="assets/imagens/banners/categoria-naves.webp" alt="" width="660" height="350" loading="lazy">
+                    <img src="assets/imagens/naves/15-executor.webp" alt="" width="660" height="350" loading="lazy">
                     <div class="home-card-copy">
                         <svg class="home-icon home-card-icon" aria-hidden="true"><use href="#home-starships-icon"/></svg>
                         <h3>Naves</h3>
@@ -202,7 +203,7 @@
                     </div>
                 </a>
                 <a class="home-card home-card-films" href="pages/filmes.html" data-reveal>
-                    <img src="assets/imagens/banners/categoria-filmes.webp" alt="" width="660" height="350" loading="lazy">
+                    <img src="assets/imagens/filmes/episodio-8.webp" alt="" width="660" height="350" loading="lazy">
                     <div class="home-card-copy">
                         <svg class="home-icon home-card-icon" aria-hidden="true"><use href="#home-films-icon"/></svg>
                         <h3>Filmes</h3>
@@ -212,7 +213,80 @@
                 </a>
             </div>
         </section>
+
+        <section class="home-section catalog-wrap home-highlights" id="destaques" aria-labelledby="destaques-titulo">
+            <div class="home-section-heading" data-reveal>
+                <h2 id="destaques-titulo">Destaques da galáxia</h2>
+            </div>
+            <div class="home-highlight-groups">
+                <div>
+                    <h3>Personagens em destaque</h3>
+                    <ul class="home-highlight-list" data-destaques="people"></ul>
+                </div>
+                <div>
+                    <h3>Naves icônicas</h3>
+                    <ul class="home-highlight-list" data-destaques="starships"></ul>
+                </div>
+                <div>
+                    <h3>Planetas em destaque</h3>
+                    <ul class="home-highlight-list" data-destaques="planets"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-section home-cinema" id="galeria" aria-labelledby="galeria-titulo">
+            <div class="catalog-wrap">
+                <div class="home-cinema-header" data-reveal>
+                    <div class="home-section-heading">
+                        <h2 id="galeria-titulo">Galeria de filmes</h2>
+                    </div>
+                    <div class="home-gallery-controls" id="galeria-controles" hidden>
+                        <button type="button" class="outline-button" id="galeria-anterior" aria-controls="galeria-posters">Anterior</button>
+                        <button type="button" class="outline-button" id="galeria-proximo" aria-controls="galeria-posters">Próximo</button>
+                    </div>
+                </div>
+                <p id="galeria-status" role="status">Carregando a galeria de filmes…</p>
+                <ul class="home-poster-list" id="galeria-posters" aria-label="Pôsteres em ordem da história" tabindex="0" hidden></ul>
+            </div>
+        </section>
+
+        <section class="home-section catalog-wrap home-chronology" id="saga" aria-labelledby="saga-titulo">
+            <div class="home-section-heading" data-reveal>
+                <h2 id="saga-titulo">Linha do tempo dos filmes</h2>
+                <p>Ordem dos acontecimentos, com o ano de estreia de cada filme.</p>
+            </div>
+            <ol class="home-timeline" id="linha-do-tempo"></ol>
+        </section>
+
+        <section class="catalog-wrap home-project" aria-labelledby="sobre-titulo">
+            <div>
+                <h2 id="sobre-titulo">Sobre o projeto</h2>
+                <p>O Star Wars Nexus foi desenvolvido no IFSP, Campus Araraquara. A SWAPI fornece os dados dos catálogos, e cinco filmes complementam a coleção a partir de um arquivo local.</p>
+            </div>
+            <a class="outline-button" href="https://swapi.dev/">Conhecer a SWAPI</a>
+        </section>
     </main>
+
+    <template id="modelo-destaque">
+        <li><a class="home-highlight">
+            <img src="" alt="" width="120" height="84" loading="lazy" decoding="async">
+            <span></span>
+        </a></li>
+    </template>
+    <template id="modelo-poster">
+        <li><a class="home-poster">
+            <img src="" alt="" width="300" height="450" loading="lazy" decoding="async">
+            <span class="home-film-label"></span>
+            <strong></strong>
+        </a></li>
+    </template>
+    <template id="modelo-linha-do-tempo">
+        <li><a>
+            <span class="home-film-label"></span>
+            <strong></strong>
+            <span class="home-film-year"></span>
+        </a></li>
+    </template>
 
     <!-- Rodapé compacto -->
     <footer class="catalog-footer">

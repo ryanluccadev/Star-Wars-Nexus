@@ -1,13 +1,37 @@
 /* O mesmo catálogo recebe uma cor de destaque distinta por recurso. */
-[data-recurso] { --accent: #ffcc74; --accent-glow: #a54f1d56; }
-[data-recurso="planets"] { --accent: #a7d9e9; --accent-glow: #35798d55; }
-[data-recurso="starships"] { --accent: #9fbffb; --accent-glow: #3557926c; }
-[data-recurso="films"] { --accent: #efd58a; --accent-glow: #8a57296b; }
+[data-recurso="people"] {
+    --accent: #ffd18a;
+    --accent-glow: #a9485b56;
+    --hero-art: url('../assets/imagens/fundos/personagens.webp');
+    --hero-focus: 72%;
+}
+
+[data-recurso="planets"] {
+    --accent: #a7d9e9;
+    --accent-glow: #35798d55;
+    --hero-art: url('../assets/imagens/fundos/planetas.webp');
+    --hero-fallback: url('../assets/imagens/banners/orbita.webp');
+    --hero-focus: 64%;
+}
+
+[data-recurso="starships"] {
+    --accent: #9fbffb;
+    --accent-glow: #3557926c;
+    --hero-art: url('../assets/imagens/fundos/naves.webp');
+    --hero-focus: 62%;
+}
+
+[data-recurso="films"] {
+    --accent: #efd58a;
+    --accent-glow: #8a57296b;
+    --hero-art: url('../assets/imagens/fundos/filmes.webp');
+    --hero-focus: 76%;
+}
 
 .catalog-hero {
     position: relative;
     isolation: isolate;
-    min-height: clamp(16rem, 31vw, 25rem);
+    min-height: clamp(18rem, 32vw, 27.5rem);
     display: grid;
     align-items: center;
     overflow: hidden;
@@ -18,42 +42,28 @@
 
 .catalog-hero::before {
     position: absolute;
-    inset: 0;
+    inset: -1.5rem 0;
     z-index: -2;
-    background: url('../assets/imagens/banners/banner-espacial.webp') right 42% / auto 160% no-repeat;
-    opacity: .72;
-    mask-image: linear-gradient(to right, transparent 12%, #000 70%);
+    background:
+        var(--hero-art) var(--hero-focus) center / cover no-repeat,
+        var(--hero-fallback, url('../assets/imagens/banners/banner-espacial.webp')) center / cover no-repeat;
+    transform: translateY(var(--hero-shift, 0px));
     content: "";
 }
 
 .catalog-hero::after {
     position: absolute;
-    inset: auto 0 0;
+    inset: 0;
     z-index: -1;
-    height: 40%;
-    background: linear-gradient(transparent, #05080e);
+    background:
+        linear-gradient(0deg, #05080e, #05080e2b 21%, transparent 47%),
+        linear-gradient(90deg, #060a12eb 0%, #060a12ba 32%, #060a1254 61%, transparent 86%);
     content: "";
 }
 
 .catalog-hero .eyebrow { color: var(--accent); }
-.catalog-hero h1 { font-size: clamp(2.4rem, 7vw, 5.5rem); }
+.catalog-hero h1 { font-size: clamp(2.4rem, 7vw, 5.5rem); max-width: 17ch; text-shadow: 0 3px 20px #000c; }
 .catalog-hero .intro { color: #d2dbe6; text-shadow: 0 3px 12px #0009; }
-
-[data-recurso="planets"] .catalog-hero::before {
-    background-image: url('../assets/imagens/banners/orbita.webp');
-    background-size: auto 100%;
-    background-position: right bottom;
-    opacity: .85;
-}
-
-[data-recurso="starships"] .catalog-hero {
-    background:
-        repeating-linear-gradient(90deg, transparent 0 38px, #a0b7e410 39px 40px),
-        radial-gradient(ellipse at 72% 28%, var(--accent-glow), transparent 65%),
-        #0a101b80;
-}
-
-[data-recurso="films"] .catalog-hero::before { opacity: .36; }
 
 /* Os ornamentos ficam atrás da leitura e herdam a cor de cada catálogo. */
 .catalog-hero .catalog-wrap::after {
@@ -177,10 +187,10 @@
 }
 
 [data-recurso="people"] .card-image { height: clamp(188px, 19vw, 255px); }
-[data-recurso="films"] .card-image { height: clamp(216px, 20vw, 300px); }
+[data-recurso="films"] .card-image { height: clamp(19rem, 32vw, 30rem); padding: .5rem; }
 [data-recurso="films"] .card-image,
 [data-recurso="people"] .card-image { aspect-ratio: 2 / 3; }
-[data-recurso="starships"] .card-image { aspect-ratio: 2 / 1; }
+[data-recurso="starships"] .card-image { aspect-ratio: 16 / 9; padding: .55rem; }
 [data-recurso="planets"] .card-image { background-color: #090e18; }
 
 .card-copy {
@@ -275,16 +285,19 @@
 }
 
 @media (max-width: 575px) {
-    .catalog-hero { min-height: 13rem; padding-block: 2.6rem; }
-    .catalog-hero::before { background-size: auto 117%; opacity: .34; }
+    .catalog-hero { min-height: 17rem; padding-block: 2.7rem; }
+    .catalog-hero::after {
+        background: linear-gradient(0deg, #05080e, #05080e24 41%, transparent),
+                    linear-gradient(90deg, #060a12e8, #060a126b);
+    }
     .catalog-hero h1 { font-size: clamp(2rem, 10vw, 3rem); }
     .catalog-controls { display: grid; grid-template-columns: minmax(0, 1fr); }
     .catalog-grid { grid-template-columns: minmax(0, 1fr); }
     [data-recurso="people"] .card-image { height: 215px; }
-    [data-recurso="films"] .card-image { height: 245px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .catalog-hero::before { transform: none; }
     .catalog-card, .card-image, .catalog-search, .catalog-filter select { transition: none; }
     .catalog-card, .skeleton-image, .skeleton-line, .skeleton-button { animation: none; }
     .catalog-card:hover, .catalog-card:hover .card-image { transform: none; }
