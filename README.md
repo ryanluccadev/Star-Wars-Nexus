@@ -1,27 +1,33 @@
-# Star Wars Nexus
+# 🌌 Star Wars Nexus
 
-Portal acadêmico não oficial para explorar personagens, planetas, naves e filmes de Star Wars. A Home reúne os quatro totais dinâmicos, links para os catálogos, destaques, galeria de pôsteres e cronologia.
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+![SWAPI](https://img.shields.io/badge/SWAPI-FFD700?style=for-the-badge&logoColor=black)
 
-## Executar
+> Uma galáxia muito, muito distante. Explore o universo de Star Wars em uma experiência interativa, imersiva e responsiva.
 
-1. Extraia o ZIP e abra a pasta `Star-Wars-Nexus`.
-2. Abra o `index.html` pelo Live Server ou execute `python -m http.server 8080` na pasta e acesse `http://localhost:8080/`.
-3. Para a primeira consulta aos catálogos, deixe a SWAPI acessível pela internet. O navegador conserva uma cópia dos dados.
+## 📖 Sobre o projeto
 
-O site usa HTML5, CSS3, JavaScript, Bootstrap local e Fetch API. Os catálogos oferecem busca, paginação e modais. Filmes inclui os seis episódios da SWAPI e cinco registros complementares de um JSON local. Essa extensão é uma funcionalidade adicional do projeto.
+O **Star Wars Nexus** é uma aplicação web multipágina desenvolvida para explorar personagens, planetas, naves e filmes do universo Star Wars.
 
-Cada página usa o fundo do seu pacote. O catálogo de naves exibe 35 imagens específicas e mantém o placeholder para o Republic Cruiser classe Consular. Os onze pôsteres aparecem na galeria, no catálogo de filmes e nas fichas. Consulte o relatório para conferir a duplicata encontrada.
+O projeto utiliza a **SWAPI (Star Wars API)** para consumir informações dinamicamente, combinando dados da API com recursos visuais locais e uma interface inspirada na identidade cinematográfica da franquia.
 
-- [Documentação técnica](DOCUMENTACAO.md)
-- [Relatório de verificação](RELATORIO.md)
-- [Créditos e proveniência das imagens](CREDITOS-IMAGENS.md)
+Desenvolvido como projeto acadêmico da disciplina de Construção de Interfaces Web do Instituto Federal de São Paulo (IFSP).
 
-## Autores
+---
 
-Ryan Lucca Marques Pereira e Pedro Aragoni
+## 🚀 Explore a galáxia
 
-Instituto Federal de São Paulo — Campus Araraquara
+| Categoria | Quantidade prevista | Descrição |
+|---|---:|---|
+| 👤 Personagens | 82 | Heróis, vilões, Jedi, Sith e droides |
+| 🪐 Planetas | 60 | Mundos e ambientes da galáxia |
+| 🚀 Naves | 36 | Caças, cargueiros e estações espaciais |
+| 🎬 Filmes | 11 | Saga Skywalker e histórias derivadas |
+| **Total** | **189** | **Registros do catálogo** |
 
-Tecnologia em Sistemas para Internet · Segundo semestre
+## ✨ Funcionalidades
 
-Construção de Interfaces Web · 2026
+- Página
