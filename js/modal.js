@@ -10,7 +10,7 @@
     - Exibir os detalhes utilizando o modal do Bootstrap.
 */
 
-import { urlRegistro } from './api.js';
+import { PLANETA_DESCONHECIDO, urlRegistro } from './api.js';
 import { nomeCategoriaFilme, rotuloEpisodio } from './filmes.js';
 
 // Formata números conforme o padrão brasileiro.
@@ -143,7 +143,9 @@ function relacoes(valor, recurso, tipo, nomes) {
         const registro = urlRegistro(url, recurso);
         const linha = elemento('li');
 
-        if (registro) {
+        if (registro === PLANETA_DESCONHECIDO) {
+            linha.textContent = 'Planeta desconhecido';
+        } else if (registro) {
             const id = new URL(registro).pathname.split('/')[3];
             linha.append(linkExterno(nomes.get(registro) ?? tipo + ' ' + id + ' na SWAPI', registro));
         } else {

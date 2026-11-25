@@ -15,6 +15,7 @@ import { lerCache, salvarCache, lerContagem, salvarContagem } from './cache.js';
 
 // Endereço principal da API Star Wars.
 const ORIGEM = 'https://swapi.dev';
+export const PLANETA_DESCONHECIDO = ORIGEM + '/api/planets/28/';
 
 // Recursos disponíveis no sistema.
 const RECURSOS_PERMITIDOS = ['people', 'planets', 'starships', 'films'];
@@ -68,6 +69,11 @@ export function urlRegistro(valor, recurso) {
         // Caso a URL não possa ser interpretada.
         return null;
     }
+}
+
+export function planetaIdentificado(item) {
+    return item.name?.trim().toLowerCase() !== 'unknown' &&
+        urlRegistro(item.url, 'planets') !== PLANETA_DESCONHECIDO;
 }
 
 

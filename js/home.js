@@ -1,6 +1,6 @@
-import { contarRecurso } from './api.js';
+import { carregarRecurso, contarRecurso, planetaIdentificado } from './api.js';
 import { carregarFilmes, nomeCategoriaFilme, rotuloEpisodio } from './filmes.js';
-import { imagemDoRegistro, placeholders } from './imagens.js';
+import { aplicarEnquadramento, imagemDoRegistro, placeholders } from './imagens.js';
 
 const formatarNumero = new Intl.NumberFormat('pt-BR');
 const aviso = document.getElementById('home-carregamento-erro');
@@ -25,13 +25,19 @@ function linkCatalogo(pagina, nome) {
     return 'pages/' + pagina + '.html?' + new URLSearchParams({ busca: nome });
 }
 
-function preencherImagem(imagem, recurso, item) {
-    const { arquivo } = imagemDoRegistro(recurso, item);
+function preencherImagem(imagem, recurso, item, contexto) {
+    const selecionada = imagemDoRegistro(recurso, item);
+    const padrao = placeholders[recurso];
     const pasta = 'assets/imagens/';
-    imagem.addEventListener('error', () => {
-        imagem.src = pasta + placeholders[recurso].arquivo;
-    }, { once: true });
-    imagem.src = pasta + arquivo;
+    const definir = ({ arquivo }) => {
+        imagem.classList.toggle('is-placeholder', arquivo === padrao.arquivo);
+        imagem.src = pasta + arquivo;
+    };
+    if (selecionada !== padrao) {
+        aplicarEnquadramento(imagem, recurso, item, contexto);
+        imagem.addEventListener('error', () => definir(padrao), { once: true });
+    }
+    definir(selecionada);
 }
 
 function renderizarDestaques() {
@@ -41,10 +47,10 @@ function renderizarDestaques() {
         lista.replaceChildren(...itens.map(([id, nome]) => {
             const card = modelo.content.cloneNode(true);
             card.querySelector('a').href = linkCatalogo(pagina, nome);
-            card.querySelector('span').textContent = nome;
+            card.querySelector('a > span:last-child').textContent = nome;
             preencherImagem(card.querySelector('img'), recurso, {
                 url: `https://swapi.dev/api/${recurso}/${id}/`
-            });
+            }, 'destaque');
             return card;
         }));
     }
@@ -81,7 +87,7 @@ function renderizarCinema(filmes) {
             parte.querySelector('strong').textContent = titulo;
         }
 
-        preencherImagem(poster.querySelector('img'), 'films', filme);
+        preencherImagem(poster.querySelector('img'), 'films', filme, 'galeria');
         linha.querySelector('.home-film-year').textContent = filme.release_date?.slice(0, 4) ?? '';
         posters.append(poster);
         cronologia.append(linha);
@@ -109,6 +115,9 @@ async function totalDoRecurso(recurso) {
         return filmes.length;
     }
 
+    if (recurso === 'planets') {
+        return (await carregarRecurso(recurso)).filter(planetaIdentificado).length;
+    }
     return contarRecurso(recurso);
 }
 

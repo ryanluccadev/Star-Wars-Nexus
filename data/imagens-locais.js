@@ -1,6 +1,5 @@
 // Gerado por scripts/indexar-imagens.py.
 export const imagensEspecificas = {
-
     "people": [
         {
             "id": "1",
@@ -24,7 +23,7 @@ export const imagensEspecificas = {
         },
         {
             "id": "5",
-            "arquivo": "personagens/5-leia-organa.webp",
+            "arquivo": "personagens/5-leia-organa.jpg",
             "descricao": "Imagem de Leia Organa"
         },
         {
@@ -49,7 +48,7 @@ export const imagensEspecificas = {
         },
         {
             "id": "10",
-            "arquivo": "personagens/10-obi-wan-kenobi.webp",
+            "arquivo": "personagens/10-obi-wan-kenobi.jpg",
             "descricao": "Imagem de Obi-Wan Kenobi"
         },
         {
@@ -413,7 +412,6 @@ export const imagensEspecificas = {
             "descricao": "Imagem de Tion Medon"
         }
     ],
-
     "planets": [
         {
             "id": "1",
@@ -469,6 +467,246 @@ export const imagensEspecificas = {
             "id": "9",
             "arquivo": "planetas/9-coruscant.webp",
             "descricao": "Cidade das Artes e das Ciências em Valência, locação de Coruscant"
+        },
+        {
+            "id": "10",
+            "arquivo": "planetas/10-kamino.webp",
+            "descricao": "Arte de Kamino no universo Star Wars"
+        },
+        {
+            "id": "11",
+            "arquivo": "planetas/11-geonosis.webp",
+            "descricao": "Arte de Geonosis no universo Star Wars"
+        },
+        {
+            "id": "12",
+            "arquivo": "planetas/12-utapau.webp",
+            "descricao": "Arte de Utapau no universo Star Wars"
+        },
+        {
+            "id": "15",
+            "arquivo": "planetas/15-polis-massa.webp",
+            "descricao": "Arte de Polis Massa no universo Star Wars"
+        },
+        {
+            "id": "16",
+            "arquivo": "planetas/16-mygeeto.webp",
+            "descricao": "Arte de Mygeeto no universo Star Wars"
+        },
+        {
+            "id": "17",
+            "arquivo": "planetas/17-felucia.webp",
+            "descricao": "Arte de Felucia no universo Star Wars"
+        },
+        {
+            "id": "18",
+            "arquivo": "planetas/18-cato-neimoidia.webp",
+            "descricao": "Arte de Cato Neimoidia no universo Star Wars"
+        },
+        {
+            "id": "19",
+            "arquivo": "planetas/19-saleucami.webp",
+            "descricao": "Arte de Saleucami no universo Star Wars"
+        },
+        {
+            "id": "20",
+            "arquivo": "planetas/20-stewjon.webp",
+            "descricao": "Arte de Stewjon no universo Star Wars"
+        },
+        {
+            "id": "21",
+            "arquivo": "planetas/21-eriadu.webp",
+            "descricao": "Arte de Eriadu no universo Star Wars"
+        },
+        {
+            "id": "23",
+            "arquivo": "planetas/23-rodia.webp",
+            "descricao": "Arte de Rodia no universo Star Wars"
+        },
+        {
+            "id": "24",
+            "arquivo": "planetas/24-nal-hutta.webp",
+            "descricao": "Arte de Nal Hutta no universo Star Wars"
+        },
+        {
+            "id": "25",
+            "arquivo": "planetas/25-dantooine.webp",
+            "descricao": "Arte de Dantooine no universo Star Wars"
+        },
+        {
+            "id": "26",
+            "arquivo": "planetas/26-bestine-iv.webp",
+            "descricao": "Arte de Bestine IV no universo Star Wars"
+        },
+        {
+            "id": "27",
+            "arquivo": "planetas/27-ord-mantell.webp",
+            "descricao": "Arte de Ord Mantell no universo Star Wars"
+        },
+        {
+            "id": "29",
+            "arquivo": "planetas/29-trandosha.webp",
+            "descricao": "Arte de Trandosha no universo Star Wars"
+        },
+        {
+            "id": "30",
+            "arquivo": "planetas/30-socorro.webp",
+            "descricao": "Arte de Socorro no universo Star Wars"
+        },
+        {
+            "id": "31",
+            "arquivo": "planetas/31-mon-cala.webp",
+            "descricao": "Arte de Mon Cala no universo Star Wars"
+        },
+        {
+            "id": "33",
+            "arquivo": "planetas/33-sullust.webp",
+            "descricao": "Arte de Sullust no universo Star Wars"
+        },
+        {
+            "id": "34",
+            "arquivo": "planetas/34-toydaria.webp",
+            "descricao": "Arte de Toydaria no universo Star Wars"
+        },
+        {
+            "id": "35",
+            "arquivo": "planetas/35-malastare.webp",
+            "descricao": "Arte de Malastare no universo Star Wars"
+        },
+        {
+            "id": "36",
+            "arquivo": "planetas/36-dathomir.webp",
+            "descricao": "Arte de Dathomir no universo Star Wars"
+        },
+        {
+            "id": "37",
+            "arquivo": "planetas/37-ryloth.webp",
+            "descricao": "Arte de Ryloth no universo Star Wars"
+        },
+        {
+            "id": "38",
+            "arquivo": "planetas/38-aleen-minor.webp",
+            "descricao": "Arte de Aleen Minor no universo Star Wars"
+        },
+        {
+            "id": "39",
+            "arquivo": "planetas/39-vulpter.webp",
+            "descricao": "Arte de Vulpter no universo Star Wars"
+        },
+        {
+            "id": "40",
+            "arquivo": "planetas/40-troiken.webp",
+            "descricao": "Arte de Troiken no universo Star Wars"
+        },
+        {
+            "id": "41",
+            "arquivo": "planetas/41-tund.webp",
+            "descricao": "Ilustração com personagens, fornecida para Tund"
+        },
+        {
+            "id": "42",
+            "arquivo": "planetas/42-haruun-kal.webp",
+            "descricao": "Ilustração com personagens, fornecida para Haruun Kal"
+        },
+        {
+            "id": "43",
+            "arquivo": "planetas/43-cerea.webp",
+            "descricao": "Arte de Cerea no universo Star Wars"
+        },
+        {
+            "id": "44",
+            "arquivo": "planetas/44-glee-anselm.webp",
+            "descricao": "Arte de Glee Anselm no universo Star Wars"
+        },
+        {
+            "id": "45",
+            "arquivo": "planetas/45-iridonia.webp",
+            "descricao": "Arte de Iridonia no universo Star Wars"
+        },
+        {
+            "id": "46",
+            "arquivo": "planetas/46-tholoth.webp",
+            "descricao": "Arte de Tholoth no universo Star Wars"
+        },
+        {
+            "id": "47",
+            "arquivo": "planetas/47-iktotch.webp",
+            "descricao": "Ilustração com personagens, fornecida para Iktotch"
+        },
+        {
+            "id": "48",
+            "arquivo": "planetas/48-quermia.webp",
+            "descricao": "Ilustração com personagens, fornecida para Quermia"
+        },
+        {
+            "id": "49",
+            "arquivo": "planetas/49-dorin.webp",
+            "descricao": "Arte de Dorin no universo Star Wars"
+        },
+        {
+            "id": "5",
+            "arquivo": "planetas/5-dagobah.webp",
+            "descricao": "Arte de Dagobah no universo Star Wars"
+        },
+        {
+            "id": "50",
+            "arquivo": "planetas/50-champala.webp",
+            "descricao": "Arte de Champala no universo Star Wars"
+        },
+        {
+            "id": "51",
+            "arquivo": "planetas/51-mirial.webp",
+            "descricao": "Ilustração com personagens, fornecida para Mirial"
+        },
+        {
+            "id": "52",
+            "arquivo": "planetas/52-serenno.webp",
+            "descricao": "Arte de Serenno no universo Star Wars"
+        },
+        {
+            "id": "53",
+            "arquivo": "planetas/53-concord-dawn.webp",
+            "descricao": "Arte de Concord Dawn no universo Star Wars"
+        },
+        {
+            "id": "54",
+            "arquivo": "planetas/54-zolan.webp",
+            "descricao": "Ilustração com personagens, fornecida para Zolan"
+        },
+        {
+            "id": "55",
+            "arquivo": "planetas/55-ojom.webp",
+            "descricao": "Arte de Ojom no universo Star Wars"
+        },
+        {
+            "id": "56",
+            "arquivo": "planetas/56-skako.webp",
+            "descricao": "Arte de Skako no universo Star Wars"
+        },
+        {
+            "id": "57",
+            "arquivo": "planetas/57-muunilinst.webp",
+            "descricao": "Arte de Muunilinst no universo Star Wars"
+        },
+        {
+            "id": "58",
+            "arquivo": "planetas/58-shili.webp",
+            "descricao": "Arte de Shili no universo Star Wars"
+        },
+        {
+            "id": "59",
+            "arquivo": "planetas/59-kalee.webp",
+            "descricao": "Arte de Kalee no universo Star Wars"
+        },
+        {
+            "id": "6",
+            "arquivo": "planetas/6-bespin.webp",
+            "descricao": "Arte de Bespin no universo Star Wars"
+        },
+        {
+            "id": "60",
+            "arquivo": "planetas/60-umbara.webp",
+            "descricao": "Arte de Umbara no universo Star Wars"
         }
     ],
     "starships": [

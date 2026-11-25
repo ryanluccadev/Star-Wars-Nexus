@@ -1,232 +1,31 @@
-Segue o **README.md do Star Wars Nexus**, atualizado para incluir os 11 filmes, a identidade visual e as funcionalidades planejadas. Não consegui recuperar integralmente o texto anterior nem verificar a última versão do código, então reconstruí o README. Confira as funcionalidades antes de publicar.
+# Star Wars Nexus
 
-# 🌌 Star Wars Nexus
+Portal acadêmico não oficial para explorar personagens, planetas, naves e filmes de Star Wars. A Home reúne os quatro totais dinâmicos, links para os catálogos, destaques, galeria de pôsteres e cronologia.
 
+## Executar
 
+1. Extraia o ZIP e abra a pasta `Star-Wars-Nexus`.
+2. Abra o `index.html` pelo Live Server ou execute `python -m http.server 8080` na pasta e acesse `http://localhost:8080/`.
+3. Para a primeira consulta aos catálogos, deixe a SWAPI acessível pela internet. O navegador conserva uma cópia dos dados.
 
+O site usa HTML5, CSS3, JavaScript, Bootstrap local e Fetch API. Os catálogos oferecem busca, paginação e modais. Filmes inclui os seis episódios da SWAPI e cinco registros complementares de um JSON local. Essa extensão é uma funcionalidade adicional do projeto.
 
+Cada página usa o fundo do seu pacote. O catálogo de naves exibe 35 imagens específicas e mantém o placeholder para o Republic Cruiser classe Consular. Os onze pôsteres aparecem na galeria, no catálogo de filmes e nas fichas. Consulte o relatório para conferir a duplicata encontrada.
 
+Os 59 planetas identificados têm imagens nos cards, nos modais e, quando presentes na seleção editorial, nos destaques da Home. O registro de origem planetária desconhecida permanece no cache da SWAPI.
 
+Esta versão reúne a atualização dos planetas com as edições do projeto fornecido pelo responsável. As 82 imagens de personagens, o favicon e as capas escolhidas para Naves e Filmes na Home vieram dessa versão.
 
+- [Documentação técnica](DOCUMENTACAO.md)
+- [Relatório de verificação](RELATORIO.md)
+- [Créditos e proveniência das imagens](CREDITOS-IMAGENS.md)
 
+## Autores
 
+Ryan Lucca Marques Pereira e Pedro Aragoni
 
+Instituto Federal de São Paulo — Campus Araraquara
 
-> Uma galáxia muito, muito distante. Explore o universo de Star Wars em uma experiência interativa, imersiva e responsiva.
+Tecnologia em Sistemas para Internet · Segundo semestre
 
-## 📖 Sobre o projeto
-
-O **Star Wars Nexus** é uma aplicação web multipágina desenvolvida para explorar personagens, planetas, naves e filmes do universo Star Wars.
-
-O projeto utiliza a **SWAPI (Star Wars API)** para consumir informações dinamicamente, combinando dados da API com recursos visuais locais e uma interface inspirada na identidade cinematográfica da franquia.
-
-Desenvolvido como projeto acadêmico da disciplina de Construção de Interfaces Web do Instituto Federal de São Paulo (IFSP).
-
----
-
-## 🚀 Explore a galáxia
-
-| Categoria      | Quantidade prevista | Descrição                              |
-| -------------- | ------------------- | -------------------------------------- |
-| 👤 Personagens | 82                  | Heróis, vilões, Jedi, Sith e droides   |
-| 🪐 Planetas    | 60                  | Mundos e ambientes da galáxia          |
-| 🚀 Naves       | 36                  | Caças, cargueiros e estações espaciais |
-| 🎬 Filmes      | 11                  | Saga Skywalker e histórias derivadas   |
-| **Total**      | **189**             | **Registros do catálogo**              |
-
-## ✨ Funcionalidades
-
-- Página inicial com identidade visual cinematográfica.
-- Páginas independentes para cada categoria.
-- Consumo dinâmico de dados da SWAPI.
-- Paginação automática das requisições.
-- Geração dinâmica de cards.
-- Pesquisa por nome ou título.
-- Modais de detalhes utilizando Bootstrap.
-- Armazenamento de dados em cache com LocalStorage.
-- Imagens locais de personagens, planetas, naves e filmes.
-- Sistema de favoritos para naves.
-- Animações e transições com CSS e JavaScript.
-- Estados de carregamento e tratamento de erros.
-- Interface responsiva para computadores, tablets e celulares.
-- Identidade visual personalizada e favicon próprio.
-
----
-
-## 🎬 Catálogo cinematográfico
-
-O catálogo contempla os nove episódios da Saga Skywalker e dois filmes derivados.
-
-### Saga Skywalker
-
-| Episódio | Filme                  | Ano  |
-| -------- | ---------------------- | ---- |
-| I        | A Ameaça Fantasma      | 1999 |
-| II       | Ataque dos Clones      | 2002 |
-| III      | A Vingança dos Sith    | 2005 |
-| IV       | Uma Nova Esperança     | 1977 |
-| V        | O Império Contra-Ataca | 1980 |
-| VI       | O Retorno de Jedi      | 1983 |
-| VII      | O Despertar da Força   | 2015 |
-| VIII     | Os Últimos Jedi        | 2017 |
-| IX       | A Ascensão Skywalker   | 2019 |
-
-### Histórias Star Wars
-
-| Filme                             | Ano  |
-| --------------------------------- | ---- |
-| Rogue One: Uma História Star Wars | 2016 |
-| Han Solo: Uma História Star Wars  | 2018 |
-
-A SWAPI disponibiliza os seis primeiros episódios da saga. Os demais filmes do catálogo são complementados por dados locais, mantendo a API como principal fonte de informações.
-
----
-
-## 🛠️ Tecnologias utilizadas
-
-| Tecnologia   | Aplicação                               |
-| ------------ | --------------------------------------- |
-| HTML5        | Estrutura semântica das páginas         |
-| CSS3         | Estilização, responsividade e animações |
-| JavaScript   | Interatividade e manipulação do DOM     |
-| Bootstrap 5  | Componentes responsivos e modais        |
-| Fetch API    | Requisições HTTP assíncronas            |
-| LocalStorage | Cache e persistência local              |
-| JSON         | Estruturação dos dados                  |
-| SWAPI        | Fonte principal de informações          |
-| Git e GitHub | Versionamento e colaboração             |
-
-## 🎨 Identidade visual
-
-A interface foi desenvolvida com inspiração na atmosfera cinematográfica de Star Wars, utilizando elementos espaciais, tipografia futurista e efeitos visuais.
-
-| Cor                | Aplicação                                 |
-| ------------------ | ----------------------------------------- |
-| 🟡 Amarelo-dourado | Destaques, botões e elementos interativos |
-| 🔵 Azul-marinho    | Estrutura visual e elementos secundários  |
-| ⚫ Preto            | Fundos e ambientação espacial             |
-| ⚪ Branco           | Textos e contraste                        |
-
-As animações e os efeitos visuais utilizam CSS e JavaScript, preservando a navegação e a usabilidade.
-
----
-
-## 🌐 API utilizada
-
-O projeto utiliza a **Star Wars API (SWAPI)**.
-
-- Site oficial: [https://swapi.dev/](https://swapi.dev/)
-- Documentação: [https://swapi.dev/documentation](https://swapi.dev/documentation)
-
-### Endpoints
-
-| Recurso     | Endpoint          |
-| ----------- | ----------------- |
-| Personagens | `/api/people/`    |
-| Planetas    | `/api/planets/`   |
-| Naves       | `/api/starships/` |
-| Filmes      | `/api/films/`     |
-
-As requisições são realizadas de forma assíncrona, permitindo carregar os registros disponíveis e apresentá-los dinamicamente na interface.
-
-### Cache local
-
-O LocalStorage é utilizado para armazenar os dados obtidos da API, reduzindo requisições repetidas e melhorando o desempenho da aplicação.
-
----
-
-## 💻 Como executar o projeto
-
-### 1. Clone o repositório
-
-```
-git clone https://github.com/ryanluccadev/Star-Wars-Nexus.git
-```
-
-### 2. Acesse a pasta do projeto
-
-```
-cd Star-Wars-Nexus
-```
-
-### 3. Abra no Visual Studio Code
-
-```
-code .
-```
-
-### 4. Execute a aplicação
-
-Instale a extensão **Live Server** no Visual Studio Code.
-
-Clique com o botão direito no arquivo `index.html` e selecione **Open with Live Server**.
-
-O projeto não necessita de instalação de dependências, banco de dados ou servidor backend próprio.
-
----
-
-## 📱 Responsividade
-
-A interface foi projetada para diferentes tamanhos de tela:
-
-- Computadores e notebooks.
-- Tablets.
-- Smartphones.
-
-A utilização do Bootstrap, combinada com CSS personalizado, permite adaptar os componentes e a navegação aos diferentes dispositivos.
-
-## 📚 Conceitos aplicados
-
-- Desenvolvimento web front-end.
-- Consumo de APIs REST.
-- Programação assíncrona.
-- Manipulação dinâmica do DOM.
-- HTML semântico.
-- Design responsivo.
-- Persistência de dados no navegador.
-- Modularização de código.
-- Acessibilidade web.
-- Controle de versão e desenvolvimento colaborativo.
-
----
-
-## 👨‍💻 Desenvolvedores
-
-| Integrante                 | GitHub                                           |
-| -------------------------- | ------------------------------------------------ |
-| Ryan Lucca Marques Pereira | [@ryanluccadev](https://github.com/ryanluccadev) |
-| Pedro Aragoni              | Desenvolvedor                                    |
-
-## 🎓 Informações acadêmicas
-
-| Informação  | Descrição                              |
-| ----------- | -------------------------------------- |
-| Instituição | Instituto Federal de São Paulo — IFSP  |
-| Campus      | Araraquara                             |
-| Curso       | Tecnologia em Sistemas para Internet   |
-| Disciplina  | Construção de Interfaces Web — ARQCIWB |
-| Semestre    | 2º semestre                            |
-| Ano         | 2026                                   |
-| Projeto     | Star Wars Nexus                        |
-
----
-
-## 🔗 Referências
-
-- [Star Wars — Site oficial](https://www.starwars.com/)
-- [Star Wars API](https://swapi.dev/)
-- [Bootstrap](https://getbootstrap.com/)
-- [MDN Web Docs](https://developer.mozilla.org/)
-- [Wookieepedia](https://starwars.fandom.com/)
-
-## ⚖️ Direitos autorais
-
-Star Wars, seus personagens, nomes, marcas e elementos visuais pertencem aos seus respectivos detentores de direitos.
-
-O Star Wars Nexus é um projeto acadêmico, independente e sem fins comerciais, sem vínculo oficial com a Lucasfilm ou a Disney.
-
----
-
-**Star Wars Nexus — Explore além das estrelas.**
-
-*Que a Força esteja com você.*
+Construção de Interfaces Web · 2026

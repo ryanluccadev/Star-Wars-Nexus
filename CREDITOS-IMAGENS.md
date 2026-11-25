@@ -145,3 +145,145 @@ Arquivos enviados pelo responsável pelo projeto. Os ZIPs não identificam a aut
 | Planetas | `fundos/planetas.webp` | `Star-Wars-Nexus-Fundos.zip` | Fundo · WebP, 1672 × 941 |
 | Naves | `fundos/naves.webp` | `Star-Wars-Nexus-Fundos.zip` | Fundo · WebP, 1672 × 941 |
 | Filmes | `fundos/filmes.webp` | `Star-Wars-Nexus-Fundos.zip` | Fundo · WebP, 1671 × 941 |
+
+## Planetas acrescentados pelo ZIP em WebP
+
+Origem: `Star-Wars-Nexus-Planetas-WebP.zip`, enviado pelo responsável pelo projeto. O pacote não identifica autoria e licença de cada imagem.
+
+| Planeta | ID SWAPI | Arquivo |
+|---|---:|---|
+| Dagobah | 5 | `planetas/5-dagobah.webp` |
+| Bespin | 6 | `planetas/6-bespin.webp` |
+| Kamino | 10 | `planetas/10-kamino.webp` |
+| Geonosis | 11 | `planetas/11-geonosis.webp` |
+| Utapau | 12 | `planetas/12-utapau.webp` |
+| Polis Massa | 15 | `planetas/15-polis-massa.webp` |
+| Mygeeto | 16 | `planetas/16-mygeeto.webp` |
+| Felucia | 17 | `planetas/17-felucia.webp` |
+| Cato Neimoidia | 18 | `planetas/18-cato-neimoidia.webp` |
+| Saleucami | 19 | `planetas/19-saleucami.webp` |
+| Stewjon | 20 | `planetas/20-stewjon.webp` |
+| Eriadu | 21 | `planetas/21-eriadu.webp` |
+| Rodia | 23 | `planetas/23-rodia.webp` |
+| Nal Hutta | 24 | `planetas/24-nal-hutta.webp` |
+| Dantooine | 25 | `planetas/25-dantooine.webp` |
+| Bestine IV | 26 | `planetas/26-bestine-iv.webp` |
+| Ord Mantell | 27 | `planetas/27-ord-mantell.webp` |
+| Trandosha | 29 | `planetas/29-trandosha.webp` |
+| Socorro | 30 | `planetas/30-socorro.webp` |
+| Mon Cala | 31 | `planetas/31-mon-cala.webp` |
+| Sullust | 33 | `planetas/33-sullust.webp` |
+| Toydaria | 34 | `planetas/34-toydaria.webp` |
+| Malastare | 35 | `planetas/35-malastare.webp` |
+| Dathomir | 36 | `planetas/36-dathomir.webp` |
+| Ryloth | 37 | `planetas/37-ryloth.webp` |
+| Aleen Minor | 38 | `planetas/38-aleen-minor.webp` |
+| Vulpter | 39 | `planetas/39-vulpter.webp` |
+| Troiken | 40 | `planetas/40-troiken.webp` |
+| Tund | 41 | `planetas/41-tund.webp` |
+| Haruun Kal | 42 | `planetas/42-haruun-kal.webp` |
+| Cerea | 43 | `planetas/43-cerea.webp` |
+| Glee Anselm | 44 | `planetas/44-glee-anselm.webp` |
+| Iridonia | 45 | `planetas/45-iridonia.webp` |
+| Tholoth | 46 | `planetas/46-tholoth.webp` |
+| Iktotch | 47 | `planetas/47-iktotch.webp` |
+| Quermia | 48 | `planetas/48-quermia.webp` |
+| Dorin | 49 | `planetas/49-dorin.webp` |
+| Champala | 50 | `planetas/50-champala.webp` |
+| Mirial | 51 | `planetas/51-mirial.webp` |
+| Serenno | 52 | `planetas/52-serenno.webp` |
+| Concord Dawn | 53 | `planetas/53-concord-dawn.webp` |
+| Zolan | 54 | `planetas/54-zolan.webp` |
+| Ojom | 55 | `planetas/55-ojom.webp` |
+| Skako | 56 | `planetas/56-skako.webp` |
+| Muunilinst | 57 | `planetas/57-muunilinst.webp` |
+| Shili | 58 | `planetas/58-shili.webp` |
+| Kalee | 59 | `planetas/59-kalee.webp` |
+| Umbara | 60 | `planetas/60-umbara.webp` |
+
+## Arquivos da versão editada pelo responsável
+
+A versão enviada trouxe 78 imagens adicionais de personagens e o favicon `banners/logo2.png`. A origem imediata é o `assets.zip` da versão do responsável pelo projeto. A autoria e a licença individuais não vieram identificadas no pacote.
+
+| ID SWAPI | Arquivo do personagem |
+|---|---|
+| 4 | `personagens/4-darth-vader.webp` |
+| 5 | `personagens/5-leia-organa.jpg` |
+| 6 | `personagens/6-owen-lars.webp` |
+| 7 | `personagens/7-beru-whitesun-lars.webp` |
+| 8 | `personagens/8-r5-d4.webp` |
+| 9 | `personagens/9-biggs-darklighter.webp` |
+| 10 | `personagens/10-obi-wan-kenobi.jpg` |
+| 11 | `personagens/11-anakin-skywalker.webp` |
+| 12 | `personagens/12-wilhuff-tarkin.webp` |
+| 13 | `personagens/13-chewbacca.webp` |
+| 14 | `personagens/14-han-solo.webp` |
+| 15 | `personagens/15-greedo.webp` |
+| 16 | `personagens/16-jabba-desilijic-tiure.webp` |
+| 18 | `personagens/18-wedge-antilles.webp` |
+| 19 | `personagens/19-jek-tono-porkins.webp` |
+| 21 | `personagens/21-palpatine.webp` |
+| 22 | `personagens/22-boba-fett.webp` |
+| 23 | `personagens/23-ig-88.webp` |
+| 24 | `personagens/24-bossk.webp` |
+| 25 | `personagens/25-lando-calrissian.webp` |
+| 26 | `personagens/26-lobot.webp` |
+| 27 | `personagens/27-ackbar.webp` |
+| 28 | `personagens/28-mon-mothma.webp` |
+| 29 | `personagens/29-arvel-crynyd.webp` |
+| 30 | `personagens/30-wicket-systri-warrick.webp` |
+| 31 | `personagens/31-nien-nunb.webp` |
+| 32 | `personagens/32-qui-gon-jinn.webp` |
+| 33 | `personagens/33-nute-gunray.webp` |
+| 34 | `personagens/34-finis-valorum.webp` |
+| 35 | `personagens/35-padme-amidala.webp` |
+| 36 | `personagens/36-jar-jar-binks.webp` |
+| 37 | `personagens/37-roos-tarpals.webp` |
+| 38 | `personagens/38-rugor-nass.webp` |
+| 39 | `personagens/39-ric-olie.webp` |
+| 40 | `personagens/40-watto.webp` |
+| 41 | `personagens/41-sebulba.webp` |
+| 42 | `personagens/42-quarsh-panaka.webp` |
+| 43 | `personagens/43-shmi-skywalker.webp` |
+| 44 | `personagens/44-darth-maul.webp` |
+| 45 | `personagens/45-bib-fortuna.webp` |
+| 46 | `personagens/46-ayla-secura.webp` |
+| 47 | `personagens/47-ratts-tyerel.webp` |
+| 48 | `personagens/48-dud-bolt.webp` |
+| 49 | `personagens/49-gasgano.webp` |
+| 50 | `personagens/50-ben-quadinaros.webp` |
+| 51 | `personagens/51-mace-windu.webp` |
+| 52 | `personagens/52-ki-adi-mundi.webp` |
+| 53 | `personagens/53-kit-fisto.webp` |
+| 54 | `personagens/54-eeth-koth.webp` |
+| 55 | `personagens/55-adi-gallia.webp` |
+| 56 | `personagens/56-saesee-tiin.webp` |
+| 57 | `personagens/57-yarael-poof.webp` |
+| 58 | `personagens/58-plo-koon.webp` |
+| 59 | `personagens/59-mas-amedda.webp` |
+| 60 | `personagens/60-gregar-typho.webp` |
+| 61 | `personagens/61-corde.webp` |
+| 62 | `personagens/62-cliegg-lars.webp` |
+| 63 | `personagens/63-poggle-the-lesser.webp` |
+| 64 | `personagens/64-luminara-unduli.webp` |
+| 65 | `personagens/65-barriss-offee.webp` |
+| 66 | `personagens/66-dorme.webp` |
+| 67 | `personagens/67-dooku.webp` |
+| 68 | `personagens/68-bail-prestor-organa.webp` |
+| 69 | `personagens/69-jango-fett.webp` |
+| 70 | `personagens/70-zam-wesell.webp` |
+| 71 | `personagens/71-dexter-jettster.webp` |
+| 72 | `personagens/72-lama-su.webp` |
+| 73 | `personagens/73-taun-we.webp` |
+| 74 | `personagens/74-jocasta-nu.webp` |
+| 75 | `personagens/75-r4-p17.webp` |
+| 76 | `personagens/76-wat-tambor.webp` |
+| 77 | `personagens/77-san-hill.webp` |
+| 78 | `personagens/78-shaak-ti.webp` |
+| 79 | `personagens/79-grievous.webp` |
+| 80 | `personagens/80-tarfful.webp` |
+| 81 | `personagens/81-raymus-antilles.webp` |
+| 82 | `personagens/82-sly-moore.webp` |
+| 83 | `personagens/83-tion-medon.webp` |
+
+Os banners `banners/categoria-naves.webp` e `banners/categoria-filmes.webp` foram preservados no acervo. Os cards da Home usam as imagens que o responsável escolheu para Naves e Filmes.

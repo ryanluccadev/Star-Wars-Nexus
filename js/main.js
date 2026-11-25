@@ -11,8 +11,8 @@
     - Gerenciar a paginação e as mensagens da interface.
 */
 
-import { carregarRecurso, indexarNomes, urlRegistro } from './api.js';
-import { imagemDoRegistro, placeholders } from './imagens.js';
+import { carregarRecurso, indexarNomes, planetaIdentificado, urlRegistro } from './api.js';
+import { aplicarEnquadramento, imagemDoRegistro, placeholders } from './imagens.js';
 import { carregarFilmes, nomeCategoriaFilme, rotuloEpisodio } from './filmes.js';
 import { filtrarRegistros } from './busca.js';
 import { abrirModal, elemento, prepararModal, termosEmPortugues, valorExibido } from './modal.js';
@@ -72,7 +72,6 @@ function nomeRegistro(item) {
 // Cria imagens a partir do ID da SWAPI, ou do número do episódio nos filmes.
 function criarImagem(item, card = false) {
     const imagem = elemento('img', '', card ? 'card-image' : 'detail-image');
-    const vertical = recurso === 'people' || recurso === 'films';
     const padrao = placeholders[recurso];
     const selecionada = imagemDoRegistro(recurso, item);
 
@@ -83,8 +82,8 @@ function criarImagem(item, card = false) {
         imagem.src = new URL('../assets/imagens/' + arquivo, import.meta.url).href;
     };
 
-    imagem.width = vertical ? 480 : 600;
-    imagem.height = vertical ? 720 : 300;
+    imagem.width = recurso === 'films' ? 480 : 640;
+    imagem.height = recurso === 'films' ? 720 : recurso === 'people' ? 480 : 360;
     imagem.decoding = 'async';
 
     if (card) {
@@ -92,6 +91,7 @@ function criarImagem(item, card = false) {
     }
 
     if (selecionada !== padrao) {
+        aplicarEnquadramento(imagem, recurso, item, card ? 'card' : 'modal');
         imagem.addEventListener('error', () => definir(padrao), { once: true });
     }
 
@@ -191,10 +191,12 @@ function criarCard(item) {
     const registro = urlRegistro(item.url, recurso);
 
     detalhes.addEventListener('click', () => {
+        const midia = elemento('div', '', 'detail-media');
+        midia.append(criarImagem(item));
         const modal = prepararModal({
             recurso,
             item,
-            imagem: criarImagem(item),
+            imagem: midia,
             registro,
             nomes: indexarNomes(recurso, registros)
         });
@@ -279,9 +281,12 @@ function montarPaginacao(total) {
 // Atualiza os cards, a quantidade de resultados e a paginação.
 function renderizar() {
     const categoria = categoriaFilme?.value;
-    const disponiveis = categoria
-        ? registros.filter(item => item.categoria === categoria)
-        : registros;
+    let disponiveis = registros;
+    if (recurso === 'planets') {
+        disponiveis = registros.filter(planetaIdentificado);
+    } else if (categoria) {
+        disponiveis = registros.filter(item => item.categoria === categoria);
+    }
     limparBusca.hidden = busca.value.length === 0;
     const filtrados = filtrarRegistros(
         disponiveis,

@@ -25,7 +25,9 @@ A pesquisa compara todos os registros carregados e ignora caixa, acentos e espa�
 
 O localStorage guarda JSON por categoria sob `swe:cache:v1:<categoria>` durante 24 horas. Cache válido vem antes da rede. O botão de atualização solicita novamente os dados. Se a rede falhar, o último catálogo válido pode ser exibido, com aviso. Respostas inválidas e armazenamento bloqueado são tratados. O estado vazio sem cache oferece nova tentativa.
 
-A Home obtém personagens, planetas e naves do total já guardado ou da primeira resposta de cada endpoint. Os destaques são uma seleção editorial e abrem a pesquisa dos catálogos. A galeria, a cronologia e o contador de filmes compartilham o mesmo carregamento dos seis registros da SWAPI e dos cinco complementares. A Home dispensa a leitura dos metadados de apoio usados somente nas fichas. A chave `swn:contagem:v1:<categoria>` guarda contagens válidas por 24 horas. Sem rede, o indicador pode aproveitar uma contagem anterior.
+A Home obtém o total de personagens e naves da contagem em cache ou da primeira resposta de cada endpoint. Para planetas, reutiliza o catálogo do cache ou carrega as páginas da SWAPI e calcula o total sem o registro `unknown`. O registro permanece no catálogo bruto e no cache. A listagem, a busca e a paginação usam os 59 planetas identificados, e os modais de personagens exibem “Planeta desconhecido” para essa referência.
+
+Os destaques são uma seleção editorial e abrem a pesquisa dos catálogos. A galeria, a cronologia e o contador de filmes compartilham o carregamento dos seis registros da SWAPI e dos cinco complementares.
 
 ## Filmes e modais
 
@@ -40,6 +42,8 @@ Os modais usam Bootstrap e são preenchidos a cada abertura com os dados do item
 Os arquivos anteriores permanecem em suas pastas. Os novos arquivos ficam em `assets/imagens/naves/`, `assets/imagens/filmes/` e `assets/imagens/fundos/`. O [inventário](CREDITOS-IMAGENS.md) registra os arquivos e os ZIPs de origem. Os cards e os modais de naves e filmes usam o mesmo mapeamento e preservam a proporção das imagens com `object-fit: contain`. O mapa associa as naves pelo número da SWAPI, os filmes pelo número do episódio ou pelo identificador complementar e usa placeholders quando falta uma imagem adequada. Uma descrição `null` indica um arquivo preservado sem associação visual.
 
 Cada hero antecipa o carregamento do próprio fundo WebP. As imagens dos catálogos e da galeria são carregadas sob demanda. O parallax usa a posição de rolagem em telas maiores, e os efeitos respeitam a preferência por movimento reduzido. O campo de estrelas pausa em abas ocultas. Navegadores compatíveis aplicam a transição entre páginas da mesma origem.
+
+Os quadros usam 4:3 para personagens, 16:9 para planetas e naves e 2:3 para filmes. Personagens e planetas preenchem o quadro com `cover`. Para naves e pôsteres, `contain` preserva a composição. A tabela `enquadramentos` em `js/imagens.js` aceita posição horizontal `x`, posição vertical `y`, `preenchimento` e `escala`, por ID e contexto (`card`, `modal`, `destaque` ou `galeria`).
 
 ## Verificar
 

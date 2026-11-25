@@ -25,15 +25,10 @@
     scrollbar-color: #657488 #0c131d;
 }
 .catalog-modal .modal-footer { padding: .9rem 1.4rem; }
-.catalog-modal .detail-image {
-    display: block;
-    height: auto;
-    max-height: 255px;
-    object-fit: contain;
-    background: #080d16;
+[data-recurso="films"] .catalog-modal .detail-media {
+    width: min(100%, 16.5rem);
+    justify-self: center;
 }
-[data-recurso="films"] .catalog-modal .detail-image { max-height: min(44vh, 24rem); }
-[data-recurso="starships"] .catalog-modal .detail-image { padding: .4rem; }
 .catalog-modal .detail-panel { background: #0c1421; padding: 1rem; min-width: 0; }
 .catalog-modal .detail-panel h3 { color: var(--ink); margin: 0 0 .8rem; }
 .catalog-modal .detail-panel dt { min-width: 0; overflow-wrap: anywhere; }

@@ -330,13 +330,40 @@
 }
 
 .home-highlight { min-height: 4.7rem; padding: .32rem .75rem .32rem .32rem; font-weight: 680; }
-.home-highlight img {
+.home-highlight-media {
     inline-size: clamp(5rem, 8.8vw, 7.25rem);
-    block-size: 4rem;
+    aspect-ratio: 16/9;
     flex: none;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #23364b, #08111b 82%);
+    border-radius: .4rem;
+}
+
+
+.home-highlight-media img,
+.home-poster-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: var(--imagem-fit, var(--imagem-fit-padrao, cover));
+    object-position: var(--imagem-x, 50%) var(--imagem-y, 50%);
+    transform: scale(var(--imagem-escala, 1));
+    transition: transform .28s ease;
+}
+
+[data-destaques="planets"] .home-highlight-media,
+[data-destaques="starships"] .home-highlight-media { aspect-ratio: 16 / 9; }
+[data-destaques="starships"] .home-highlight-media { isolation: isolate; }
+[data-destaques="starships"] .home-highlight-media img {
+    --imagem-fit-padrao: contain;
+    padding: .18rem;
+    mix-blend-mode: lighten;
+}
+
+:is(.home-highlight-media, .home-poster-media) img.is-placeholder {
     object-fit: contain;
-    background: #060d16;
-    border-radius: .32rem;
+    object-position: center;
+    transform: none;
 }
 
 .home-highlight:is(:hover, :focus-visible),
@@ -391,13 +418,19 @@
 }
 
 .home-poster:focus-visible { outline-offset: -3px; }
-.home-poster img {
-    inline-size: 100%;
-    block-size: auto;
+.home-poster-media {
+    display: block;
+    overflow: hidden;
     aspect-ratio: 2 / 3;
-    object-fit: contain;
     border-radius: .35rem;
     background: #060a11;
+    --imagem-fit-padrao: contain;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .home-highlight:hover img:not(.is-placeholder), .home-poster:hover img:not(.is-placeholder) {
+        transform: scale(calc(var(--imagem-escala, 1) * 1.025));
+    }
 }
 
 .home-film-label {
@@ -504,6 +537,8 @@
     .home-card img,
     .home-card-link svg,
     .home-highlight,
+    .home-highlight-media img,
     .home-poster,
+    .home-poster-media img,
     .home-timeline a { transition: none; }
 }
