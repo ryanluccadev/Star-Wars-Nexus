@@ -1,5 +1,6 @@
 // Gerado por scripts/indexar-imagens.py.
 export const imagensEspecificas = {
+
     "people": [
         {
             "id": "1",
@@ -12,16 +13,407 @@ export const imagensEspecificas = {
             "descricao": "Material promocional de Star Wars com C-3PO"
         },
         {
+            "id": "3",
+            "arquivo": "personagens/3-r2-d2.webp",
+            "descricao": "Material promocional de Star Wars com R2-D2"
+        },
+        {
+            "id": "4",
+            "arquivo": "personagens/4-darth-vader.webp",
+            "descricao": "Imagem de Darth Vader"
+        },
+        {
+            "id": "5",
+            "arquivo": "personagens/5-leia-organa.webp",
+            "descricao": "Imagem de Leia Organa"
+        },
+        {
+            "id": "6",
+            "arquivo": "personagens/6-owen-lars.webp",
+            "descricao": "Imagem de Owen Lars"
+        },
+        {
+            "id": "7",
+            "arquivo": "personagens/7-beru-whitesun-lars.webp",
+            "descricao": "Imagem de Beru Whitesun Lars"
+        },
+        {
+            "id": "8",
+            "arquivo": "personagens/8-r5-d4.webp",
+            "descricao": "Imagem de R5-D4"
+        },
+        {
+            "id": "9",
+            "arquivo": "personagens/9-biggs-darklighter.webp",
+            "descricao": "Imagem de Biggs Darklighter"
+        },
+        {
+            "id": "10",
+            "arquivo": "personagens/10-obi-wan-kenobi.webp",
+            "descricao": "Imagem de Obi-Wan Kenobi"
+        },
+        {
+            "id": "11",
+            "arquivo": "personagens/11-anakin-skywalker.webp",
+            "descricao": "Imagem de Anakin Skywalker"
+        },
+        {
+            "id": "12",
+            "arquivo": "personagens/12-wilhuff-tarkin.webp",
+            "descricao": "Imagem de Wilhuff Tarkin"
+        },
+        {
+            "id": "13",
+            "arquivo": "personagens/13-chewbacca.webp",
+            "descricao": "Imagem de Chewbacca"
+        },
+        {
+            "id": "14",
+            "arquivo": "personagens/14-han-solo.webp",
+            "descricao": "Imagem de Han Solo"
+        },
+        {
+            "id": "15",
+            "arquivo": "personagens/15-greedo.webp",
+            "descricao": "Imagem de Greedo"
+        },
+        {
+            "id": "16",
+            "arquivo": "personagens/16-jabba-desilijic-tiure.webp",
+            "descricao": "Imagem de Jabba Desilijic Tiure"
+        },
+        {
+            "id": "18",
+            "arquivo": "personagens/18-wedge-antilles.webp",
+            "descricao": "Imagem de Wedge Antilles"
+        },
+        {
+            "id": "19",
+            "arquivo": "personagens/19-jek-tono-porkins.webp",
+            "descricao": "Imagem de Jek Tono Porkins"
+        },
+        {
             "id": "20",
             "arquivo": "personagens/20-yoda.webp",
             "descricao": "Escultura original de Yoda por Lawrence Noble, em fotografia oficial de Star Wars"
         },
         {
-            "id": "3",
-            "arquivo": "personagens/3-r2-d2.webp",
-            "descricao": "Material promocional de Star Wars com R2-D2"
+            "id": "21",
+            "arquivo": "personagens/21-palpatine.webp",
+            "descricao": "Imagem de Palpatine"
+        },
+        {
+            "id": "22",
+            "arquivo": "personagens/22-boba-fett.webp",
+            "descricao": "Imagem de Boba Fett"
+        },
+        {
+            "id": "23",
+            "arquivo": "personagens/23-ig-88.webp",
+            "descricao": "Imagem de IG-88"
+        },
+        {
+            "id": "24",
+            "arquivo": "personagens/24-bossk.webp",
+            "descricao": "Imagem de Bossk"
+        },
+        {
+            "id": "25",
+            "arquivo": "personagens/25-lando-calrissian.webp",
+            "descricao": "Imagem de Lando Calrissian"
+        },
+        {
+            "id": "26",
+            "arquivo": "personagens/26-lobot.webp",
+            "descricao": "Imagem de Lobot"
+        },
+        {
+            "id": "27",
+            "arquivo": "personagens/27-ackbar.webp",
+            "descricao": "Imagem do Almirante Ackbar"
+        },
+        {
+            "id": "28",
+            "arquivo": "personagens/28-mon-mothma.webp",
+            "descricao": "Imagem de Mon Mothma"
+        },
+        {
+            "id": "29",
+            "arquivo": "personagens/29-arvel-crynyd.webp",
+            "descricao": "Imagem de Arvel Crynyd"
+        },
+        {
+            "id": "30",
+            "arquivo": "personagens/30-wicket-systri-warrick.webp",
+            "descricao": "Imagem de Wicket Systri Warrick"
+        },
+        {
+            "id": "31",
+            "arquivo": "personagens/31-nien-nunb.webp",
+            "descricao": "Imagem de Nien Nunb"
+        },
+        {
+            "id": "32",
+            "arquivo": "personagens/32-qui-gon-jinn.webp",
+            "descricao": "Imagem de Qui-Gon Jinn"
+        },
+        {
+            "id": "33",
+            "arquivo": "personagens/33-nute-gunray.webp",
+            "descricao": "Imagem de Nute Gunray"
+        },
+        {
+            "id": "34",
+            "arquivo": "personagens/34-finis-valorum.webp",
+            "descricao": "Imagem de Finis Valorum"
+        },
+        {
+            "id": "35",
+            "arquivo": "personagens/35-padme-amidala.webp",
+            "descricao": "Imagem de Padmé Amidala"
+        },
+        {
+            "id": "36",
+            "arquivo": "personagens/36-jar-jar-binks.webp",
+            "descricao": "Imagem de Jar Jar Binks"
+        },
+        {
+            "id": "37",
+            "arquivo": "personagens/37-roos-tarpals.webp",
+            "descricao": "Imagem de Roos Tarpals"
+        },
+        {
+            "id": "38",
+            "arquivo": "personagens/38-rugor-nass.webp",
+            "descricao": "Imagem de Rugor Nass"
+        },
+        {
+            "id": "39",
+            "arquivo": "personagens/39-ric-olie.webp",
+            "descricao": "Imagem de Ric Olié"
+        },
+        {
+            "id": "40",
+            "arquivo": "personagens/40-watto.webp",
+            "descricao": "Imagem de Watto"
+        },
+        {
+            "id": "41",
+            "arquivo": "personagens/41-sebulba.webp",
+            "descricao": "Imagem de Sebulba"
+        },
+        {
+            "id": "42",
+            "arquivo": "personagens/42-quarsh-panaka.webp",
+            "descricao": "Imagem de Quarsh Panaka"
+        },
+        {
+            "id": "43",
+            "arquivo": "personagens/43-shmi-skywalker.webp",
+            "descricao": "Imagem de Shmi Skywalker"
+        },
+        {
+            "id": "44",
+            "arquivo": "personagens/44-darth-maul.webp",
+            "descricao": "Imagem de Darth Maul"
+        },
+        {
+            "id": "45",
+            "arquivo": "personagens/45-bib-fortuna.webp",
+            "descricao": "Imagem de Bib Fortuna"
+        },
+        {
+            "id": "46",
+            "arquivo": "personagens/46-ayla-secura.webp",
+            "descricao": "Imagem de Aayla Secura"
+        },
+        {
+            "id": "47",
+            "arquivo": "personagens/47-ratts-tyerel.webp",
+            "descricao": "Imagem de Ratts Tyerel"
+        },
+        {
+            "id": "48",
+            "arquivo": "personagens/48-dud-bolt.webp",
+            "descricao": "Imagem de Dud Bolt"
+        },
+        {
+            "id": "49",
+            "arquivo": "personagens/49-gasgano.webp",
+            "descricao": "Imagem de Gasgano"
+        },
+        {
+            "id": "50",
+            "arquivo": "personagens/50-ben-quadinaros.webp",
+            "descricao": "Imagem de Ben Quadinaros"
+        },
+        {
+            "id": "51",
+            "arquivo": "personagens/51-mace-windu.webp",
+            "descricao": "Imagem de Mace Windu"
+        },
+        {
+            "id": "52",
+            "arquivo": "personagens/52-ki-adi-mundi.webp",
+            "descricao": "Imagem de Ki-Adi-Mundi"
+        },
+        {
+            "id": "53",
+            "arquivo": "personagens/53-kit-fisto.webp",
+            "descricao": "Imagem de Kit Fisto"
+        },
+        {
+            "id": "54",
+            "arquivo": "personagens/54-eeth-koth.webp",
+            "descricao": "Imagem de Eeth Koth"
+        },
+        {
+            "id": "55",
+            "arquivo": "personagens/55-adi-gallia.webp",
+            "descricao": "Imagem de Adi Gallia"
+        },
+        {
+            "id": "56",
+            "arquivo": "personagens/56-saesee-tiin.webp",
+            "descricao": "Imagem de Saesee Tiin"
+        },
+        {
+            "id": "57",
+            "arquivo": "personagens/57-yarael-poof.webp",
+            "descricao": "Imagem de Yarael Poof"
+        },
+        {
+            "id": "58",
+            "arquivo": "personagens/58-plo-koon.webp",
+            "descricao": "Imagem de Plo Koon"
+        },
+        {
+            "id": "59",
+            "arquivo": "personagens/59-mas-amedda.webp",
+            "descricao": "Imagem de Mas Amedda"
+        },
+        {
+            "id": "60",
+            "arquivo": "personagens/60-gregar-typho.webp",
+            "descricao": "Imagem de Gregar Typho"
+        },
+        {
+            "id": "61",
+            "arquivo": "personagens/61-corde.webp",
+            "descricao": "Imagem de Cordé"
+        },
+        {
+            "id": "62",
+            "arquivo": "personagens/62-cliegg-lars.webp",
+            "descricao": "Imagem de Cliegg Lars"
+        },
+        {
+            "id": "63",
+            "arquivo": "personagens/63-poggle-the-lesser.webp",
+            "descricao": "Imagem de Poggle the Lesser"
+        },
+        {
+            "id": "64",
+            "arquivo": "personagens/64-luminara-unduli.webp",
+            "descricao": "Imagem de Luminara Unduli"
+        },
+        {
+            "id": "65",
+            "arquivo": "personagens/65-barriss-offee.webp",
+            "descricao": "Imagem de Barriss Offee"
+        },
+        {
+            "id": "66",
+            "arquivo": "personagens/66-dorme.webp",
+            "descricao": "Imagem de Dormé"
+        },
+        {
+            "id": "67",
+            "arquivo": "personagens/67-dooku.webp",
+            "descricao": "Imagem do Conde Dooku"
+        },
+        {
+            "id": "68",
+            "arquivo": "personagens/68-bail-prestor-organa.webp",
+            "descricao": "Imagem de Bail Prestor Organa"
+        },
+        {
+            "id": "69",
+            "arquivo": "personagens/69-jango-fett.webp",
+            "descricao": "Imagem de Jango Fett"
+        },
+        {
+            "id": "70",
+            "arquivo": "personagens/70-zam-wesell.webp",
+            "descricao": "Imagem de Zam Wesell"
+        },
+        {
+            "id": "71",
+            "arquivo": "personagens/71-dexter-jettster.webp",
+            "descricao": "Imagem de Dexter Jettster"
+        },
+        {
+            "id": "72",
+            "arquivo": "personagens/72-lama-su.webp",
+            "descricao": "Imagem de Lama Su"
+        },
+        {
+            "id": "73",
+            "arquivo": "personagens/73-taun-we.webp",
+            "descricao": "Imagem de Taun We"
+        },
+        {
+            "id": "74",
+            "arquivo": "personagens/74-jocasta-nu.webp",
+            "descricao": "Imagem de Jocasta Nu"
+        },
+        {
+            "id": "75",
+            "arquivo": "personagens/75-r4-p17.webp",
+            "descricao": "Imagem de R4-P17"
+        },
+        {
+            "id": "76",
+            "arquivo": "personagens/76-wat-tambor.webp",
+            "descricao": "Imagem de Wat Tambor"
+        },
+        {
+            "id": "77",
+            "arquivo": "personagens/77-san-hill.webp",
+            "descricao": "Imagem de San Hill"
+        },
+        {
+            "id": "78",
+            "arquivo": "personagens/78-shaak-ti.webp",
+            "descricao": "Imagem de Shaak Ti"
+        },
+        {
+            "id": "79",
+            "arquivo": "personagens/79-grievous.webp",
+            "descricao": "Imagem do General Grievous"
+        },
+        {
+            "id": "80",
+            "arquivo": "personagens/80-tarfful.webp",
+            "descricao": "Imagem de Tarfful"
+        },
+        {
+            "id": "81",
+            "arquivo": "personagens/81-raymus-antilles.webp",
+            "descricao": "Imagem de Raymus Antilles"
+        },
+        {
+            "id": "82",
+            "arquivo": "personagens/82-sly-moore.webp",
+            "descricao": "Imagem de Sly Moore"
+        },
+        {
+            "id": "83",
+            "arquivo": "personagens/83-tion-medon.webp",
+            "descricao": "Imagem de Tion Medon"
         }
     ],
+
     "planets": [
         {
             "id": "1",
